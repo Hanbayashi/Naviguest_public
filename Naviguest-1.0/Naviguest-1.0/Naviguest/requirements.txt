@@ -1,0 +1,3 @@
+# Naviguest/requirements.txt
+# 現状のServerless Function (http.serverベース) には外部依存ライブラリはありません。
+# もし将来的に 'numpy' や 'pandas' などを使いたくなったらここに追記します。
