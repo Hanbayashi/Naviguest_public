@@ -1,3 +1,3 @@
-# Naviguest/requirements.txt
-# 現状のServerless Function (http.serverベース) には外部依存ライブラリはありません。
-# もし将来的に 'numpy' や 'pandas' などを使いたくなったらここに追記します。
+# This file lists the Python dependencies for the backend.
+# Currently, there are no external dependencies for the http.server-based function.
+# Add packages like 'numpy' or 'pandas' here if needed in the future.
