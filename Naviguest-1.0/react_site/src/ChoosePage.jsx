@@ -107,7 +107,7 @@ const SelectionScreen = () => {
   // ④ PythonバックエンドへのAPI呼び出しロジックを追加
   // 追加場所: スクロール処理関数の定義の直後、またはコンポーネントの先頭
   useEffect(() => {
-    const apiUrl = '/api/hello'; // Vercelにデプロイ後の相対パス
+    const apiUrl = 'http://127.0.0.1:5000/api/hello';
     fetch(apiUrl)
       .then(response => {
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -124,29 +124,20 @@ const SelectionScreen = () => {
     const valueToSend = 1; // 送信する数値は「1」
 
     try {
-      const response = await fetch('/api/update_number', { // PythonのAPIエンドポイント
+      // const response = await fetch('/api/update_number', { // PythonのAPIエンドポイント (これもコメントアウトまたは削除)
+      const response = await fetch('http://127.0.0.1:5000/api/update_number', { // ★★★ ここも絶対パスに修正 ★★★
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ number: valueToSend }), // 数値1をJSONとして送信
+        body: JSON.stringify({ number: valueToSend }),
       });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log("Pythonからのレスポンス:", data);
-      // Python側で状態が保持されないため、ここではアラートのみ。
-      // 実際にはDBに保存してその結果を表示するべきです。
-      alert(`Pythonに数値 ${valueToSend} を送信しました。\nAPIの計算結果: ${data.calculated_value}`);
-
-      // 成功したらMap.jsxに遷移
-      navigate('/map'); // Map.jsxへのパス
-
+      // ... 以下は同じ ...
     } catch (error) {
       console.error("数値送信エラー:", error);
       alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
     }
+    
   };
 
   return (
