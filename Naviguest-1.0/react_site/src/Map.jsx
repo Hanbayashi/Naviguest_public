@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'; // ① useEffect を追加
+import React, { useState, useEffect } from 'react'; // useEffect を追加
 import { Link } from 'react-router-dom'; // 戻るボタン用にLinkをインポート
 import backbutton from './assets/BackButton.png'; // 戻るボタン画像をインポート
 
 // コンポーネント名を Map から MapPage に変更します
-const MapPage = () => { // ② コンポーネント名を MapPage に変更
+const MapPage = () => {
   const [arrivedNumber, setArrivedNumber] = useState('');
 
-  // ③ Pythonから受け取った数値を保持するstateを追加
+  // Pythonから受け取った数値を保持するstateを追加
   const [currentNumberFromPython, setCurrentNumberFromPython] = useState(null);
   const [lastCalculatedResult, setLastCalculatedResult] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,13 +20,13 @@ const MapPage = () => { // ② コンポーネント名を MapPage に変更
     }
   };
 
-  // ④ Pythonバックエンドから数値をフェッチするロジックを追加
+  // Pythonバックエンドから数値をフェッチするロジックを追加
   useEffect(() => {
     const fetchPythonNumber = async () => {
       try {
         setLoading(true);
-        // Vercelにデプロイ後の相対パスを使用
-        const response = await fetch('/api/get_current_number'); 
+        // ★★★ 修正点: ここを絶対パスに変更 ★★★
+        const response = await fetch('http://127.0.0.1:5000/api/get_current_number'); 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -80,7 +80,7 @@ const MapPage = () => { // ② コンポーネント名を MapPage に変更
         </div>
       </div>
 
-      {/* ⑤ Pythonからのデータ表示エリアを追加 */}
+      {/* Pythonからのデータ表示エリアを追加 */}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         {loading ? (
           <p>Pythonからのデータ読み込み中...</p>

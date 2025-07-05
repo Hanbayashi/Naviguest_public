@@ -104,8 +104,6 @@ const SelectionScreen = () => {
     genre8aRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // ④ PythonバックエンドへのAPI呼び出しロジックを追加
-  // 追加場所: スクロール処理関数の定義の直後、またはコンポーネントの先頭
   useEffect(() => {
     const apiUrl = 'http://127.0.0.1:5000/api/hello';
     fetch(apiUrl)
@@ -124,19 +122,30 @@ const SelectionScreen = () => {
     const valueToSend = 1; // 送信する数値は「1」
 
     try {
-      // const response = await fetch('/api/update_number', { // PythonのAPIエンドポイント (これもコメントアウトまたは削除)
-      const response = await fetch('http://127.0.0.1:5000/api/update_number', { // ★★★ ここも絶対パスに修正 ★★★
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ number: valueToSend }),
-      });
-      // ... 以下は同じ ...
-    } catch (error) {
-      console.error("数値送信エラー:", error);
-      alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+
+    if (!response.ok) {
+      // レスポンスがOKでない場合はエラーをスロー
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    // 必要であれば、Pythonからのレスポンスをここで処理することもできます
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+
+    // ★★★ ここに画面遷移を追加 ★★★
+    navigate('/map'); // Map.jsxに対応するパスへ遷移
+
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
     
   };
 
