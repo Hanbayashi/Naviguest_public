@@ -104,6 +104,7 @@ const SelectionScreen = () => {
     genre8aRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  //Pythonとの通信設定
   useEffect(() => {
     const apiUrl = 'http://127.0.0.1:5000/api/hello';
     fetch(apiUrl)
@@ -118,8 +119,9 @@ const SelectionScreen = () => {
       });
   }, []);
 
-  const handleGenre1aClick = async () => {
-    const valueToSend = 1111; // 送信する数値は「1」
+  //送信する値（目的地の番号）の設定
+  const handleGenrepoint2Click = async () => {
+    const valueToSend = 2; // 送信する数値
 
     try {
     const response = await fetch('http://127.0.0.1:5000/api/update_number', {
@@ -139,7 +141,6 @@ const SelectionScreen = () => {
     const data = await response.json();
     console.log("Pythonからの応答:", data);
 
-    // ★★★ ここに画面遷移を追加 ★★★
     navigate('/map'); // Map.jsxに対応するパスへ遷移
 
   } catch (error) {
@@ -147,6 +148,512 @@ const SelectionScreen = () => {
     alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
   }
     
+  };
+
+  const handleGenrepoint3Click = async () => {
+    const valueToSend = 3; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint5Click = async () => {
+    const valueToSend = 5; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint6Click = async () => {
+    const valueToSend = 6; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint7Click = async () => {
+    const valueToSend = 7; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint8Click = async () => {
+    const valueToSend = 8; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint9Click = async () => {
+    const valueToSend = 9; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint10Click = async () => {
+    const valueToSend = 10; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint11Click = async () => {
+    const valueToSend = 11; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint12Click = async () => {
+    const valueToSend = 12; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint13Click = async () => {
+    const valueToSend = 13; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint14Click = async () => {
+    const valueToSend = 14; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint15Click = async () => {
+    const valueToSend = 15; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint16Click = async () => {
+    const valueToSend = 16; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint17Click = async () => {
+    const valueToSend = 17; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint18Click = async () => {
+    const valueToSend = 18; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint19Click = async () => {
+    const valueToSend = 19; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint20Click = async () => {
+    const valueToSend = 20; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint21Click = async () => {
+    const valueToSend = 21; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint25Click = async () => {
+    const valueToSend = 25; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint26Click = async () => {
+    const valueToSend = 26; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint27Click = async () => {
+    const valueToSend = 27; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint31Click = async () => {
+    const valueToSend = 31; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+  };
+
+  const handleGenrepoint32Click = async () => {
+    const valueToSend = 32; // 送信する数値
+    try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ number: valueToSend }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Pythonからの応答:", data);
+    navigate('/map'); 
+  } catch (error) {
+    console.error("数値送信エラー:", error);
+    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
   };
 
   return (
@@ -204,7 +711,7 @@ const SelectionScreen = () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <img
           src={Genre4Image}
           alt="ジャンル4"
@@ -265,24 +772,23 @@ const SelectionScreen = () => {
             scrollMarginTop: '100px',
             cursor: 'pointer',
           }}
-          onClick={handleGenre1aClick}
+          onClick={handleGenrepoint5Click}
         />
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <Link to="/map"> 
-          <img
-            src={Genre1bImage}
-            alt="ジャンル1-2"
-            style={{
-              width: '300px',
-              height: 'auto',
-              maxWidth: '100%',
-              scrollMarginTop: '100px',
-              cursor: 'pointer', 
-            }}
-          />
-        </Link>
+        <img
+          src={Genre1bImage}
+          alt="ジャンル1-2"
+          style={{
+            width: '300px',
+            height: 'auto',
+            maxWidth: '100%',
+            scrollMarginTop: '100px',
+            cursor: 'pointer',
+          }}
+          onClick={handleGenrepoint2Click}
+        />
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -318,19 +824,18 @@ const SelectionScreen = () => {
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <Link to="/map"> 
-          <img
-            src={Genre1eImage}
-            alt="ジャンル1-5"
-            style={{
-              width: '300px',
-              height: 'auto',
-              maxWidth: '100%',
-              scrollMarginTop: '100px',
-              cursor: 'pointer', 
-            }}
-          />
-        </Link>
+        <img
+          src={Genre1eImage}
+          alt="ジャンル1-5"
+          style={{
+            width: '300px',
+            height: 'auto',
+            maxWidth: '100%',
+            scrollMarginTop: '100px',
+            cursor: 'pointer',
+          }}
+          onClick={handleGenrepoint6Click}
+        />
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -350,19 +855,18 @@ const SelectionScreen = () => {
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <Link to="/map"> 
-          <img
-            src={Genre1gImage}
-            alt="ジャンル1-7"
-            style={{
-              width: '300px',
-              height: 'auto',
-              maxWidth: '100%',
-              scrollMarginTop: '100px',
-              cursor: 'pointer', 
-            }}
-          />
-        </Link>
+        <img
+          src={Genre1gImage}
+          alt="ジャンル1-7"
+          style={{
+            width: '300px',
+            height: 'auto',
+            maxWidth: '100%',
+            scrollMarginTop: '100px',
+            cursor: 'pointer',
+          }}
+          onClick={handleGenrepoint7Click}
+        />
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -399,7 +903,6 @@ const SelectionScreen = () => {
 
       {/*ジャンル2*/}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <Link to="/map"> 
         <img
           ref={genre2aRef}
           src={Genre2aImage}
@@ -408,10 +911,11 @@ const SelectionScreen = () => {
             width: '300px',
             height: 'auto',
             maxWidth: '100%',
-            scrollMarginTop: '100px', 
+            scrollMarginTop: '100px',
+            cursor: 'pointer',
           }}
+          onClick={handleGenrepoint7Click}
         />
-        </Link>
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -493,7 +997,7 @@ const SelectionScreen = () => {
         </Link>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
         <Link to="/map"> 
           <img
             src={Genre3cImage}
@@ -543,22 +1047,21 @@ const SelectionScreen = () => {
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <Link to="/map"> 
-          <img
-            src={Genre4cImage}
-            alt="ジャンル4-3"
-            style={{
-              width: '300px',
-              height: 'auto',
-              maxWidth: '100%',
-              scrollMarginTop: '100px',
-              cursor: 'pointer', 
-            }}
-          />
-        </Link>
+        <img
+          src={Genre4cImage}
+          alt="ジャンル4-3"
+          style={{
+            width: '300px',
+            height: 'auto',
+            maxWidth: '100%',
+            scrollMarginTop: '100px',
+            cursor: 'pointer',
+          }}
+          onClick={handleGenrepoint3Click}
+        />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
         <Link to="/map"> 
           <img
             src={Genre4dImage}
@@ -915,7 +1418,6 @@ const SelectionScreen = () => {
 
       {/*ジャンル8*/}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <Link to="/map">
         <img
           ref={genre8aRef}
           src={Genre8aImage}
@@ -924,10 +1426,11 @@ const SelectionScreen = () => {
             width: '300px',
             height: 'auto',
             maxWidth: '100%',
-            scrollMarginTop: '100px', 
+            scrollMarginTop: '100px',
+            cursor: 'pointer',
           }}
+          onClick={handleGenrepoint3Click}
         />
-        </Link>
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
