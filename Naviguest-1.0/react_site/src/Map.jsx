@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'; // useEffect を追加
 import { Link } from 'react-router-dom'; // 戻るボタン用にLinkをインポート
 import backbutton from './assets/BackButton.png'; // 戻るボタン画像をインポート
 
-// コンポーネント名を Map から MapPage に変更します
 const MapPage = () => {
   const [arrivedNumber, setArrivedNumber] = useState('');
 
@@ -90,16 +89,15 @@ const MapPage = () => {
           <>
             <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#333' }}>
               Pythonが最後に認識した数値: <span style={{ color: '#0066cc' }}>
-                {currentNumberFromPython !== null ? currentNumberFromPython.toFixed(2) : 'N/A'}
+                {currentNumberFromPython !== null ? currentNumberFromPython: 'N/A'}
               </span>
             </p>
             <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#333' }}>
               Pythonでの計算結果: <span style={{ color: '#28a745' }}>
-                {lastCalculatedResult !== null ? lastCalculatedResult.toFixed(2) : 'N/A'}
+                {lastCalculatedResult !== null ? lastCalculatedResult : 'N/A'}
               </span>
             </p>
             <p style={{ color: '#888', fontSize: '0.9rem' }}>
-              ※Vercel Serverless Functionはステートレスなため、この数値は通常0です。
             </p>
           </>
         )}

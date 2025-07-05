@@ -119,7 +119,7 @@ const SelectionScreen = () => {
   }, []);
 
   const handleGenre1aClick = async () => {
-    const valueToSend = 1; // 送信する数値は「1」
+    const valueToSend = 1111; // 送信する数値は「1」
 
     try {
     const response = await fetch('http://127.0.0.1:5000/api/update_number', {
