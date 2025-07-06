@@ -24,7 +24,6 @@ const MapPage = () => {
     const fetchPythonNumber = async () => {
       try {
         setLoading(true);
-        // ★★★ 修正点: ここを絶対パスに変更 ★★★
         const response = await fetch('http://127.0.0.1:5000/api/get_current_number'); 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -46,7 +45,6 @@ const MapPage = () => {
 
   return (
     <>
-      {/* ヘッダー (既存のまま) */}
       <header
         style={{
           backgroundColor: '#0066cc',
@@ -58,7 +56,6 @@ const MapPage = () => {
         <h1 style={{ fontSize: '48px' }}>ナビゲスト</h1>
       </header>
 
-      {/* マップコンテンツ (既存のまま) */}
       <div style={{ padding: '2rem', textAlign: 'center' }}>
         <h2>現在地から目的地までの案内画面です</h2>
         <div

@@ -6,7 +6,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000", "methods": ["GET", "POST", "OPTIONS"]}})
 
-# ★★★ グローバル変数で値を保持する場所を定義 (既にこの部分は存在するはず) ★★★
+# グローバル変数で値を保持する場所を定義 
 current_received_number = 0
 last_calculated_result = 0
 
@@ -27,7 +27,7 @@ def update_number():
         number = data.get('number', 0)
         calculated_value = number * 10
 
-        # ★★★ 受け取った数値と計算結果をグローバル変数に保存 (既にこの部分は存在するはず) ★★★
+        # 受け取った数値と計算結果をグローバル変数に保存 
         current_received_number = number
         last_calculated_result = calculated_value
 
@@ -40,7 +40,6 @@ def update_number():
 # MapPageから呼ばれる /api/get_current_number エンドポイント
 @app.route('/api/get_current_number', methods=['GET'])
 def get_current_number():
-    # ★★★ ここを修正！グローバル変数に保存された最新の数値を返すように変更 ★★★
     return jsonify({
         "current_number": current_received_number, # 0ではなくグローバル変数
         "last_calculated_result": last_calculated_result # 0ではなくグローバル変数
