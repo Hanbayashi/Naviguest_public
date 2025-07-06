@@ -11,11 +11,46 @@ const MapPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // 数字以外の入力を防ぎ、2桁に制限するイベントハンドラ (既存のまま)
+  const [inputError, setInputError] = useState('');
+
+  // 数字以外の入力を防ぎ、範囲を制限するイベントハンドラを修正
   const handleInputChange = (e) => {
     const value = e.target.value;
-    if (/^\d*$/.test(value) && value.length <= 2) {
+
+    // 1. 数字以外の入力を防ぐ
+    if (!/^\d*$/.test(value)) {
+      // 数字以外が入力された場合は何もしないか、エラーを表示
+      // setInputError('数字のみ入力してください。'); // エラー表示したい場合
+      return;
+    }
+
+    // 2. 2桁（最大値32を考慮）に制限
+    if (value.length > 2) {
+      return; // 2桁を超えたら処理しない
+    }
+
+    // 3. 値が空の場合はエラーメッセージをクリアしてstateを更新
+    if (value === '') {
+      setArrivedNumber('');
+      setInputError('');
+      return;
+    }
+
+    // 4. 数値に変換して範囲をチェック
+    const numValue = parseInt(value, 10);
+
+    // 数値として有効で、かつ範囲内にあるかチェック
+    if (isNaN(numValue)) {
+      // parseIntでNaNになることは、上記の /^\d*$/ で防いでいるため、通常ここには来ない
       setArrivedNumber(value);
+      setInputError('有効な数値を入力してください。');
+    } else if (numValue < 1 || numValue > 32) {
+      setArrivedNumber(value); // 一旦入力された値は表示
+      setInputError('1から32までの数字を入力してください。');
+    } else {
+      // 全ての条件を満たした場合
+      setArrivedNumber(value);
+      setInputError(''); // エラーメッセージをクリア
     }
   };
 
@@ -103,24 +138,31 @@ const MapPage = () => {
       {/* 既存の入力欄と表示エリア (変更なし) */}
       <p>到着した番号を入力してください。</p>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}> {/* マージン調整 */}
         <input
-          type="text"
-          pattern="\d{0,2}"
+          type="text" // type="number" に変更すると、ブラウザのバリデーションが追加されるが、handleInputChangeで制御するため text のままでもOK
+          // pattern と maxLength は handleInputChange でより厳密に制御するため、必須ではないが残しておいても害はない
+          pattern="\d{1,2}" // 1桁または2桁の数字 (最小1を暗に示唆)
           inputMode="numeric"
           value={arrivedNumber}
           onChange={handleInputChange}
-          placeholder="例: 12"
-          maxLength="2"
+          placeholder="例: 12 (1〜32)" // プレースホルダーを更新
+          maxLength="2" // 2桁に制限
           style={{
             padding: '0.8rem',
             fontSize: '1.2rem',
             width: '250px',
             textAlign: 'center',
             borderRadius: '5px',
-            border: '1px solid #ccc',
+            border: inputError ? '2px solid red' : '1px solid #ccc', // エラー時に赤枠
           }}
         />
+        {/* エラーメッセージの表示 */}
+        {inputError && (
+          <p style={{ color: 'red', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+            {inputError}
+          </p>
+        )}
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
