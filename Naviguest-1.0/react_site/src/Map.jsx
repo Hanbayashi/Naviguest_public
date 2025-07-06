@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'; // useEffect を追加
-import { Link } from 'react-router-dom'; // 戻るボタン用にLinkをインポート
-import backbutton from './assets/BackButton.png'; // 戻るボタン画像をインポート
+import React, { useState, useEffect } from 'react'; 
+import { Link } from 'react-router-dom'; 
+import backbutton from './assets/BackButton.png'; 
 
 const MapPage = () => {
   const [arrivedNumber, setArrivedNumber] = useState('');

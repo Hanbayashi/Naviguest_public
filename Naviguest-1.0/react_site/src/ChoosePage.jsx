@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 // 画像のインポート
 import backbutton from './assets/BackButton.png';
+import topbutton from './assets/TopButton.png';
 import Genre1Image from './assets/genre1.png';
 import Genre1aImage from './assets/genre1-1.png';
 import Genre1bImage from './assets/genre1-2.png';
@@ -680,7 +681,9 @@ const SelectionScreen = () => {
       </header>
 
       {/* 説明テキスト */}
-      <p style={{ padding: '2rem', fontSize: '20px' }}>ジャンルを選択してください（文章は要件等）。</p>
+      <div style={{ padding: '2rem', textAlign: 'center' }}>
+        <h2>ジャンルを選択してください（文章は要件等）。</h2>
+      </div>
 
       <p style={{ textAlign: 'center', fontSize: '1.2em', color: '#555' }}>
         {pythonMessage}
@@ -762,6 +765,10 @@ const SelectionScreen = () => {
       {/*部署等*/}
 
       {/*ジャンル1*/}
+      <div style={{ padding: '1rem', textAlign: 'center' }}>
+        <h2>手続き・証明・財務</h2>
+      </div>
+
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         {/* Link コンポーネントを削除し、onClick で直接処理を呼び出す */}
         <img
@@ -900,6 +907,10 @@ const SelectionScreen = () => {
       </div>
 
       {/*ジャンル2*/}
+      <div style={{ padding: '1rem', textAlign: 'center' }}>
+        <h2>子育て・家庭支援</h2>
+      </div>
+
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <img
           ref={genre2aRef}
@@ -962,6 +973,10 @@ const SelectionScreen = () => {
       </div>
 
       {/*ジャンル3*/}
+      <div style={{ padding: '1rem', textAlign: 'center' }}>
+        <h2>健康・医療・保険</h2>
+      </div>
+
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <img
           ref={genre3aRef}
@@ -1009,6 +1024,10 @@ const SelectionScreen = () => {
       </div>
 
       {/*ジャンル4*/}
+      <div style={{ padding: '1rem', textAlign: 'center' }}>
+        <h2>高齢者・障がい者・生活困窮者支援</h2>
+      </div>
+
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <img
           ref={genre4aRef}
@@ -1071,6 +1090,10 @@ const SelectionScreen = () => {
       </div>
 
       {/*ジャンル5*/}
+      <div style={{ padding: '1rem', textAlign: 'center' }}>
+        <h2>雇用・経済・企業・産業復興</h2>
+      </div>
+
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <img
           ref={genre5aRef}
@@ -1148,6 +1171,10 @@ const SelectionScreen = () => {
       </div>
 
       {/*ジャンル6*/}
+      <div style={{ padding: '1rem', textAlign: 'center' }}>
+        <h2>住宅・都市計画・まちづくり</h2>
+      </div>
+
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <img
           ref={genre6aRef}
@@ -1345,6 +1372,10 @@ const SelectionScreen = () => {
       </div>
 
       {/*ジャンル7*/}
+      <div style={{ padding: '1rem', textAlign: 'center' }}>
+        <h2>広報・市民対応・行政運営</h2>
+      </div>
+
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <img
           ref={genre7aRef}
@@ -1437,6 +1468,10 @@ const SelectionScreen = () => {
       </div>
 
       {/*ジャンル8*/}
+      <div style={{ padding: '1rem', textAlign: 'center' }}>
+        <h2>会議・相談</h2>
+      </div>
+
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <img
           ref={genre8aRef}
