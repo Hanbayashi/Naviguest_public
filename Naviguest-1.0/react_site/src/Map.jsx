@@ -1,8 +1,73 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import backbutton from './assets/BackButton.png';
-// トップボタンを使用しないため、topbuttonのimportはコメントアウトまたは削除
-// import topbutton from './assets/TopButton.png';
+import F1button from './assets/1F.png';
+import F2button from './assets/2F.png';
+import F3button from './assets/3F.png';
+import F4button from './assets/4F.png';
+import F5button from './assets/5F.png';
+import F6button from './assets/6F.png';
+
+import point1 from './assets/point1.png';
+import point2 from './assets/point2.png';
+import point3 from './assets/point3.png';
+import point4 from './assets/point4.png';
+import point5 from './assets/point5.png';
+import point6 from './assets/point6.png';
+import point7 from './assets/point7.png';
+import point8 from './assets/point8.png';
+import point9 from './assets/point9.png';
+// ★★★ 必要に応じて、2F以降のpoint画像もインポートしてください ★★★
+// 例:
+// import point10 from './assets/point10.png';
+// import point11 from './assets/point11.png';
+// ...
+
+const floorImages = {
+  '1F': F1button,
+  '2F': F2button,
+  '3F': F3button,
+  '4F': F4button,
+  '5F': F5button,
+  '6F': F6button,
+};
+
+// ノード番号から階を判定するヘルパー関数
+// Pythonのroom_to_floor定義と同期させてください
+const getNodeFloor = (node) => {
+  if (node >= 1 && node <= 9) return '1F';
+  if (node >= 10 && node <= 14) return '2F';
+  if (node >= 15 && node <= 21) return '3F';
+  if (node >= 24 && node <= 27) return '4F'; // Pythonのfloor_4の定義 (24〜27) に合わせる
+  if (node >= 28 && node <= 30) return '5F';
+  if (node >= 31 && node <= 32) return '6F';
+  return null; // 該当する階がない場合
+};
+
+
+const nodePointData = {
+  // 1Fのノード
+  1: { src: point1, top: '50.5%', left: '43%', width: '50px' },
+  2: { src: point2, top: '65%', left: '30%', width: '75px' },
+  3: { src: point3, top: '46%', left: '30%', width: '75px' },
+  4: { src: point4, top: '21%', left: '44%', width: '75px' },
+  5: { src: point5, top: '46%', left: '55%', width: '75px' },
+  6: { src: point6, top: '65%', left: '55%', width: '75px' },
+  7: { src: point7, top: '58%', left: '67%', width: '75px' },
+  8: { src: point8, top: '40%', left: '78%', width: '75px' },
+  9: { src: point9, top: '17%', left: '68%', width: '75px' },
+  // ★★★ 2F以降のノードも同様に追加してください ★★★
+  // 例:
+  // 10: { src: point10, top: 'YY%', left: 'XX%', width: 'ZZpx' },
+  // 11: { src: point11, top: 'YY%', left: 'XX%', width: 'ZZpx' },
+  // ...
+  // ここに全てのノードの情報を定義することで、各階のマップ上にピンを表示できるようになります。
+  // 各階のpoint画像と、その画像内での正確なtop/left/widthを慎重に設定してください。
+  // 例えば、2Fのノードの場合:
+  // 10: { src: point10, top: 'XX%', left: 'YY%', width: '75px' },
+  // 11: { src: point11, top: 'XX%', left: 'YY%', width: '75px' },
+  // ...
+};
 
 const MapPage = () => {
   // 入力欄に表示される値とバリデーションエラーメッセージ
@@ -24,6 +89,7 @@ const MapPage = () => {
   // 初期位置を1とするが、これはMapPageがロードされた時に一度だけPythonに送られる初期値
   const [confirmedMapNode, setConfirmedMapNode] = useState(1);
 
+  const [currentFloorDisplayImage, setCurrentFloorDisplayImage] = useState(F1button); // 初期画像を1Fに設定
 
   // 入力欄の変更を処理するハンドラ
   const handleInputChange = (e) => {
@@ -53,7 +119,6 @@ const MapPage = () => {
 
     // 入力値が有効な形式であれば、arrivedNumberを更新
     setArrivedNumber(value);
-    // ここではまだ confirmedMapNode を更新しない。確定ボタンで更新する。
   };
 
   // 「確定」ボタンクリック時のハンドラ
@@ -65,6 +130,7 @@ const MapPage = () => {
       setInputError('現在の場所の番号を入力してください。');
       return;
     }
+    // ノード番号の最大値はPythonのgraph定義 (32) に合わせる
     if (isNaN(numValue) || numValue < 1 || numValue > 32) {
       setInputError('1から32までの有効な数字を入力してください。');
       return;
@@ -73,7 +139,6 @@ const MapPage = () => {
     // 全てのバリデーションを通過したら、確定されたノードを更新し、Pythonへのリクエストをトリガー
     setConfirmedMapNode(numValue);
     setInputError(''); // エラーメッセージをクリア
-    // setArrivedNumber(''); // 確定後に入力欄をクリアしたい場合はコメントを外す
   };
 
   // Pythonバックエンドから経路データをフェッチするuseEffect
@@ -84,7 +149,6 @@ const MapPage = () => {
         setLoading(true);
         setError(null); // エラー状態をリセット
 
-        // Pythonの /api/get_next_point エンドポイントに現在のノードをPOSTで送信
         const response = await fetch('http://127.0.0.1:5000/api/get_next_point', {
           method: 'POST',
           headers: {
@@ -104,6 +168,14 @@ const MapPage = () => {
         setCurrentBuilding(data.current_building);
         setGoalNode(data.goal_node);
         setGuidanceMessage(data.message);
+
+        // ★★★ ここで current_floor に基づいて表示画像を更新 ★★★
+        if (data.current_floor && floorImages[data.current_floor]) {
+          setCurrentFloorDisplayImage(floorImages[data.current_floor]);
+        } else {
+          // current_floor が不明な場合や対応する画像がない場合のフォールバック
+          setCurrentFloorDisplayImage(F1button); // 例として1Fに設定
+        }
 
       } catch (err) {
         console.error("MapPageでのPython API呼び出しエラー:", err);
@@ -151,7 +223,7 @@ const MapPage = () => {
         ) : error ? (
           <p style={{ color: 'red' }}>エラー: {error}</p>
         ) : (
-          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000', marginBottom: '1rem' }}> {/* 下マージンを追加してマップとの隙間を作る */}
+          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000', marginBottom: '1rem' }}>
             案内: <span style={{ color: '#d9534f' }}>{guidanceMessage}</span>
           </p>
         )}
@@ -159,24 +231,58 @@ const MapPage = () => {
         <div
           style={{
             width: '80%',
-            height: '600px', // マップ表示エリアの高さ（必要に応じて調整）
-            backgroundColor: '#f0f0f0',
+            minHeight: '400px', // 最低限の高さを確保
             margin: '2rem auto',
-            border: '1px solid #ccc',
             display: 'flex',
-            flexDirection: 'column', // コンテンツを縦に配置
             justifyContent: 'center',
             alignItems: 'center',
-            fontSize: '24px',
-            color: '#888',
+            overflow: 'hidden',
+            position: 'relative',
           }}
         >
-          マップ表示エリア
-          {/* 実際のマップがここに表示される想定 */}
-          {/* デモ用にスクロール可能な高さを確保するためのダミー要素 */}
-          <div style={{ height: '1000px', width: '1px' }}></div>
+          <img
+            src={currentFloorDisplayImage}
+            alt="現在の階のマップ"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              display: 'block',
+              border: '2px solid black',
+              zIndex: 1,
+            }}
+          />
+
+          {/* ★★★ ここから、現在の階の全てのノードポイントを表示するロジック ★★★ */}
+          {Object.entries(nodePointData).map(([nodeId, nodeInfo]) => {
+            const nodeNumber = parseInt(nodeId, 10);
+            // 現在表示されている階と、このノードの階が一致する場合のみ表示
+            if (getNodeFloor(nodeNumber) === currentFloor) {
+              return (
+                <img
+                  key={nodeNumber} // Reactのリストレンダリングにはkeyが必要
+                  src={nodeInfo.src}
+                  alt={`ノード ${nodeNumber}`}
+                  style={{
+                    position: 'absolute',
+                    top: nodeInfo.top,
+                    left: nodeInfo.left,
+                    width: nodeInfo.width,
+                    height: 'auto',
+                    zIndex: 2, // マップ画像より手前に表示
+                    // 現在地ノードには青い枠線を追加
+                    border: nodeNumber === confirmedMapNode ? '3px solid blue' : 'none',
+                    borderRadius: '50%', // オプション: ピンを丸く表示
+                  }}
+                />
+              );
+            }
+            return null; // 条件に合わないノードは表示しない
+          })}
+          {/* ★★★ 変更ここまで ★★★ */}
+
         </div>
       </div>
+
 
       {/* Pythonからの経路案内データ表示セクション */}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -295,5 +401,4 @@ const MapPage = () => {
   );
 };
 
-// コンポーネント名を MapPage に変更してエクスポート
 export default MapPage;

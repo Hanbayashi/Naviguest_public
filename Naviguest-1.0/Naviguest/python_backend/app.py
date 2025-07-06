@@ -74,7 +74,7 @@ def bfs_shortest_path(graph, start, goal):
 floor_1 = list(range(1, 10))      # 1〜9
 floor_2 = list(range(10, 15))     # 10〜14
 floor_3 = list(range(15, 22))     # 15〜21
-floor_4 = list(range(24, 28))     # 24〜27
+floor_4 = list(range(22, 28))     # 22〜27
 floor_5 = list(range(28, 31))     # 28〜30
 floor_6 = list(range(31, 33))     # 31〜32
 
