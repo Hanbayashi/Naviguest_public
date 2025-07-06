@@ -145,540 +145,535 @@ const SelectionScreen = () => {
 
   //送信する値（目的地の番号）の設定
   const handleGenrepoint2Click = async () => {
-    const valueToSend = 2; // 送信する数値
-
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+  const valueToSend = 2; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', { // エンドポイントを修正
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }), // キーを 'goal_node' に修正
     });
 
     if (!response.ok) {
-      // レスポンスがOKでない場合はエラーをスロー
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // 必要であれば、Pythonからのレスポンスをここで処理することもできます
     const data = await response.json();
-    console.log("Pythonからの応答:", data);
-
-    navigate('/map'); // Map.jsxに対応するパスへ遷移
+    console.log("Pythonからの応答:", data); // Pythonからの応答を確認
+    navigate('/map'); // Map.jsxへ遷移
 
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error); // エラーメッセージを修正
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-    
-  };
+};
 
-  const handleGenrepoint3Click = async () => {
-    const valueToSend = 3; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint3Click = async () => {
+  const valueToSend = 3; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint5Click = async () => {
-    const valueToSend = 5; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint5Click = async () => {
+  const valueToSend = 5; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint6Click = async () => {
-    const valueToSend = 6; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint6Click = async () => {
+  const valueToSend = 6; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint7Click = async () => {
-    const valueToSend = 7; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint7Click = async () => {
+  const valueToSend = 7; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint8Click = async () => {
-    const valueToSend = 8; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint8Click = async () => {
+  const valueToSend = 8; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint9Click = async () => {
-    const valueToSend = 9; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint9Click = async () => {
+  const valueToSend = 9; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint10Click = async () => {
-    const valueToSend = 10; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint10Click = async () => {
+  const valueToSend = 10; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint11Click = async () => {
-    const valueToSend = 11; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint11Click = async () => {
+  const valueToSend = 11; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint12Click = async () => {
-    const valueToSend = 12; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint12Click = async () => {
+  const valueToSend = 12; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint13Click = async () => {
-    const valueToSend = 13; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint13Click = async () => {
+  const valueToSend = 13; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint14Click = async () => {
-    const valueToSend = 14; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint14Click = async () => {
+  const valueToSend = 14; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint15Click = async () => {
-    const valueToSend = 15; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint15Click = async () => {
+  const valueToSend = 15; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint16Click = async () => {
-    const valueToSend = 16; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint16Click = async () => {
+  const valueToSend = 16; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint17Click = async () => {
-    const valueToSend = 17; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint17Click = async () => {
+  const valueToSend = 17; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint18Click = async () => {
-    const valueToSend = 18; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint18Click = async () => {
+  const valueToSend = 18; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint19Click = async () => {
-    const valueToSend = 19; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint19Click = async () => {
+  const valueToSend = 19; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint20Click = async () => {
-    const valueToSend = 20; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint20Click = async () => {
+  const valueToSend = 20; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint21Click = async () => {
-    const valueToSend = 21; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint21Click = async () => {
+  const valueToSend = 21; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint25Click = async () => {
-    const valueToSend = 25; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint25Click = async () => {
+  const valueToSend = 25; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint26Click = async () => {
-    const valueToSend = 26; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint26Click = async () => {
+  const valueToSend = 26; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint27Click = async () => {
-    const valueToSend = 27; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint27Click = async () => {
+  const valueToSend = 27; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint31Click = async () => {
-    const valueToSend = 31; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint31Click = async () => {
+  const valueToSend = 31; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
-  const handleGenrepoint32Click = async () => {
-    const valueToSend = 32; // 送信する数値
-    try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_number', {
+const handleGenrepoint32Click = async () => {
+  const valueToSend = 32; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ number: valueToSend }),
+      body: JSON.stringify({ goal_node: valueToSend }),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Pythonからの応答:", data);
-    navigate('/map'); 
+    navigate('/map');
   } catch (error) {
-    console.error("数値送信エラー:", error);
-    alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
+    console.error("目的地の送信エラー:", error);
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
   }
-  };
+};
 
   // ★★★ ページトップへスクロールする関数 ★★★
   const scrollToTop = () => {
