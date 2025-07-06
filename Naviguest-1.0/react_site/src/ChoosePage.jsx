@@ -82,6 +82,8 @@ const SelectionScreen = () => {
 
   const [pythonMessage, setPythonMessage] = useState('Pythonからのメッセージを待機中...');
 
+  const [showTopButton, setShowTopButton] = useState(false);
+
   // スクロール処理
   const handleScrollToGenre1a = () => {
     genre1aRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -121,6 +123,24 @@ const SelectionScreen = () => {
         console.error("Python API呼び出しエラー:", error);
         setPythonMessage('Pythonバックエンドに接続できませんでした。');
       });
+
+      // ★★★ スクロールイベントリスナーを設定 ★★★
+    const handleScroll = () => {
+      // ページのスクロール位置が一定以上（例: 200px）になったらボタンを表示
+      if (window.scrollY > 200) {
+        setShowTopButton(true);
+      } else {
+        setShowTopButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // クリーンアップ関数: コンポーネントがアンマウントされるときにイベントリスナーを削除
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+
   }, []);
 
   //送信する値（目的地の番号）の設定
@@ -658,6 +678,14 @@ const SelectionScreen = () => {
     console.error("数値送信エラー:", error);
     alert("数値の送信に失敗しました。詳細をコンソールで確認してください。");
   }
+  };
+
+  // ★★★ ページトップへスクロールする関数 ★★★
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -1510,6 +1538,30 @@ const SelectionScreen = () => {
           <img src={backbutton} alt="戻る" style={{ width: '200px', height: 'auto' }} />
         </Link>
       </div>
+
+       {/* ★★★ ページトップへ戻る固定ボタンを追加 ★★★ */}
+      {showTopButton && ( // showTopButtonがtrueの場合のみ表示
+        <div
+          style={{
+            position: 'fixed',
+            bottom: '20px', // 画面下端から20px
+            right: '20px',  // 画面右端から20px
+            zIndex: 1000,   // 他の要素の上に表示
+          }}
+        >
+          <img
+            src={topbutton} 
+            alt="ページトップへ"
+            onClick={scrollToTop} // クリックでスクロール関数を実行
+            style={{
+              width: '180px', // サイズ調整
+              height: 'auto',
+              cursor: 'pointer',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+            }}
+          />
+        </div>
+      )}
 
       {/* フッター */}
       <footer style={{ backgroundColor: '#ddd', textAlign: 'center', padding: '1rem' }}>
