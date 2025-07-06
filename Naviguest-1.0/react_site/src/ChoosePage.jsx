@@ -1526,15 +1526,22 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center' }}>
-
-        <Link to="/">
-          {/* srcをインポートしたbackbutton変数に変更 */}
-          <img src={backbutton} alt="戻る" style={{ width: '200px', height: 'auto' }} />
+      <div style={{ marginBottom: '2rem',textAlign: 'center' }}>
+        <Link to="/"> 
+          <img
+            src={backbutton}
+            alt="戻る"
+            style={{
+              width: '200px', // 必要に応じてサイズ調整 
+              height: 'auto',
+              cursor: 'pointer',
+              border: 'none', 
+              verticalAlign: 'middle', //  追加: 画像の配置を調整 
+            }}
+          />
         </Link>
       </div>
 
-       {/* ★★★ ページトップへ戻る固定ボタンを追加 ★★★ */}
       {showTopButton && ( // showTopButtonがtrueの場合のみ表示
         <div
           style={{
