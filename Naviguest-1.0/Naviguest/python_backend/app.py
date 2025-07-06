@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from collections import deque # dequeをインポート
+from collections import deque 
 
 app = Flask(__name__)
 # CORS設定: Reactアプリケーションが動作するポート3000からのアクセスを許可
@@ -8,7 +8,6 @@ CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000", "methods": 
 
 # --- グラフ定義 ---
 # 施設の各ノード（点）とその隣接ノードを定義したグラフ
-# 例: 1は2, 3, 4, 5, 6と繋がっている
 graph = {
     1: [2, 3, 4, 5, 6],
     2: [1, 3],

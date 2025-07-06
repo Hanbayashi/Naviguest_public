@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 // 画像のインポート
 import backbutton from './assets/BackButton.png';
 import topbutton from './assets/TopButton.png';
+
 import Genre1Image from './assets/genre1.png';
 import Genre1aImage from './assets/genre1-1.png';
 import Genre1bImage from './assets/genre1-2.png';

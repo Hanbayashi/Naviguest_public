@@ -78,18 +78,14 @@ const nodePointData = {
 const MapPage = () => {
   const [arrivedNumber, setArrivedNumber] = useState('');
   const [inputError, setInputError] = useState('');
-
   const [nextPoint, setNextPoint] = useState(null);
   const [currentFloor, setCurrentFloor] = useState(null);
   const [currentBuilding, setCurrentBuilding] = useState(null);
   const [goalNode, setGoalNode] = useState(null);
   const [guidanceMessage, setGuidanceMessage] = useState('経路案内を待機中...');
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [confirmedMapNode, setConfirmedMapNode] = useState(1);
-
   const [currentFloorDisplayImage, setCurrentFloorDisplayImage] = useState(F1button);
 
   const handleInputChange = (e) => {
@@ -246,8 +242,9 @@ const MapPage = () => {
                     top: nodeInfo.top,
                     left: nodeInfo.left,
                     width: nodeInfo.width,
-                    height: nodeInfo.width, // 高さを幅と同じにして円にする
-                    backgroundColor: 'rgba(255, 0, 0, 0.7)', // 赤色の半透明背景
+                    height: nodeInfo.width, 
+                    //backgroundColor: 'rgba(255, 0, 0, 0.7)', // 赤色の半透明背景
+                    backgroundColor: nodeNumber === confirmedMapNode ? 'rgba(0, 0, 255, 0.7)' : 'rgba(255, 0, 0, 0.7)',
                     borderRadius: '50%', // 円形にする
                     display: 'flex',
                     justifyContent: 'center',
@@ -257,7 +254,7 @@ const MapPage = () => {
                     // フォントサイズはノードのwidthに応じて動的に設定
                     fontSize: `${parseFloat(nodeInfo.width) * 0.4}px`,
                     zIndex: 2,
-                    border: nodeNumber === confirmedMapNode ? '3px solid blue' : 'none',
+                    //border: nodeNumber === confirmedMapNode ? '4px solid blue' : 'none',
                     transform: 'translate(-50%, -50%)',
                   }}
                 >

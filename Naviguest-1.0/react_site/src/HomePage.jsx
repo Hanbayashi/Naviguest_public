@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // ナビゲーション用にLinkをインポート
+import { Link } from 'react-router-dom'; 
 import CityHall from './assets/CityHall.jpg';
 import startbutton from './assets/StartButton.png';
 
@@ -25,13 +25,13 @@ const HomePage = () => {
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
       <img
-        src={CityHall} // インポートした変数を使用
+        src={CityHall}
         alt="市役所の写真"
         style={{
           width: '600px',
           height: 'auto',
           maxWidth: '100%',
-          scrollMarginTop: '100px', // スクロール位置の余白調整（任意）
+          scrollMarginTop: '100px',
         }}
       />
     </div>
@@ -43,11 +43,11 @@ const HomePage = () => {
               src={startbutton}
               alt="スタートボタン"
               style={{
-                width: '200px', // ★★★ 画像のサイズを調整してください 
+                width: '200px',
                 height: 'auto',
                 cursor: 'pointer',
                 border: 'none', 
-                verticalAlign: 'middle', // 画像とテキストのベースラインを揃える場合に役立つ
+                verticalAlign: 'middle', 
               }}
             />
           </Link>
