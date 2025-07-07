@@ -1,0 +1,4 @@
+# .gitignore (Naviguest-1.0/react_site/ 直下)
+node_modules/
+build/
+.env
