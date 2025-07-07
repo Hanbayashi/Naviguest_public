@@ -27,4 +27,4 @@ COPY . .
 # Flaskアプリをgunicornで起動する一般的なコマンド例
 # 'app:app' の部分は、あなたのFlaskアプリケーションのエントリポイントに合わせてください
 # 例: main.py に Flask インスタンスが app という変数名で定義されている場合、'main:app'
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:10000", "app:app"]
+CMD ["python", "-m", "gunicorn", "-w", "4", "-b", "0.0.0.0:10000", "app:app"]
