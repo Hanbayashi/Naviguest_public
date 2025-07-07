@@ -1555,9 +1555,9 @@ const handleGenrepoint32Click = async () => {
           <img
             src={topbutton} 
             alt="ページトップへ"
-            onClick={scrollToTop} // クリックでスクロール関数を実行
+            onClick={scrollToTop} 
             style={{
-              width: '180px', // サイズ調整
+              width: '180px', 
               height: 'auto',
               cursor: 'pointer',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
