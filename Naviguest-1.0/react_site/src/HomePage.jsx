@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
-import CityHall from './assets/CityHall.jpg';
+import CityHall from './assets/CityHall.png';
 import startbutton from './assets/StartButton.png';
 
 const HomePage = () => {
@@ -15,15 +15,7 @@ const HomePage = () => {
         </nav>
       </header>
 
-      <div style={{textAlign: 'center' }}>
-        <h2>舞鶴市役所にご来庁いただきありがとうございます。</h2>
-      </div>
-
-      <div style={{textAlign: 'center' }}>
-        <h2>このページでは、東舞鶴市役所各課の場所や施設へのアクセス方法をわかりやすくご紹介しています。</h2>
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '2rem' , marginTop: '2rem'}}>
       <img
         src={CityHall}
         alt="市役所の写真"
@@ -36,8 +28,15 @@ const HomePage = () => {
       />
     </div>
 
+    <div style={{textAlign: 'center' }}>
+        <h2>舞鶴市役所にご来庁いただきありがとうございます。</h2>
+      </div>
+
+      <div style={{textAlign: 'center' }}>
+        <h2>このページでは、舞鶴市役所各課の場所や施設へのアクセス方法をわかりやすくご紹介しています。</h2>
+      </div>
+
       <div style={{ marginBottom: '2rem',textAlign: 'center' }}>
-          {/* 内部ナビゲーションにはLinkコンポーネントを使用 */}
           <Link to="/startpoint">
             <img
               src={startbutton}

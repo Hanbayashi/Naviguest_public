@@ -2,12 +2,22 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // useNavigateをインポート
 import backbutton from './assets/BackButton.png';
-// nextbuttonはChoosePageへの遷移に使うので、別途送信ボタンを設けるか、同じものを流用
+import point1 from './assets/startpoint1.png';
+import point3 from './assets/startpoint3.png';
+import point4 from './assets/startpoint4.png';
+import point9 from './assets/startpoint9.png';
 
 const StartPointPage = () => {
   const [selectedStartNode, setSelectedStartNode] = useState(null); // 選択された開始ノードを保持
   const [errorMessage, setErrorMessage] = useState(''); // エラーメッセージ用
   const navigate = useNavigate(); // 遷移に使う
+
+  const nodeImages = {
+    1: point1,
+    3: point3,
+    4: point4,
+    9: point9,
+  };
 
   // 開始ノードの選択ボタンがクリックされた時のハンドラ
   const handleNodeSelect = async (nodeNumber) => {
@@ -53,33 +63,40 @@ const StartPointPage = () => {
       </header>
 
       <div style={{ textAlign: 'center', padding: '2rem' }}>
-        <h2>現在の場所を選択してください</h2>
-        <p style={{ fontSize: '1.2rem', margin: '1rem 0' }}>
-          マップ上の開始ノードに該当するボタンを押してください。
-        </p>
+        <h2>現在の場所を写真を参考に選択してください</h2>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', marginBottom: '30px' }}>
+        <div 
+          style={{ 
+            display: 'flex', 
+            flexDirection: 'column', // 縦方向に並べる
+            alignItems: 'center', // 中央揃え
+            gap: '20px', // ボタン間の間隔
+            marginBottom: '30px' 
+          }}
+        >
           {nodeOptions.map((node) => (
             <button
               key={node}
               onClick={() => handleNodeSelect(node)}
               style={{
-                padding: '15px 30px',
-                fontSize: '1.5rem',
-                cursor: 'pointer',
-                backgroundColor: selectedStartNode === node ? '#0056b3' : '#007bff', // 選択されたボタンの色を変える
-                color: 'white',
-                border: 'none',
+                background: 'none', // ボタンのデフォルト背景を削除
+                border: selectedStartNode === node ? '3px solid #0056b3' : '1px solid #ccc', // 選択時の枠線
                 borderRadius: '8px',
-                minWidth: '120px', // ボタンの最小幅
+                cursor: 'pointer',
+                padding: '5px', // 画像の周りのパディング
                 boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                transition: 'background-color 0.2s ease',
-                '&:hover': {
-                  backgroundColor: '#0056b3',
-                }
+                transition: 'border 0.2s ease, box-shadow 0.2s ease',
               }}
             >
-              ノード {node}
+              <img 
+                src={nodeImages[node]} 
+                alt={`ノード ${node}`} 
+                style={{ 
+                  maxWidth: '250px', // 画像の最大幅
+                  height: 'auto', 
+                  display: 'block' // 余白をなくす
+                }} 
+              />
             </button>
           ))}
         </div>
@@ -95,13 +112,6 @@ const StartPointPage = () => {
         <Link to="/">
           <img src={backbutton} alt="戻る" style={{ width: '150px', height: 'auto', marginRight: '20px' }} />
         </Link>
-        {/*
-        // 以下の「次へ」ボタンは、開始ノードの選択と送信が成功した後に自動的に遷移するため、基本的には不要になります。
-        // もしユーザーが選択せずに「次へ」を押したい場合など、特別な要件があるなら残してください。
-        <Link to="/choose">
-          <img src={nextbutton} alt="次へ" style={{ width: '200px', height: 'auto', cursor: 'pointer' }} />
-        </Link>
-        */}
       </div>
 
       <footer style={{ backgroundColor: '#ddd', textAlign: 'center', padding: '1rem' }}>

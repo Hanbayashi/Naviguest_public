@@ -699,14 +699,16 @@ const handleGenrepoint32Click = async () => {
               listStyle: 'none',padding: 0,display: 'flex',justifyContent: 'center',gap: '2rem',
             }}
           >
-            {/* 必要に応じてナビゲーション項目を追加 */}
           </ul>
         </nav>
       </header>
 
       {/* 説明テキスト */}
-      <div style={{ padding: '2rem', textAlign: 'center' }}>
-        <h2>ジャンルを選択してください（文章は要件等）。</h2>
+      <div style={{ textAlign: 'center' }}>
+        <h2>
+          ご案内を希望するジャンルをお選びください。<br /> 
+          選択されたジャンルの目的地まで、自動でスクロールします。
+        </h2>
       </div>
 
       <p style={{ textAlign: 'center', fontSize: '1.2em', color: '#555' }}>
