@@ -789,11 +789,11 @@ const handleGenrepoint32Click = async () => {
       {/*部署等*/}
 
       {/*ジャンル1*/}
-      <div style={{ padding: '1rem', textAlign: 'center' }}>
+      <div style={{  textAlign: 'center' }}>
         <h2>手続き・証明・財務</h2>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         {/* Link コンポーネントを削除し、onClick で直接処理を呼び出す */}
         <img
           ref={genre1aRef}
@@ -810,7 +810,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre1bImage}
           alt="ジャンル1-2"
@@ -825,7 +825,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre1cImage}
           alt="ジャンル1-3"
@@ -840,7 +840,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre1dImage}
           alt="ジャンル1-4"
@@ -855,7 +855,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre1eImage}
           alt="ジャンル1-5"
@@ -870,7 +870,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre1fImage}
           alt="ジャンル1-6"
@@ -885,7 +885,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre1gImage}
           alt="ジャンル1-7"
@@ -900,7 +900,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre1hImage}
           alt="ジャンル1-8"
@@ -915,7 +915,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <img
           src={Genre1iImage}
           alt="ジャンル1-9"
@@ -931,11 +931,11 @@ const handleGenrepoint32Click = async () => {
       </div>
 
       {/*ジャンル2*/}
-      <div style={{ padding: '1rem', textAlign: 'center' }}>
+      <div style={{  textAlign: 'center' }}>
         <h2>子育て・家庭支援</h2>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           ref={genre2aRef}
           src={Genre2aImage}
@@ -951,7 +951,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre2bImage}
           alt="ジャンル2-2"
@@ -966,7 +966,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre2cImage}
           alt="ジャンル2-3"
@@ -981,7 +981,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <img
           src={Genre2dImage}
           alt="ジャンル2-4"
@@ -997,11 +997,11 @@ const handleGenrepoint32Click = async () => {
       </div>
 
       {/*ジャンル3*/}
-      <div style={{ padding: '1rem', textAlign: 'center' }}>
+      <div style={{  textAlign: 'center' }}>
         <h2>健康・医療・保険</h2>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           ref={genre3aRef}
           src={Genre3aImage}
@@ -1017,7 +1017,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre3bImage}
           alt="ジャンル3-2"
@@ -1032,7 +1032,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <img
           src={Genre3cImage}
           alt="ジャンル3-3"
@@ -1048,11 +1048,11 @@ const handleGenrepoint32Click = async () => {
       </div>
 
       {/*ジャンル4*/}
-      <div style={{ padding: '1rem', textAlign: 'center' }}>
+      <div style={{ textAlign: 'center' }}>
         <h2>高齢者・障がい者・生活困窮者支援</h2>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           ref={genre4aRef}
           src={Genre4aImage}
@@ -1068,7 +1068,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre4bImage}
           alt="ジャンル4-2"
@@ -1083,7 +1083,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre4cImage}
           alt="ジャンル4-3"
@@ -1098,7 +1098,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <img
           src={Genre4dImage}
           alt="ジャンル4-4"
@@ -1114,11 +1114,11 @@ const handleGenrepoint32Click = async () => {
       </div>
 
       {/*ジャンル5*/}
-      <div style={{ padding: '1rem', textAlign: 'center' }}>
+      <div style={{ textAlign: 'center' }}>
         <h2>雇用・経済・企業・産業復興</h2>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           ref={genre5aRef}
           src={Genre5aImage}
@@ -1134,7 +1134,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre5bImage}
           alt="ジャンル5-2"
@@ -1149,7 +1149,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre5cImage}
           alt="ジャンル5-3"
@@ -1164,7 +1164,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre5dImage}
           alt="ジャンル5-4"
@@ -1179,7 +1179,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <img
           src={Genre5eImage}
           alt="ジャンル5-5"
@@ -1195,11 +1195,11 @@ const handleGenrepoint32Click = async () => {
       </div>
 
       {/*ジャンル6*/}
-      <div style={{ padding: '1rem', textAlign: 'center' }}>
+      <div style={{  textAlign: 'center' }}>
         <h2>住宅・都市計画・まちづくり</h2>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           ref={genre6aRef}
           src={Genre6aImage}
@@ -1215,7 +1215,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6bImage}
           alt="ジャンル6-2"
@@ -1230,7 +1230,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6cImage}
           alt="ジャンル6-3"
@@ -1245,7 +1245,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6dImage}
           alt="ジャンル6-4"
@@ -1260,7 +1260,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6eImage}
           alt="ジャンル6-5"
@@ -1275,7 +1275,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6fImage}
           alt="ジャンル6-6"
@@ -1290,7 +1290,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6gImage}
           alt="ジャンル6-7"
@@ -1305,7 +1305,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6hImage}
           alt="ジャンル6-8"
@@ -1320,7 +1320,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6iImage}
           alt="ジャンル6-9"
@@ -1335,7 +1335,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6jImage}
           alt="ジャンル6-10"
@@ -1350,7 +1350,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6kImage}
           alt="ジャンル6-11"
@@ -1365,7 +1365,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre6lImage}
           alt="ジャンル6-12"
@@ -1380,7 +1380,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <img
           src={Genre6mImage}
           alt="ジャンル6-13"
@@ -1396,11 +1396,11 @@ const handleGenrepoint32Click = async () => {
       </div>
 
       {/*ジャンル7*/}
-      <div style={{ padding: '1rem', textAlign: 'center' }}>
+      <div style={{  textAlign: 'center' }}>
         <h2>広報・市民対応・行政運営</h2>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           ref={genre7aRef}
           src={Genre7aImage}
@@ -1416,7 +1416,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre7bImage}
           alt="ジャンル7-2"
@@ -1431,7 +1431,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre7cImage}
           alt="ジャンル7-3"
@@ -1446,7 +1446,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre7dImage}
           alt="ジャンル7-4"
@@ -1461,7 +1461,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre7eImage}
           alt="ジャンル7-5"
@@ -1476,7 +1476,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <img
           src={Genre7fImage}
           alt="ジャンル7-6"
@@ -1492,11 +1492,11 @@ const handleGenrepoint32Click = async () => {
       </div>
 
       {/*ジャンル8*/}
-      <div style={{ padding: '1rem', textAlign: 'center' }}>
+      <div style={{  textAlign: 'center' }}>
         <h2>会議・相談</h2>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           ref={genre8aRef}
           src={Genre8aImage}
@@ -1512,7 +1512,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <img
           src={Genre8bImage}
           alt="ジャンル8-2"

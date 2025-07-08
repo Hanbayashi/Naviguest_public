@@ -11,9 +11,9 @@ import F6button from './assets/6F.png';
 //案内画像
 import guidance_1_2 from './assets/1-2.png';
 import guidance_1_3 from './assets/1-3.png';
-import guidance_1_4 from './assets/1-2.png';
-import guidance_1_5 from './assets/1-2.png';
-import guidance_1_6 from './assets/1-2.png';
+import guidance_1_4 from './assets/1-4.png';
+import guidance_1_5 from './assets/1-5.png';
+import guidance_1_6 from './assets/1-6.png';
 import guidance_2_1 from './assets/2-1.png';
 import guidance_2_3 from './assets/2-3.png';
 import guidance_3_2 from './assets/3-2.png';
@@ -86,7 +86,6 @@ const floorImages = {
 };
 
 // ノード番号から階を判定するヘルパー関数
-// Pythonのroom_to_floor定義と完全に同期させてください
 const getNodeFloor = (node) => {
   if (node >= 1 && node <= 9) return '1F';
   if (node >= 10 && node <= 14) return '2F';
@@ -94,7 +93,7 @@ const getNodeFloor = (node) => {
   if (node >= 22 && node <= 27) return '4F'; 
   if (node >= 28 && node <= 30) return '5F';
   if (node >= 31 && node <= 32) return '6F';
-  return null; // 該当する階がない場合
+  return null;
 };
 
 // ノードサイズを調整するヘルパー関数
@@ -104,13 +103,12 @@ const scaleNodeSize = (originalWidth) => {
 };
 
 // 各ノード番号に対応する位置情報を定義するオブジェクト
-// top, left, widthは、あなたのマップ画像に合わせて正確に調整してください。
 const nodePointData = {
   //1Fのノード
-  1: { top: '54.5%', left: '45%', width: scaleNodeSize('75px') },
+  1: { top: '60%', left: '44%', width: scaleNodeSize('75px') },
   2: { top: '70%', left: '30%', width: scaleNodeSize('75px') },
   3: { top: '51%', left: '30%', width: scaleNodeSize('75px') },
-  4: { top: '24%', left: '46%', width: scaleNodeSize('75px') },
+  4: { top: '24%', left: '45%', width: scaleNodeSize('75px') },
   5: { top: '51%', left: '57%', width: scaleNodeSize('75px') },
   6: { top: '70%', left: '57%', width: scaleNodeSize('75px') },
   7: { top: '62%', left: '69%', width: scaleNodeSize('75px') },
@@ -137,16 +135,15 @@ const nodePointData = {
   25: { top: '70%', left: '69%', width: scaleNodeSize('75px') },
   26: { top: '47%', left: '81%', width: scaleNodeSize('75px') },
   27: { top: '20%', left: '73%', width: scaleNodeSize('75px') },
-  //5Fのノード (元のコメントでは4Fと書かれていた部分)
+  //5Fのノード
   28: { top: '74%', left: '47%', width: scaleNodeSize('75px') },
   29: { top: '34%', left: '48%', width: scaleNodeSize('75px') },
   30: { top: '55%', left: '56%', width: scaleNodeSize('75px') },
-  //6Fのノード (元のコメントでは5Fと書かれていた部分)
+  //6Fのノード
   31: { top: '74%', left: '37%', width: scaleNodeSize('75px') },
   32: { top: '34%', left: '41%', width: scaleNodeSize('75px') },
 };
 
-// --- ここから案内画像のパスを管理するオブジェクト (ご提供いただいた通り) ---
 const guidanceImages = {
     '1-2': guidance_1_2,
     '1-3': guidance_1_3,
@@ -227,10 +224,8 @@ const MapPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // 初期値はnullにしておき、Pythonから取得した値で更新するようにする
-  const [confirmedMapNode, setConfirmedMapNode] = useState(null); 
-  // 初期表示画像をデフォルトではなく1Fボタンにしておく（初期ロード中の見た目）
-  const [currentFloorDisplayImage, setCurrentFloorDisplayImage] = useState(F1button); 
+  const [confirmedMapNode, setConfirmedMapNode] = useState(null);
+  const [currentFloorDisplayImage, setCurrentFloorDisplayImage] = useState(F1button);
 
 
   const handleInputChange = (e) => {
@@ -274,38 +269,31 @@ const MapPage = () => {
     setInputError('');
   };
 
-  // Pythonバックエンドから経路データをフェッチするuseEffect
   useEffect(() => {
     const fetchPathData = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // MapPageが初めてロードされ、confirmedMapNodeがまだnullの場合
         if (confirmedMapNode === null) {
-          // Pythonから現在の初期位置を取得するAPIを呼び出す
           const initialResponse = await fetch('http://127.0.0.1:5000/api/get_current_node');
           if (!initialResponse.ok) {
-            // エラーレスポンスの場合、JSONをパースしてメッセージを取得
             const errorText = await initialResponse.text();
             throw new Error(`HTTP error! status: ${initialResponse.status} for initial node: ${errorText}`);
           }
           const initialData = await initialResponse.json();
-          
+
           if (initialData.status === "success" && initialData.current_node !== undefined) {
-            setConfirmedMapNode(initialData.current_node); // 取得した初期ノードでStateを更新
-            setArrivedNumber(String(initialData.current_node)); // 入力欄も更新
+            setConfirmedMapNode(initialData.current_node);
+            setArrivedNumber(String(initialData.current_node));
           } else {
-            // Pythonから初期ノードが返されない、またはstatusがsuccessでない場合
             console.warn("Pythonから有効な初期ノードが返されませんでした。デフォルト値1を設定します。", initialData);
             setConfirmedMapNode(1);
             setArrivedNumber('1');
           }
-          // 初期ロード時に1回だけ実行し、その後の通常の経路探索ロジックはconfirmedMapNode更新でトリガーされる
-          return; 
+          return;
         }
 
-        // 通常の経路探索API呼び出し（confirmedMapNodeが確定された後に実行）
         const response = await fetch('http://127.0.0.1:5000/api/get_next_point', {
           method: 'POST',
           headers: {
@@ -315,7 +303,6 @@ const MapPage = () => {
         });
 
         if (!response.ok) {
-          // エラーレスポンスの場合、JSONをパースしてメッセージを取得
           const errorText = await response.text();
           throw new Error(`HTTP error! status: ${response.status}: ${errorText}`);
         }
@@ -327,11 +314,10 @@ const MapPage = () => {
         setGoalNode(data.goal_node);
         setGuidanceMessage(data.message);
 
-        if (data.current_floor && floorImages[data.current_floor]) {
-          setCurrentFloorDisplayImage(floorImages[data.current_floor]);
+        if (data.current_floor && floorImages.hasOwnProperty(data.current_floor)) {
+          setCurrentFloorDisplayImage(floorImages[`${data.current_floor}`]);
         } else {
-          // Pythonからの階情報が不明な場合や対応する画像がない場合のフォールバック
-          setCurrentFloorDisplayImage(F1button); 
+          setCurrentFloorDisplayImage(F1button);
         }
 
       } catch (err) {
@@ -344,7 +330,7 @@ const MapPage = () => {
     };
 
     fetchPathData();
-  }, [confirmedMapNode]); // confirmedMapNode が変わるたびに useEffect を再実行
+  }, [confirmedMapNode]);
 
   const handleMoveToNextPoint = () => {
     if (nextPoint !== null) {
@@ -355,17 +341,15 @@ const MapPage = () => {
     }
   };
 
-  // 現在地から次のポイントまでの案内画像パスを生成
   const getGuidanceImageSrc = () => {
     if (confirmedMapNode !== null && nextPoint !== null) {
       const key = `${confirmedMapNode}-${nextPoint}`;
-      return guidanceImages[key]; // guidanceImagesオブジェクトから対応するパスを返す
+      return guidanceImages.hasOwnProperty(key) ? guidanceImages[`${key}`] : null;
     }
-    return null; // 画像がない場合
+    return null;
   };
 
 
-  // confirmedMapNode がまだロードされていない場合はローディング表示
   if (confirmedMapNode === null && loading) {
     return (
       <div style={{ textAlign: 'center', padding: '2rem' }}>
@@ -432,6 +416,43 @@ const MapPage = () => {
             const nodeNumber = parseInt(nodeId, 10);
             // 現在の階のノードのみを表示
             if (getNodeFloor(nodeNumber) === currentFloor) {
+              // ノードの種類に応じた背景色とテキスト
+              let backgroundColor = 'rgba(255, 0, 0, 0.7)'; // その他のノードは赤色（半透明）
+              let labelTextAbove = null; // ノードの上に表示するテキスト
+
+              if (nodeNumber === confirmedMapNode) {
+                // 現在地
+                backgroundColor = 'rgba(0, 0, 255, 0.7)'; // 青色（半透明）
+                labelTextAbove = (
+                  <div style={{ 
+                    color: '#CC0000', // 濃い赤色
+                    fontWeight: 'bold', 
+                    fontSize: '1.2em', 
+                    textAlign: 'center',
+                    backgroundColor: 'white', // 背景を白に
+                    padding: '2px 5px', // パディング
+                    borderRadius: '3px', // 角丸
+                    whiteSpace: 'nowrap' // テキストが折り返さないように
+                  }}>現在地</div>
+                );
+              } else if (nodeNumber === nextPoint) {
+                // 次のポイント (濃い黄色)
+                backgroundColor = 'rgba(255, 191, 0, 0.9)'; // 濃い目の黄色（不透明度高め）
+                labelTextAbove = (
+                  // 文字色を濃い赤色（#CC0000）、文字サイズを大きく（1.2em）
+                  <div style={{ 
+                    color: '#CC0000', // 濃い赤色
+                    fontWeight: 'bold', 
+                    fontSize: '1.2em', 
+                    textAlign: 'center',
+                    backgroundColor: 'white', // 背景を白に
+                    padding: '2px 5px', // パディング
+                    borderRadius: '3px', // 角丸
+                    whiteSpace: 'nowrap' // テキストが折り返さないように
+                  }}>次のポイント</div>
+                );
+              }
+
               return (
                 <div
                   key={nodeNumber}
@@ -439,33 +460,55 @@ const MapPage = () => {
                     position: 'absolute',
                     top: nodeInfo.top,
                     left: nodeInfo.left,
-                    width: nodeInfo.width,
-                    height: nodeInfo.width, // 円形にするためwidthと同じ値を設定
-                    // 現在のノードは青、それ以外は赤
-                    backgroundColor: nodeNumber === confirmedMapNode ? 'rgba(0, 0, 255, 0.7)' : 'rgba(255, 0, 0, 0.7)',
-                    borderRadius: '50%', // 円形にする
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'white', // ノード番号の文字色
-                    fontWeight: 'bold',
-                    fontSize: `${parseFloat(nodeInfo.width) * 0.4}px`, // ノードのwidthに応じてフォントサイズを調整
+                    transform: 'translate(-50%, -50%)', // 円の中心をtop/leftに合わせる
                     zIndex: 2,
-                    transform: 'translate(-50%, -50%)', // 中心に配置するための調整
+                    display: 'flex',
+                    flexDirection: 'column', // 上にテキスト、下に円を配置
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
                 >
-                  {nodeNumber}
+                  {/* ノードの上に表示するテキスト */}
+                  {labelTextAbove && (
+                    <div
+                      style={{
+                        position: 'absolute', // 親divに対して絶対配置
+                        bottom: '100%', // 円の上部に配置
+                        marginBottom: '5px', // 円との間に少し余白
+                        // padding, borderRadius, whiteSpace はすでにlabelTextAboveのdivスタイルに含まれる
+                        // transform: 'translateY(-50%)', // 必要に応じて調整
+                      }}
+                    >
+                      {labelTextAbove}
+                    </div>
+                  )}
+                  {/* ノード番号を表示する円 */}
+                  <div
+                    style={{
+                      width: nodeInfo.width,
+                      height: nodeInfo.width, // 円形にするためwidthと同じ値を設定
+                      backgroundColor: backgroundColor,
+                      borderRadius: '50%', // 円形にする
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      color: 'white', // ノード番号の文字色 (円の中の数字)
+                      fontWeight: 'bold',
+                      fontSize: `${parseFloat(nodeInfo.width) * 0.4}px`, // ノードのwidthに応じてフォントサイズを調整
+                    }}
+                  >
+                    {nodeNumber}
+                  </div>
                 </div>
               );
             }
-            return null; // 現在の階ではないノードは表示しない
+            return null;
           })}
 
         </div>
-      </div>
 
-      {/* --- ここから案内画像の表示を追加 --- */}
-        {currentGuidanceImage && !loading && !error && ( // 画像パスが存在し、ローディング中でなくエラーでない場合のみ表示
+        {/* 案内画像の表示 */}
+        {currentGuidanceImage && !loading && !error && (
           <div style={{ marginTop: '2rem', textAlign: 'center' }}>
             <h3>次の移動案内</h3>
             <img 
@@ -480,7 +523,8 @@ const MapPage = () => {
             />
           </div>
         )}
-        {/* --- ここまで案内画像の表示を追加 --- */}
+
+      </div>
 
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>

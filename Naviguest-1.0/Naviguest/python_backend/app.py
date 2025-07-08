@@ -13,38 +13,39 @@ CORS(app, resources={r"/api/*": {"origins": CORS_ORIGIN, "methods": ["GET", "POS
 
 # --- グラフ定義 ---
 # 施設の各ノード（点）とその隣接ノードを定義したグラフ
+# エレベーター間の直接接続は含めず、階内での接続のみを定義します。
 graph = {
     1: [2, 3, 4, 5, 6],
-    2: [1, 3],
+    2: [1, 3], 
     3: [2, 4],
     4: [1, 3, 5],
     5: [4, 6, 7],
     6: [1, 5, 7],
-    7: [5, 6, 8, 9],
+    7: [5, 6, 8, 9], 
     8: [7, 9],
     9: [7, 8],
     10: [11],
-    11: [10, 12],
-    12: [11, 13, 14],
+    11: [10, 12], 
+    12: [11, 13, 14], 
     13: [12, 14],
     14: [12, 13],
     15: [16],
     16: [15, 17],
-    17: [16, 18],
+    17: [16, 18], 
     18: [17],
-    19: [20, 21],
+    19: [20, 21], 
     20: [19, 21],
     21: [19, 20],
     22: [23],
-    23: [22, 24],
+    23: [22, 24], 
     24: [23],
-    25: [26, 27],
+    25: [26, 27], 
     26: [25, 27],
     27: [25, 26],
-    28: [29, 30],
+    28: [29, 30], 
     29: [28, 30],
     30: [28, 29],
-    31: [32],
+    31: [32], 
     32: [31]
 }
 
@@ -119,11 +120,8 @@ def is_in_annex(node):
     """
     return node in annex_nodes
 
-# --- 経路探索ロジック ---
 # グローバル変数で現在のゴールノードと現在の位置を保持
 _global_goal_node = None
-# アプリケーション起動時の初期現在地ノード。
-# startpointpage.jsxから /api/set_initial_current_node で上書きされることが期待される。
 _global_current_node = 1 
 
 def find_next_point(current_node_arg, goal_node_arg=None):
@@ -133,16 +131,11 @@ def find_next_point(current_node_arg, goal_node_arg=None):
     """
     global _global_goal_node, _global_current_node
 
-    # 関数呼び出し時のcurrent_nodeをグローバルな現在地として更新
-    # MapPage.jsxから呼ばれる際はここでcurrent_nodeが更新される
     _global_current_node = current_node_arg
 
-    # goal_node_argが指定された場合はグローバルゴールを更新し、
-    # そうでなければ現在のグローバルゴールを使用
     if goal_node_arg is not None:
         _global_goal_node = goal_node_arg
     elif _global_goal_node is None:
-        # ゴールが未設定の場合はエラーメッセージを返す
         return {
             "next_point": None,
             "current_floor": room_to_floor.get(current_node_arg, "不明"),
@@ -151,20 +144,28 @@ def find_next_point(current_node_arg, goal_node_arg=None):
             "message": "目的地が設定されていません。"
         }
     
-    actual_goal = _global_goal_node # 現在の処理で使う実際のゴールノード
+    actual_goal = _global_goal_node
 
-    # 現在地と目的地の階層および館の情報を取得
     current_floor = room_to_floor.get(current_node_arg, "不明")
     goal_floor = room_to_floor.get(actual_goal, "不明")
     
     current_building = "本館" if not is_in_annex(current_node_arg) else "別館"
     goal_building = "本館" if not is_in_annex(actual_goal) else "別館"
 
-    path_segments = [] # 経路案内メッセージを格納するリスト
-    next_point = None  # 次に進むべきノードを初期化
+    path_segments = []
+    next_point = None
+
+    # 指定された階層番号が3以上か判定するヘルパー
+    def is_floor_3f_or_higher(floor_str):
+        if floor_str == "不明":
+            return False
+        try:
+            floor_num = int(floor_str.replace("F", ""))
+            return floor_num >= 3
+        except ValueError:
+            return False
 
     # --- 経路探索ロジックの本体 ---
-    # 目的地ノードが設定されており、かつ現在のノードと目的地ノード、そしてその階が全て一致する場合に「到着」と判断
     if actual_goal is not None and \
        current_node_arg == actual_goal and \
        current_floor == goal_floor:
@@ -172,6 +173,62 @@ def find_next_point(current_node_arg, goal_node_arg=None):
         next_point = None
         path_segments.append(f"目的地 {actual_goal} に到着しました。")
         _global_goal_node = None # ゴールに到着したらリセット
+    # 現在地が3F以上で、かつ目的地と館が違う場合にノード1への案内を優先
+    elif current_building != goal_building and is_floor_3f_or_higher(current_floor):
+        # Step 1: Find the nearest elevator on the current floor within the current building
+        target_elevators_on_current_floor = []
+        if is_in_annex(current_node_arg): # If currently in annex
+            target_elevators_on_current_floor = [e for e in elevator_nodes if is_in_annex(e) and room_to_floor.get(e) == current_floor]
+        else: # If currently in main building
+            target_elevators_on_current_floor = [e for e in elevator_nodes if not is_in_annex(e) and room_to_floor.get(e) == current_floor]
+
+        closest_elevator_path = None
+        closest_elevator = None
+
+        for elevator in target_elevators_on_current_floor:
+            path_to_elevator = bfs_shortest_path(graph, current_node_arg, elevator)
+            if path_to_elevator:
+                if closest_elevator_path is None or len(path_to_elevator) < len(closest_elevator_path):
+                    closest_elevator_path = path_to_elevator
+                    closest_elevator = elevator
+
+        if closest_elevator_path and len(closest_elevator_path) > 1:
+            # User is not at an elevator, guide them to the closest elevator
+            next_point = closest_elevator_path[1]
+            path_segments.append(f"【館移動・高層階からの移動】{current_building} から {goal_building} への移動のため、まず本館1F（ノード1）へ向かいます。現在地 {current_node_arg} から最寄りのエレベーター ({closest_elevator}) へ向かってください。")
+        elif closest_elevator_path and len(closest_elevator_path) == 1:
+            # User is already at an elevator on the current floor
+            # Instruct them to go to 1F
+            path_segments.append(f"【館移動・高層階からの移動】{current_building} から {goal_building} への移動のため、本館1F（ノード1）へ向かいます。エレベーター ({current_node_arg}) に到着しました。エレベーターで1Fへ移動してください。")
+            next_point = None # Vertical movement, no next node in horizontal graph
+        else:
+            # No elevator found on current floor/building, fallback to original Node 1 instruction if possible
+            # このケースは稀だが、エレベーターノードが設定されていない場所からの移動の場合
+            path_to_node1 = bfs_shortest_path(graph, current_node_arg, 1)
+            if path_to_node1 and len(path_to_node1) > 1:
+                next_point = path_to_node1[1]
+                path_segments.append(f"【館移動・高層階からの移動】{current_building} から {goal_building} への移動のため、まず本館1F（ノード1）へ向かいます。現在地 {current_node_arg} から本館1Fの入口 (ノード 1) へ向かってください。")
+            elif path_to_node1 and len(path_to_node1) == 1:
+                # Already at Node 1
+                path_segments.append(f"あなたは既に本館1Fの入口 (ノード 1) にいます。")
+                path_from_node1_to_goal = bfs_shortest_path(graph, current_node_arg, actual_goal)
+                if path_from_node1_to_goal and len(path_from_node1_to_goal) > 1:
+                    next_point = path_from_node1_to_goal[1]
+                    path_segments.append(f"ここから目的地 {actual_goal} へ向かってください。次のポイントは {next_point} です。")
+                else:
+                    path_segments.append(f"ノード1から目的地 {actual_goal} への経路が見つかりませんでした。")
+                    next_point = None
+            else:
+                path_segments.append(f"本館1F（ノード1）への経路が見つかりませんでした。")
+                next_point = None
+        
+        return {
+            "next_point": next_point,
+            "current_floor": current_floor,
+            "current_building": current_building,
+            "goal_node": actual_goal,
+            "message": " ".join(path_segments).strip()
+        }
     elif current_floor == goal_floor and current_building == goal_building:
         # 同じ階・同じ館の場合：BFSで直接探索
         path = bfs_shortest_path(graph, current_node_arg, actual_goal)
@@ -181,64 +238,17 @@ def find_next_point(current_node_arg, goal_node_arg=None):
         else:
             path_segments.append(f"同じ階の {current_floor} ({current_building}) 内で、{current_node_arg} から {actual_goal} への経路が見つかりませんでした。")
     else:
-        # 異なる階または異なる館の場合：エレベーター・接続点を経由するロジック
-
-        # まず、現在の建物から目的地の建物へ移動する必要があるか判定
+        # 異なる階または異なる館（上記の新ロジック以外）の場合
+        
+        # まず、異なる館への移動が必要な場合の案内 (1F, 2Fは本館別館が繋がっているため、ここでは直接接続点に誘導)
         if current_building != goal_building:
             path_segments.append(f"【館移動】{current_building} から {goal_building} へ移動します。")
-            # 別館への接続点 (ノード7) または本館への接続点 (ノード1) を仮定
-            # 実際には、現在地から最も近い接続点をBFSで探すべき
             connection_point = None
             if current_building == "本館" and goal_building == "別館":
-                # 本館から別館へ
-                candidates = [node for node in graph[current_node_arg] if is_in_annex(node)] # 隣接する別館ノードを探す
-                if candidates:
-                    connection_point = candidates[0] # 一旦隣接する別館ノードがあればそこへ
-                else: # 隣接する別館ノードがなければ、最も近い別館接続点へ（仮に7）
-                    path_to_conn = bfs_shortest_path(graph, current_node_arg, 7)
-                    if path_to_conn and len(path_to_conn) > 1:
-                        next_point = path_to_conn[1]
-                        path_segments.append(f"まず {current_node_arg} から別館接続点 (ノード 7) へ向かってください。")
-                        return {
-                            "next_point": next_point,
-                            "current_floor": current_floor,
-                            "current_building": current_building,
-                            "goal_node": actual_goal,
-                            "message": " ".join(path_segments).strip()
-                        }
-                    connection_point = 7 # 強制的に7へ
-            elif current_building == "別館" and goal_building == "本館":
-                # 別館から本館へ
-                candidates = [node for node in graph[current_node_arg] if not is_in_annex(node)] # 隣接する本館ノードを探す
-                if candidates:
-                    connection_point = candidates[0] # 一旦隣接する本館ノードがあればそこへ
-                else: # 隣接する本館ノードがなければ、最も近い本館接続点へ（仮に1）
-                    path_to_conn = bfs_shortest_path(graph, current_node_arg, 1)
-                    if path_to_conn and len(path_to_conn) > 1:
-                        next_point = path_to_conn[1]
-                        path_segments.append(f"まず {current_node_arg} から本館接続点 (ノード 1) へ向かってください。")
-                        return {
-                            "next_point": next_point,
-                            "current_floor": current_floor,
-                            "current_building": current_building,
-                            "goal_node": actual_goal,
-                            "message": " ".join(path_segments).strip()
-                        }
-                    connection_point = 1 # 強制的に1へ
-            
-            if connection_point and current_node_arg != connection_point:
-                path_to_conn = bfs_shortest_path(graph, current_node_arg, connection_point)
+                path_to_conn = bfs_shortest_path(graph, current_node_arg, 7) # ノード7を別館接続点と仮定
                 if path_to_conn and len(path_to_conn) > 1:
                     next_point = path_to_conn[1]
-                    path_segments.append(f"{current_node_arg} から {connection_point} ({goal_building} 接続点) へ向かってください。")
-                elif path_to_conn and len(path_to_conn) == 1:
-                    # 既に接続点にいる場合
-                    path_segments.append(f"あなたは既に {connection_point} ({goal_building} 接続点) にいます。")
-                else:
-                    path_segments.append(f"{goal_building} 接続点への経路が見つかりませんでした。")
-                
-                # ここで次のポイントが設定されていれば、館移動を優先
-                if next_point is not None:
+                    path_segments.append(f"まず {current_node_arg} から別館接続点 (ノード 7) へ向かってください。")
                     return {
                         "next_point": next_point,
                         "current_floor": current_floor,
@@ -246,46 +256,62 @@ def find_next_point(current_node_arg, goal_node_arg=None):
                         "goal_node": actual_goal,
                         "message": " ".join(path_segments).strip()
                     }
+            elif current_building == "別館" and goal_building == "本館":
+                path_to_conn = bfs_shortest_path(graph, current_node_arg, 1) # ノード1を本館接続点と仮定
+                if path_to_conn and len(path_to_conn) > 1:
+                    next_point = path_to_conn[1]
+                    path_segments.append(f"まず {current_node_arg} から本館接続点 (ノード 1) へ向かってください。")
+                    return {
+                        "next_point": next_point,
+                        "current_floor": current_floor,
+                        "current_building": current_building,
+                        "goal_node": actual_goal,
+                        "message": " ".join(path_segments).strip()
+                    }
+            path_segments.append(f"接続点への経路が見つかりませんでした。") # フォールバック
 
-        # 階移動が必要な場合（同じ館でも階が違う、または館移動後に階移動が必要）
-        path_segments.append(f"【階移動】{current_floor} から {goal_floor} へ移動します。")
+        # 階移動が必要な場合 (館移動が完了した、または館移動なしで階が異なる場合)
+        if current_floor != goal_floor:
+            # 現在地が本館か別館かによって、対象のエレベーター系統を絞る
+            target_elevators = []
+            if is_in_annex(current_node_arg): # 別館にいる場合
+                target_elevators = [e for e in elevator_nodes if is_in_annex(e) and room_to_floor.get(e) == current_floor]
+            else: # 本館にいる場合
+                target_elevators = [e for e in elevator_nodes if not is_in_annex(e) and room_to_floor.get(e) == current_floor]
 
-        # 現在地から最も近いエレベーターを探す
-        # 同じ建物内のエレベーターのみを対象
-        current_building_elevators = [
-            node for node in elevator_nodes
-            if is_in_annex(node) == is_in_annex(current_node_arg) # 現在の建物と同じ建物
-        ]
-        
-        closest_elevator_path = None
-        closest_elevator = None
+            closest_elevator_path = None
+            closest_elevator = None
 
-        for elevator in current_building_elevators:
-            path_to_elevator = bfs_shortest_path(graph, current_node_arg, elevator)
-            if path_to_elevator:
-                if closest_elevator_path is None or len(path_to_elevator) < len(closest_elevator_path):
-                    closest_elevator_path = path_to_elevator
-                    closest_elevator = elevator
-        
-        if closest_elevator_path and len(closest_elevator_path) > 1:
-            next_point = closest_elevator_path[1]
-            path_segments.append(f"{current_node_arg} からエレベーター ({closest_elevator}) へ向かってください。")
-        elif closest_elevator_path and len(closest_elevator_path) == 1:
-            # 既にエレベーターにいる場合
-            path_segments.append(f"エレベーター ({current_node_arg}) に到着しました。{goal_floor} へ移動してください。")
-            # ここで次のポイントはまだ確定しない。階移動はユーザーの行動に依存。
-            # 階移動後、MapPageが新しいcurrent_nodeで再度APIを叩くことを期待。
-            next_point = None # エレベーターにいるので、次を返さない
-        else:
-            path_segments.append(f"現在の階からエレベーターが見つかりませんでした。")
-            next_point = None # 経路が見つからなければ次はない
+            # 現在の階にある、最も近いエレベーターを探す
+            for elevator in target_elevators:
+                path_to_elevator = bfs_shortest_path(graph, current_node_arg, elevator)
+                if path_to_elevator:
+                    if closest_elevator_path is None or len(path_to_elevator) < len(closest_elevator_path):
+                        closest_elevator_path = path_to_elevator
+                        closest_elevator = elevator
+            
+            if closest_elevator_path and len(closest_elevator_path) > 1:
+                next_point = closest_elevator_path[1]
+                # メッセージを統合: 階移動の案内とエレベーターへの誘導を一緒にする
+                path_segments.append(f"【階移動】{current_floor} から {goal_floor} へ移動します。{current_node_arg} からエレベーター ({closest_elevator}) へ向かってください。")
+            elif closest_elevator_path and len(closest_elevator_path) == 1:
+                # 既にエレベーターにいる場合
+                path_segments.append(f"エレベーター ({current_node_arg}) に到着しました。{goal_floor} へ移動してください。")
+                next_point = None 
+            else:
+                path_segments.append(f"現在の階からエレベーターが見つかりませんでした。")
+                next_point = None
 
     # 全ての経路探索が終わっても next_point が None で、かつゴールに未到達の場合
     if next_point is None and current_node_arg != actual_goal:
-        # この最終フォールバックは、メッセージが空で経路が見つからなかった場合などに役立つ
+        # メッセージがまだない場合にのみ、一般的な「経路が見つかりませんでした」を追加
         if not path_segments:
             path_segments.append("経路が見つかりませんでした。")
-        # else: メッセージがあればそのまま
+        elif "エレベーターに到着" not in " ".join(path_segments) and \
+             "本館1Fの入口 (ノード 1) にいます" not in " ".join(path_segments) and \
+             "接続点への経路が見つかりませんでした" not in " ".join(path_segments): # 既存のメッセージと衝突しないように
+            path_segments.append("経路が中断されました。")
+
 
     # 結果を辞書形式で返す
     return {
@@ -305,18 +331,17 @@ def hello_world():
 # /api/update_goal エンドポイント (ChoosePage.jsxから呼ばれる)
 @app.route('/api/update_goal', methods=['POST', 'OPTIONS'])
 def update_goal():
-    global _global_goal_node # グローバル変数を修正可能にする
+    global _global_goal_node 
 
     if request.method == 'OPTIONS':
-        return '', 200 # CORSプリフライトリクエストへの応答
+        return '', 200 
     else:
         data = request.get_json()
-        goal_node = data.get('goal_node') # 'goal_node'というキーで値を受け取る
+        goal_node = data.get('goal_node') 
 
         if goal_node is None:
             return jsonify({"status": "error", "message": "goal_nodeが指定されていません。"}), 400
         
-        # 受け取ったゴールノードをグローバル変数に保存
         _global_goal_node = goal_node
 
         return jsonify({
@@ -331,7 +356,7 @@ def set_initial_current_node():
     global _global_current_node
 
     if request.method == 'OPTIONS':
-        return '', 200 # CORSプリフライトリクエストへの応答
+        return '', 200 
     else:
         data = request.get_json()
         initial_current_node = data.get('initial_current_node')
@@ -339,9 +364,8 @@ def set_initial_current_node():
         if initial_current_node is None:
             return jsonify({"status": "error", "message": "initial_current_nodeが指定されていません。"}), 400
         
-        # 受け取った初期現在地ノードをグローバル変数に保存
         _global_current_node = initial_current_node
-        print(f"初期現在地が {initial_current_node} に設定されました。") # デバッグ出力
+        print(f"初期現在地が {initial_current_node} に設定されました。") 
 
         return jsonify({
             "status": "success",
@@ -353,26 +377,22 @@ def set_initial_current_node():
 @app.route('/api/get_current_node', methods=['GET'])
 def get_current_node():
     global _global_current_node
-    # current_node と status をJSONで返す
     return jsonify({"current_node": _global_current_node, "status": "success"})
 
 
 # /api/get_next_point エンドポイント (Map.jsxから呼ばれる)
-@app.route('/api/get_next_point', methods=['POST']) # 現在地を受け取るためPOSTを使用
+@app.route('/api/get_next_point', methods=['POST']) 
 def get_next_point():
     global _global_current_node, _global_goal_node
 
     data = request.get_json()
-    current_node_from_react = data.get('current_node') # Reactから現在のノードを受け取る
+    current_node_from_react = data.get('current_node') 
 
-    if current_node_from_react is None:
+    if current_node_from_react is None: 
         return jsonify({"status": "error", "message": "current_nodeが指定されていません。"}), 400
 
-    # find_next_pointを呼び出して次の移動ポイントと経路案内情報を取得
-    # goal_node_argはNoneにし、_global_goal_nodeが使われるようにする
     result = find_next_point(current_node_arg=current_node_from_react, goal_node_arg=None)
 
-    # 経路探索結果をJSON形式で返す
     return jsonify({
         "next_point": result["next_point"],
         "current_floor": result["current_floor"],
