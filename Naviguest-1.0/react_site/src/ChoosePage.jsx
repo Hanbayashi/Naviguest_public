@@ -1528,7 +1528,7 @@ const handleGenrepoint32Click = async () => {
       </div>
 
       <div style={{ marginBottom: '2rem',textAlign: 'center' }}>
-        <Link to="/"> 
+        <Link to="/startpoint"> 
           <img
             src={backbutton}
             alt="戻る"
