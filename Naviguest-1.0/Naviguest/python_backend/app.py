@@ -1,10 +1,13 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from collections import deque 
+from collections import deque
+import os 
 
 app = Flask(__name__)
-# CORS設定: Reactアプリケーションが動作するポート3000からのアクセスを許可
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000", "methods": ["GET", "POST", "OPTIONS"]}})
+
+CORS_ORIGIN = os.environ.get("CORS_ORIGIN", "http://localhost:3000")
+CORS(app, resources={r"/api/*": {"origins": CORS_ORIGIN, "methods": ["GET", "POST", "OPTIONS"]}})
+
 
 # --- グラフ定義 ---
 # 施設の各ノード（点）とその隣接ノードを定義したグラフ
@@ -337,7 +340,3 @@ def get_next_point():
         "goal_node": result["goal_node"],
         "message": result["message"]
     })
-
-# アプリケーションを実行
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
