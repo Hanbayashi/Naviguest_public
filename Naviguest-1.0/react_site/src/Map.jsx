@@ -361,6 +361,8 @@ const MapPage = () => {
 
   const currentGuidanceImage = getGuidanceImageSrc();
 
+  
+
   return (
     <>
       <header

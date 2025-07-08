@@ -171,10 +171,13 @@ def find_next_point(current_node_arg, goal_node_arg=None):
        current_floor == goal_floor:
         # 目的地に到着
         next_point = None
-        path_segments.append(f"目的地 {actual_goal} に到着しました。")
+        path_segments.append(f"目的地に到着しました。") # シンプルなメッセージ
         _global_goal_node = None # ゴールに到着したらリセット
     # 現在地が3F以上で、かつ目的地と館が違う場合にノード1への案内を優先
     elif current_building != goal_building and is_floor_3f_or_higher(current_floor):
+        # ここに新しい追加メッセージを挿入
+        path_segments.append(f"目的地は{goal_building}ですが、今{current_building}にいます。一度1階に戻ります。\n")
+        
         # Step 1: Find the nearest elevator on the current floor within the current building
         target_elevators_on_current_floor = []
         if is_in_annex(current_node_arg): # If currently in annex
@@ -195,31 +198,30 @@ def find_next_point(current_node_arg, goal_node_arg=None):
         if closest_elevator_path and len(closest_elevator_path) > 1:
             # User is not at an elevator, guide them to the closest elevator
             next_point = closest_elevator_path[1]
-            path_segments.append(f"【館移動・高層階からの移動】{current_building} から {goal_building} への移動のため、まず本館1F（ノード1）へ向かいます。現在地 {current_node_arg} から最寄りのエレベーター ({closest_elevator}) へ向かってください。")
+            path_segments.append(f"{next_point}番に向かってください。") # シンプルなメッセージ
         elif closest_elevator_path and len(closest_elevator_path) == 1:
             # User is already at an elevator on the current floor
             # Instruct them to go to 1F
-            path_segments.append(f"【館移動・高層階からの移動】{current_building} から {goal_building} への移動のため、本館1F（ノード1）へ向かいます。エレベーター ({current_node_arg}) に到着しました。エレベーターで1Fへ移動してください。")
+            path_segments.append(f"エレベーターで1Fに移動してください。") # シンプルなメッセージ
             next_point = None # Vertical movement, no next node in horizontal graph
         else:
             # No elevator found on current floor/building, fallback to original Node 1 instruction if possible
-            # このケースは稀だが、エレベーターノードが設定されていない場所からの移動の場合
             path_to_node1 = bfs_shortest_path(graph, current_node_arg, 1)
             if path_to_node1 and len(path_to_node1) > 1:
                 next_point = path_to_node1[1]
-                path_segments.append(f"【館移動・高層階からの移動】{current_building} から {goal_building} への移動のため、まず本館1F（ノード1）へ向かいます。現在地 {current_node_arg} から本館1Fの入口 (ノード 1) へ向かってください。")
+                path_segments.append(f"{next_point}番に向かってください。") # シンプルなメッセージ
             elif path_to_node1 and len(path_to_node1) == 1:
                 # Already at Node 1
-                path_segments.append(f"あなたは既に本館1Fの入口 (ノード 1) にいます。")
+                path_segments.append(f"あなたは既に本館1Fの入口 (ノード 1) にいます。") # これは一旦そのまま。次のステップで目的案内
                 path_from_node1_to_goal = bfs_shortest_path(graph, current_node_arg, actual_goal)
                 if path_from_node1_to_goal and len(path_from_node1_to_goal) > 1:
                     next_point = path_from_node1_to_goal[1]
-                    path_segments.append(f"ここから目的地 {actual_goal} へ向かってください。次のポイントは {next_point} です。")
+                    path_segments.append(f"{next_point}番に向かってください。") # シンプルなメッセージ
                 else:
-                    path_segments.append(f"ノード1から目的地 {actual_goal} への経路が見つかりませんでした。")
+                    path_segments.append(f"経路が見つかりませんでした。") # シンプルなメッセージ
                     next_point = None
             else:
-                path_segments.append(f"本館1F（ノード1）への経路が見つかりませんでした。")
+                path_segments.append(f"経路が見つかりませんでした。") # シンプルなメッセージ
                 next_point = None
         
         return {
@@ -234,21 +236,20 @@ def find_next_point(current_node_arg, goal_node_arg=None):
         path = bfs_shortest_path(graph, current_node_arg, actual_goal)
         if path and len(path) > 1:
             next_point = path[1]
-            path_segments.append(f"同じ階の {current_floor} ({current_building}) で、{current_node_arg} から {actual_goal} への経路が見つかりました。次のポイントは {next_point} です。")
+            path_segments.append(f"{next_point}番に向かってください。") # シンプルなメッセージ
         else:
-            path_segments.append(f"同じ階の {current_floor} ({current_building}) 内で、{current_node_arg} から {actual_goal} への経路が見つかりませんでした。")
+            path_segments.append(f"経路が見つかりませんでした。") # シンプルなメッセージ
     else:
         # 異なる階または異なる館（上記の新ロジック以外）の場合
         
         # まず、異なる館への移動が必要な場合の案内 (1F, 2Fは本館別館が繋がっているため、ここでは直接接続点に誘導)
         if current_building != goal_building:
-            path_segments.append(f"【館移動】{current_building} から {goal_building} へ移動します。")
             connection_point = None
             if current_building == "本館" and goal_building == "別館":
                 path_to_conn = bfs_shortest_path(graph, current_node_arg, 7) # ノード7を別館接続点と仮定
                 if path_to_conn and len(path_to_conn) > 1:
                     next_point = path_to_conn[1]
-                    path_segments.append(f"まず {current_node_arg} から別館接続点 (ノード 7) へ向かってください。")
+                    path_segments.append(f"{next_point}番に向かってください。") # シンプルなメッセージ
                     return {
                         "next_point": next_point,
                         "current_floor": current_floor,
@@ -260,7 +261,7 @@ def find_next_point(current_node_arg, goal_node_arg=None):
                 path_to_conn = bfs_shortest_path(graph, current_node_arg, 1) # ノード1を本館接続点と仮定
                 if path_to_conn and len(path_to_conn) > 1:
                     next_point = path_to_conn[1]
-                    path_segments.append(f"まず {current_node_arg} から本館接続点 (ノード 1) へ向かってください。")
+                    path_segments.append(f"{next_point}番に向かってください。") # シンプルなメッセージ
                     return {
                         "next_point": next_point,
                         "current_floor": current_floor,
@@ -268,7 +269,7 @@ def find_next_point(current_node_arg, goal_node_arg=None):
                         "goal_node": actual_goal,
                         "message": " ".join(path_segments).strip()
                     }
-            path_segments.append(f"接続点への経路が見つかりませんでした。") # フォールバック
+            path_segments.append(f"経路が見つかりませんでした。") # シンプルなメッセージ
 
         # 階移動が必要な場合 (館移動が完了した、または館移動なしで階が異なる場合)
         if current_floor != goal_floor:
@@ -292,14 +293,13 @@ def find_next_point(current_node_arg, goal_node_arg=None):
             
             if closest_elevator_path and len(closest_elevator_path) > 1:
                 next_point = closest_elevator_path[1]
-                # メッセージを統合: 階移動の案内とエレベーターへの誘導を一緒にする
-                path_segments.append(f"【階移動】{current_floor} から {goal_floor} へ移動します。{current_node_arg} からエレベーター ({closest_elevator}) へ向かってください。")
+                path_segments.append(f"{next_point}番に向かってください。") # シンプルなメッセージ
             elif closest_elevator_path and len(closest_elevator_path) == 1:
                 # 既にエレベーターにいる場合
-                path_segments.append(f"エレベーター ({current_node_arg}) に到着しました。{goal_floor} へ移動してください。")
+                path_segments.append(f"エレベーターで{goal_floor}に移動してください。") # シンプルなメッセージ
                 next_point = None 
             else:
-                path_segments.append(f"現在の階からエレベーターが見つかりませんでした。")
+                path_segments.append(f"経路が見つかりませんでした。") # シンプルなメッセージ
                 next_point = None
 
     # 全ての経路探索が終わっても next_point が None で、かつゴールに未到達の場合
@@ -307,11 +307,6 @@ def find_next_point(current_node_arg, goal_node_arg=None):
         # メッセージがまだない場合にのみ、一般的な「経路が見つかりませんでした」を追加
         if not path_segments:
             path_segments.append("経路が見つかりませんでした。")
-        elif "エレベーターに到着" not in " ".join(path_segments) and \
-             "本館1Fの入口 (ノード 1) にいます" not in " ".join(path_segments) and \
-             "接続点への経路が見つかりませんでした" not in " ".join(path_segments): # 既存のメッセージと衝突しないように
-            path_segments.append("経路が中断されました。")
-
 
     # 結果を辞書形式で返す
     return {
