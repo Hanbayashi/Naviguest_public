@@ -8,7 +8,73 @@ import F4button from './assets/4F.png';
 import F5button from './assets/5F.png';
 import F6button from './assets/6F.png';
 
-// ノードポイント画像は使用しないため、インポートは不要です。
+//案内画像
+import guidance_1_2 from './assets/1-2.png';
+import guidance_1_3 from './assets/1-3.png';
+import guidance_1_4 from './assets/1-2.png';
+import guidance_1_5 from './assets/1-2.png';
+import guidance_1_6 from './assets/1-2.png';
+import guidance_2_1 from './assets/2-1.png';
+import guidance_2_3 from './assets/2-3.png';
+import guidance_3_2 from './assets/3-2.png';
+import guidance_3_4 from './assets/3-4.png';
+import guidance_4_1 from './assets/4-1.png';
+import guidance_4_3 from './assets/4-3.png';
+import guidance_4_5 from './assets/4-5.png';
+import guidance_5_4 from './assets/5-4.png';
+import guidance_5_6 from './assets/5-6.png';
+import guidance_5_7 from './assets/5-7.png';
+import guidance_6_1 from './assets/6-1.png';
+import guidance_6_5 from './assets/6-5.png';
+import guidance_6_7 from './assets/6-7.png';
+import guidance_7_5 from './assets/7-5.png';
+import guidance_7_6 from './assets/7-6.png';
+import guidance_7_8 from './assets/7-8.png';
+import guidance_7_9 from './assets/7-9.png';
+import guidance_8_7 from './assets/8-7.png';
+import guidance_8_9 from './assets/8-9.png';
+import guidance_9_7 from './assets/9-7.png';
+import guidance_9_8 from './assets/9-8.png';
+import guidance_10_11 from './assets/10-11.png';
+import guidance_11_10 from './assets/11-10.png';
+import guidance_11_12 from './assets/11-12.png';
+import guidance_12_11 from './assets/12-11.png';
+import guidance_12_13 from './assets/12-13.png';
+import guidance_12_14 from './assets/12-14.png';
+import guidance_13_12 from './assets/13-12.png';
+import guidance_13_14 from './assets/13-14.png';
+import guidance_14_12 from './assets/14-12.png';
+import guidance_14_13 from './assets/14-13.png';
+import guidance_15_16 from './assets/15-16.png';
+import guidance_16_15 from './assets/16-15.png';
+import guidance_16_17 from './assets/16-17.png';
+import guidance_17_16 from './assets/17-16.png';
+import guidance_17_18 from './assets/17-18.png';
+import guidance_18_17 from './assets/18-17.png';
+import guidance_19_20 from './assets/19-20.png';
+import guidance_19_21 from './assets/19-21.png';
+import guidance_20_19 from './assets/20-19.png';
+import guidance_20_21 from './assets/20-21.png';
+import guidance_21_19 from './assets/21-19.png';
+import guidance_21_20 from './assets/21-20.png';
+import guidance_22_23 from './assets/22-23.png';
+import guidance_23_22 from './assets/23-22.png';
+import guidance_23_24 from './assets/23-24.png';
+import guidance_24_23 from './assets/24-23.png';
+import guidance_25_26 from './assets/25-26.png';
+import guidance_25_27 from './assets/25-27.png';
+import guidance_26_25 from './assets/26-25.png';
+import guidance_26_27 from './assets/26-27.png';
+import guidance_27_25 from './assets/27-25.png';
+import guidance_27_26 from './assets/27-26.png';
+import guidance_28_29 from './assets/28-29.png';
+import guidance_28_30 from './assets/28-30.png';
+import guidance_29_28 from './assets/29-28.png';
+import guidance_29_30 from './assets/29-30.png';
+import guidance_30_28 from './assets/30-28.png';
+import guidance_30_29 from './assets/30-29.png';
+import guidance_31_32 from './assets/31-32.png';
+import guidance_32_31 from './assets/32-31.png';
 
 const floorImages = {
   '1F': F1button,
@@ -80,6 +146,75 @@ const nodePointData = {
   32: { top: '34%', left: '41%', width: scaleNodeSize('75px') },
 };
 
+// --- ここから案内画像のパスを管理するオブジェクト (ご提供いただいた通り) ---
+const guidanceImages = {
+    '1-2': guidance_1_2,
+    '1-3': guidance_1_3,
+    '1-4': guidance_1_4,
+    '1-5': guidance_1_5,
+    '1-6': guidance_1_6,
+    '2-1': guidance_2_1,
+    '2-3': guidance_2_3,
+    '3-2': guidance_3_2,
+    '3-4': guidance_3_4,
+    '4-1': guidance_4_1,
+    '4-3': guidance_4_3,
+    '4-5': guidance_4_5,
+    '5-4': guidance_5_4,
+    '5-6': guidance_5_6,
+    '5-7': guidance_5_7,
+    '6-1': guidance_6_1,
+    '6-5': guidance_6_5,
+    '6-7': guidance_6_7,
+    '7-5': guidance_7_5,
+    '7-6': guidance_7_6,
+    '7-8': guidance_7_8,
+    '7-9': guidance_7_9,
+    '8-7': guidance_8_7,
+    '8-9': guidance_8_9,
+    '9-7': guidance_9_7,
+    '9-8': guidance_9_8,
+    '10-11': guidance_10_11,
+    '11-10': guidance_11_10,
+    '11-12': guidance_11_12,
+    '12-11': guidance_12_11,
+    '12-13': guidance_12_13,
+    '12-14': guidance_12_14,
+    '13-12': guidance_13_12,
+    '13-14': guidance_13_14,
+    '14-12': guidance_14_12,
+    '14-13': guidance_14_13,
+    '15-16': guidance_15_16,
+    '16-15': guidance_16_15,
+    '16-17': guidance_16_17,
+    '17-16': guidance_17_16,
+    '17-18': guidance_17_18,
+    '18-17': guidance_18_17,
+    '19-20': guidance_19_20,
+    '19-21': guidance_19_21,
+    '20-19': guidance_20_19,
+    '20-21': guidance_20_21,
+    '21-19': guidance_21_19,
+    '21-20': guidance_21_20,
+    '22-23': guidance_22_23,
+    '23-22': guidance_23_22,
+    '23-24': guidance_23_24,
+    '24-23': guidance_24_23,
+    '25-26': guidance_25_26,
+    '25-27': guidance_25_27,
+    '26-25': guidance_26_25,
+    '26-27': guidance_26_27,
+    '27-25': guidance_27_25,
+    '27-26': guidance_27_26,
+    '28-29': guidance_28_29,
+    '28-30': guidance_28_30,
+    '29-28': guidance_29_28,
+    '29-30': guidance_29_30,
+    '30-28': guidance_30_28,
+    '30-29': guidance_30_29,
+    '31-32': guidance_31_32,
+    '32-31': guidance_32_31,
+};
 
 const MapPage = () => {
   const [arrivedNumber, setArrivedNumber] = useState('');
@@ -220,6 +355,16 @@ const MapPage = () => {
     }
   };
 
+  // 現在地から次のポイントまでの案内画像パスを生成
+  const getGuidanceImageSrc = () => {
+    if (confirmedMapNode !== null && nextPoint !== null) {
+      const key = `${confirmedMapNode}-${nextPoint}`;
+      return guidanceImages[key]; // guidanceImagesオブジェクトから対応するパスを返す
+    }
+    return null; // 画像がない場合
+  };
+
+
   // confirmedMapNode がまだロードされていない場合はローディング表示
   if (confirmedMapNode === null && loading) {
     return (
@@ -229,6 +374,8 @@ const MapPage = () => {
       </div>
     );
   }
+
+  const currentGuidanceImage = getGuidanceImageSrc();
 
   return (
     <>
@@ -316,6 +463,24 @@ const MapPage = () => {
 
         </div>
       </div>
+
+      {/* --- ここから案内画像の表示を追加 --- */}
+        {currentGuidanceImage && !loading && !error && ( // 画像パスが存在し、ローディング中でなくエラーでない場合のみ表示
+          <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+            <h3>次の移動案内</h3>
+            <img 
+              src={currentGuidanceImage} 
+              alt="次の移動案内" 
+              style={{ 
+                maxWidth: '80%', 
+                height: 'auto', 
+                border: '1px solid #ccc',
+                marginTop: '1rem' 
+              }} 
+            />
+          </div>
+        )}
+        {/* --- ここまで案内画像の表示を追加 --- */}
 
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
