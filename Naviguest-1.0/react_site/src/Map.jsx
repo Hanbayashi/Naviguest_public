@@ -349,7 +349,6 @@ const MapPage = () => {
     return null;
   };
 
-
   if (confirmedMapNode === null && loading) {
     return (
       <div style={{ textAlign: 'center', padding: '2rem' }}>
@@ -360,8 +359,6 @@ const MapPage = () => {
   }
 
   const currentGuidanceImage = getGuidanceImageSrc();
-
-  
 
   return (
     <>
@@ -376,8 +373,55 @@ const MapPage = () => {
         <h1 style={{ fontSize: '48px' }}>ナビゲスト</h1>
       </header>
 
-      <div style={{ padding: '2rem', textAlign: 'center' }}>
+      <div style={{ textAlign: 'center' }}>
         <h2>現在地から目的地までの案内画面です</h2>
+      
+      <div style={{  textAlign: 'center' }}>
+        <h2>現在の場所の番号を入力し、確定ボタンを押してください。</h2>
+      </div>
+
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+        <input
+          type="text"
+          pattern="\d{1,2}"
+          inputMode="numeric"
+          value={arrivedNumber}
+          onChange={handleInputChange}
+          placeholder="例: 1 (1〜32)"
+          maxLength="2"
+          style={{
+            padding: '0.8rem',
+            fontSize: '1.2rem',
+            width: '250px',
+            textAlign: 'center',
+            borderRadius: '5px',
+            border: inputError ? '2px solid red' : '1px solid #ccc',
+            marginBottom: '10px',
+          }}
+        />
+        {inputError && (
+          <p style={{ color: 'red', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+            {inputError}
+          </p>
+        )}
+        
+        <button
+          onClick={handleConfirmCurrentNode}
+          style={{
+            padding: '10px 20px',
+            fontSize: '1.2rem',
+            cursor: 'pointer',
+            backgroundColor: '#28a745',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            display: 'block',
+            margin: '0.5rem auto 0 auto',
+          }}
+        >
+          確定
+        </button>
+      </div>
 
         {loading ? (
           <p>経路データを読み込み中...</p>
@@ -385,7 +429,7 @@ const MapPage = () => {
           <p style={{ color: 'red' }}>エラー: {error}</p>
         ) : (
           <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000', marginBottom: '1rem' }}>
-            案内: <span style={{ color: '#d9534f' }}>{guidanceMessage}</span>
+            案内: <span style={{ color: '#d9534f',fontSize: '28px' }}>{guidanceMessage}</span>
           </p>
         )}
 
@@ -536,91 +580,9 @@ const MapPage = () => {
           <p style={{ color: 'red' }}>エラー: {error}</p>
         ) : (
           <>
-            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#333' }}>
-              現在のノード: <span style={{ color: '#0066cc' }}>{confirmedMapNode}</span>
-            </p>
-            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#333' }}>
-              現在の階: <span style={{ color: '#0066cc' }}>{currentFloor || 'N/A'}</span>
-            </p>
-            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#333' }}>
-              現在の館: <span style={{ color: '#0066cc' }}>{currentBuilding || 'N/A'}</span>
-            </p>
-            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#333' }}>
-              目的地ノード: <span style={{ color: '#28a745' }}>{goalNode || '未設定'}</span>
-            </p>
-            <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000' }}>
-              案内: <span style={{ color: '#d9534f' }}>{guidanceMessage}</span>
-            </p>
-            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#333' }}>
-              次のポイント: <span style={{ color: '#5cb85c' }}>{nextPoint !== null ? nextPoint : '到着'}</span>
-            </p>
-
-            {nextPoint !== null && (
-              <button
-                onClick={handleMoveToNextPoint}
-                style={{
-                  padding: '10px 20px',
-                  fontSize: '1.2rem',
-                  marginTop: '15px',
-                  cursor: 'pointer',
-                  backgroundColor: '#007bff',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '5px'
-                }}
-              >
-                次のポイントへ進む (デモ用)
-              </button>
-            )}
+            
           </>
         )}
-      </div>
-
-      <div style={{ padding: '2rem', textAlign: 'center' }}>
-        <h2>現在の場所の番号を入力し、確定ボタンを押してください。</h2>
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <input
-          type="text"
-          pattern="\d{1,2}"
-          inputMode="numeric"
-          value={arrivedNumber}
-          onChange={handleInputChange}
-          placeholder="例: 1 (1〜32)"
-          maxLength="2"
-          style={{
-            padding: '0.8rem',
-            fontSize: '1.2rem',
-            width: '250px',
-            textAlign: 'center',
-            borderRadius: '5px',
-            border: inputError ? '2px solid red' : '1px solid #ccc',
-            marginBottom: '10px',
-          }}
-        />
-        {inputError && (
-          <p style={{ color: 'red', fontSize: '0.9rem', marginTop: '0.5rem' }}>
-            {inputError}
-          </p>
-        )}
-        
-        <button
-          onClick={handleConfirmCurrentNode}
-          style={{
-            padding: '10px 20px',
-            fontSize: '1.2rem',
-            cursor: 'pointer',
-            backgroundColor: '#28a745',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            display: 'block',
-            margin: '0.5rem auto 0 auto',
-          }}
-        >
-          確定
-        </button>
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>

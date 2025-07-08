@@ -17,7 +17,7 @@ CORS(app, resources={r"/api/*": {"origins": CORS_ORIGIN, "methods": ["GET", "POS
 graph = {
     1: [2, 3, 4, 5, 6],
     2: [1, 3], 
-    3: [2, 4],
+    3: [1, 2, 4], # ★ここを変更しました：ノード1を追加★
     4: [1, 3, 5],
     5: [4, 6, 7],
     6: [1, 5, 7],
@@ -50,12 +50,22 @@ graph = {
 }
 
 # --- ヘルパー関数: 最短経路探索 (BFS) ---
-def bfs_shortest_path(graph, start, goal):
+# forbidden_nodes 引数を追加
+def bfs_shortest_path(graph, start, goal, forbidden_nodes=None):
     """
     グラフ上で開始ノードから目標ノードまでの最短経路を幅優先探索(BFS)で見つける。
+    forbidden_nodes: 探索中に経由してはいけないノードのリスト (中間地点としてのみ適用)
     """
+    if forbidden_nodes is None:
+        forbidden_nodes = set()
+    else:
+        forbidden_nodes = set(forbidden_nodes) # 検索を高速化するためセットに変換
+
     visited = set()  # 訪問済みのノードを記録
     queue = deque([[start]])  # 探索キュー。各要素はこれまでの経路を示すリスト。
+
+    # 開始ノードや目標ノード自体がforbidden_nodesに含まれていても、
+    # 探索の開始と終了は可能にする（中間地点としてのみ禁止）
 
     while queue:
         path = queue.popleft()  # キューの先頭から経路を取り出す
@@ -68,8 +78,10 @@ def bfs_shortest_path(graph, start, goal):
             visited.add(node)  # 現在のノードを訪問済みとしてマーク
             if node in graph:  # グラフにノードが存在するか確認
                 for neighbor in graph[node]:
-                    # 隣接ノードが未訪問の場合のみ新しい経路を作成
-                    if neighbor not in visited:
+                    # 隣接ノードがforbidden_nodesに含まれておらず、かつ未訪問の場合のみ新しい経路を作成
+                    # ただし、目標ノードがforbidden_nodesに含まれていても、そこが目標なら到達を許可する
+                    if neighbor not in visited and \
+                       (neighbor not in forbidden_nodes or neighbor == goal): # ★ここが変更点★
                         new_path = path + [neighbor]  # 新しい経路を作成
                         queue.append(new_path)  # キューに追加
     return None  # 経路が見つからなかった場合
@@ -175,8 +187,7 @@ def find_next_point(current_node_arg, goal_node_arg=None):
         _global_goal_node = None # ゴールに到着したらリセット
     # 現在地が3F以上で、かつ目的地と館が違う場合にノード1への案内を優先
     elif current_building != goal_building and is_floor_3f_or_higher(current_floor):
-        # ここに新しい追加メッセージを挿入
-        path_segments.append(f"目的地は{goal_building}ですが、今{current_building}にいます。一度1階に戻ります。\n")
+        path_segments.append(f"目的地は{goal_building}ですが、今{current_building}にいます。一度1階に戻ります。\n") 
         
         # Step 1: Find the nearest elevator on the current floor within the current building
         target_elevators_on_current_floor = []
@@ -233,7 +244,17 @@ def find_next_point(current_node_arg, goal_node_arg=None):
         }
     elif current_floor == goal_floor and current_building == goal_building:
         # 同じ階・同じ館の場合：BFSで直接探索
-        path = bfs_shortest_path(graph, current_node_arg, actual_goal)
+        # 特定の経路ではノード1またはノード4を禁止してBFSを呼び出す
+        if (current_node_arg == 4 and actual_goal == 5):
+            path = bfs_shortest_path(graph, current_node_arg, actual_goal, forbidden_nodes=[1])
+        # ★ここを変更しました：ノード2とノード4を禁止します★
+        elif (current_node_arg == 3 and actual_goal == 5): 
+            path = bfs_shortest_path(graph, current_node_arg, actual_goal, forbidden_nodes=[2, 4]) 
+        elif (current_node_arg == 2 and actual_goal == 6):
+            path = bfs_shortest_path(graph, current_node_arg, actual_goal, forbidden_nodes=[1])
+        else:
+            path = bfs_shortest_path(graph, current_node_arg, actual_goal)
+
         if path and len(path) > 1:
             next_point = path[1]
             path_segments.append(f"{next_point}番に向かってください。") # シンプルなメッセージ
@@ -307,6 +328,7 @@ def find_next_point(current_node_arg, goal_node_arg=None):
         # メッセージがまだない場合にのみ、一般的な「経路が見つかりませんでした」を追加
         if not path_segments:
             path_segments.append("経路が見つかりませんでした。")
+
 
     # 結果を辞書形式で返す
     return {
