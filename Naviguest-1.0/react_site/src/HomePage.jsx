@@ -16,7 +16,7 @@ const HomePage = () => {
       </header>
 
       <div style={{textAlign: 'center' }}>
-        <h2>舞鶴市役所にご来庁いただき ありがとうございます。</h2>
+        <h2>舞鶴市役所にご来庁いただきありがとうございます。</h2>
       </div>
 
       <div style={{textAlign: 'center' }}>
