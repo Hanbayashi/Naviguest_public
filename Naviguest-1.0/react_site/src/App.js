@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import SelectionScreen from './ChoosePage';
 import MapPage from './Map';
 import ScrollToTop from './ScrollToTop'; 
+import StartPointPage from './startpointpage';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <ScrollToTop /> 
       <Routes>     
         <Route path="/" element={<HomePage />} />
+        <Route path="/startpoint" element={<StartPointPage />} /> 
         <Route path="/choose" element={<SelectionScreen />} /> 
         <Route path="/map" element={<MapPage />} />
       </Routes>

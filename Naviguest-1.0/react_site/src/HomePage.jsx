@@ -38,7 +38,7 @@ const HomePage = () => {
 
       <div style={{ marginBottom: '2rem',textAlign: 'center' }}>
           {/* 内部ナビゲーションにはLinkコンポーネントを使用 */}
-          <Link to="/choose">
+          <Link to="/startpoint">
             <img
               src={startbutton}
               alt="スタートボタン"

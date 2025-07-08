@@ -5,6 +5,8 @@ import os
 
 app = Flask(__name__)
 
+# CORS設定: Reactアプリケーションが動作するポート3000からのアクセスを許可
+# 環境変数 CORS_ORIGIN が設定されていればそれを使用、なければ http://localhost:3000 をデフォルトとする
 CORS_ORIGIN = os.environ.get("CORS_ORIGIN", "http://localhost:3000")
 CORS(app, resources={r"/api/*": {"origins": CORS_ORIGIN, "methods": ["GET", "POST", "OPTIONS"]}})
 
@@ -73,12 +75,12 @@ def bfs_shortest_path(graph, start, goal):
 
 # --- 施設構造の定義 ---
 # 各階に属するノード番号のリスト
-floor_1 = list(range(1, 10))      # 1〜9
-floor_2 = list(range(10, 15))     # 10〜14
-floor_3 = list(range(15, 22))     # 15〜21
-floor_4 = list(range(22, 28))     # 22〜27
-floor_5 = list(range(28, 31))     # 28〜30
-floor_6 = list(range(31, 33))     # 31〜32
+floor_1 = list(range(1, 10))       # 1〜9
+floor_2 = list(range(10, 15))      # 10〜14
+floor_3 = list(range(15, 22))      # 15〜21
+floor_4 = list(range(22, 28))      # 22〜27
+floor_5 = list(range(28, 31))      # 28〜30
+floor_6 = list(range(31, 33))      # 31〜32
 
 # ノード番号から階層名を検索するための辞書
 room_to_floor = {}
@@ -120,7 +122,9 @@ def is_in_annex(node):
 # --- 経路探索ロジック ---
 # グローバル変数で現在のゴールノードと現在の位置を保持
 _global_goal_node = None
-_global_current_node = 1 # ★★★ アプリケーション起動時の初期現在地ノード（例: 1）
+# アプリケーション起動時の初期現在地ノード。
+# startpointpage.jsxから /api/set_initial_current_node で上書きされることが期待される。
+_global_current_node = 1 
 
 def find_next_point(current_node_arg, goal_node_arg=None):
     """
@@ -130,6 +134,7 @@ def find_next_point(current_node_arg, goal_node_arg=None):
     global _global_goal_node, _global_current_node
 
     # 関数呼び出し時のcurrent_nodeをグローバルな現在地として更新
+    # MapPage.jsxから呼ばれる際はここでcurrent_nodeが更新される
     _global_current_node = current_node_arg
 
     # goal_node_argが指定された場合はグローバルゴールを更新し、
@@ -159,7 +164,10 @@ def find_next_point(current_node_arg, goal_node_arg=None):
     next_point = None  # 次に進むべきノードを初期化
 
     # --- 経路探索ロジックの本体 ---
-    if current_node_arg == actual_goal:
+    # 目的地ノードが設定されており、かつ現在のノードと目的地ノード、そしてその階が全て一致する場合に「到着」と判断
+    if actual_goal is not None and \
+       current_node_arg == actual_goal and \
+       current_floor == goal_floor:
         # 目的地に到着
         next_point = None
         path_segments.append(f"目的地 {actual_goal} に到着しました。")
@@ -317,6 +325,38 @@ def update_goal():
             "message": f"目的地を {goal_node} に設定しました。"
         })
 
+# --- 新しいエンドポイント: 初期現在地を設定 (startpointpage.jsxから呼ばれる) ---
+@app.route('/api/set_initial_current_node', methods=['POST', 'OPTIONS'])
+def set_initial_current_node():
+    global _global_current_node
+
+    if request.method == 'OPTIONS':
+        return '', 200 # CORSプリフライトリクエストへの応答
+    else:
+        data = request.get_json()
+        initial_current_node = data.get('initial_current_node')
+
+        if initial_current_node is None:
+            return jsonify({"status": "error", "message": "initial_current_nodeが指定されていません。"}), 400
+        
+        # 受け取った初期現在地ノードをグローバル変数に保存
+        _global_current_node = initial_current_node
+        print(f"初期現在地が {initial_current_node} に設定されました。") # デバッグ出力
+
+        return jsonify({
+            "status": "success",
+            "set_initial_current_node": initial_current_node,
+            "message": f"初期現在地を {initial_current_node} に設定しました。"
+        })
+
+# --- 新しいエンドポイント: 現在のグローバルな現在地ノードを取得 (Map.jsxから呼ばれる初回ロード時) ---
+@app.route('/api/get_current_node', methods=['GET'])
+def get_current_node():
+    global _global_current_node
+    # current_node と status をJSONで返す
+    return jsonify({"current_node": _global_current_node, "status": "success"})
+
+
 # /api/get_next_point エンドポイント (Map.jsxから呼ばれる)
 @app.route('/api/get_next_point', methods=['POST']) # 現在地を受け取るためPOSTを使用
 def get_next_point():
@@ -340,3 +380,7 @@ def get_next_point():
         "goal_node": result["goal_node"],
         "message": result["message"]
     })
+
+# アプリケーションを実行
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
