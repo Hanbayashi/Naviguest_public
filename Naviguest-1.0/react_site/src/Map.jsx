@@ -380,7 +380,17 @@ const MapPage = () => {
         <h2>現在の場所の番号を入力し、確定ボタンを押してください。</h2>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+        {loading ? (
+          <p>経路データを読み込み中...</p>
+        ) : error ? (
+          <p style={{ color: 'red' }}>エラー: {error}</p>
+        ) : (
+          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000', marginBottom: '1rem' }}>
+            案内: <span style={{ color: '#d9534f',fontSize: '28px' }}>{guidanceMessage}</span>
+          </p>
+        )}
+
+        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <input
           type="text"
           pattern="\d{1,2}"
@@ -391,7 +401,7 @@ const MapPage = () => {
           maxLength="2"
           style={{
             padding: '0.8rem',
-            fontSize: '1.2rem',
+            fontSize: '2rem',
             width: '250px',
             textAlign: 'center',
             borderRadius: '5px',
@@ -408,8 +418,8 @@ const MapPage = () => {
         <button
           onClick={handleConfirmCurrentNode}
           style={{
-            padding: '10px 20px',
-            fontSize: '1.2rem',
+            padding: '20px 40px',
+            fontSize: '2rem',
             cursor: 'pointer',
             backgroundColor: '#28a745',
             color: 'white',
@@ -422,16 +432,6 @@ const MapPage = () => {
           確定
         </button>
       </div>
-
-        {loading ? (
-          <p>経路データを読み込み中...</p>
-        ) : error ? (
-          <p style={{ color: 'red' }}>エラー: {error}</p>
-        ) : (
-          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000', marginBottom: '1rem' }}>
-            案内: <span style={{ color: '#d9534f',fontSize: '28px' }}>{guidanceMessage}</span>
-          </p>
-        )}
 
         <div
           style={{
