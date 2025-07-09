@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import backbutton from './assets/BackButton.png';
 import F1button from './assets/1F.png';
 import F2button from './assets/2F.png';
@@ -227,6 +227,7 @@ const MapPage = () => {
   const [confirmedMapNode, setConfirmedMapNode] = useState(null);
   const [currentFloorDisplayImage, setCurrentFloorDisplayImage] = useState(F1button);
 
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -318,6 +319,10 @@ const MapPage = () => {
           setCurrentFloorDisplayImage(floorImages[`${data.current_floor}`]);
         } else {
           setCurrentFloorDisplayImage(F1button);
+        }
+
+        if (data.next_point === null && data.goal_node !== null && confirmedMapNode === data.goal_node) {
+          navigate('/finish'); // /finish パスへ遷移
         }
 
       } catch (err) {

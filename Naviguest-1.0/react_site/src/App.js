@@ -5,6 +5,7 @@ import SelectionScreen from './ChoosePage';
 import MapPage from './Map';
 import ScrollToTop from './ScrollToTop'; 
 import StartPointPage from './startpointpage';
+import FinishPage from './finish.jsx'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/startpoint" element={<StartPointPage />} /> 
         <Route path="/choose" element={<SelectionScreen />} /> 
         <Route path="/map" element={<MapPage />} />
+        <Route path="/finish" element={<FinishPage />} />
       </Routes>
     </Router>
   );
