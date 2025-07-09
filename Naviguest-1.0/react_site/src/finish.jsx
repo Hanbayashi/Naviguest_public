@@ -2,6 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // 戻るためにLinkを使用
 import backbutton from './assets/BackButton.png'; // 戻るボタンの画像があれば
+import mapbutton from './assets/Mapbutton.png'; 
+import choosebutton from './assets/Choosebutton.png'; 
 
 const FinishPage = () => {
   return (
@@ -18,6 +20,43 @@ const FinishPage = () => {
         <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>
           何かお手伝いできることがあれば、お近くのスタッフにお声がけください。
         </p>
+      </div>
+
+      <div 
+        style={{ 
+          textAlign: 'center', 
+          marginBottom: '2rem', 
+          display: 'flex', 
+          flexDirection: 'column', // 縦方向に並べる
+          alignItems: 'center', // 中央揃え
+          gap: '20px' // ボタン間の間隔
+        }}
+      >
+        {/* Map.jsx へ戻るボタン */}
+        <Link to="/map">
+          <img 
+            src={mapbutton} 
+            alt="マップに戻る" 
+            style={{ 
+              width: '200px', 
+              height: 'auto', 
+              cursor: 'pointer', 
+            }} 
+          />
+        </Link>
+
+        {/* ChoosePage.jsx へ戻るボタン */}
+        <Link to="/choose">
+          <img 
+            src={choosebutton} 
+            alt="目的地選択に戻る" 
+            style={{ 
+              width: '200px', 
+              height: 'auto', 
+              cursor: 'pointer', 
+            }} 
+          />
+        </Link>
       </div>
 
       <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
