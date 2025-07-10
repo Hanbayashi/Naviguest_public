@@ -11,14 +11,16 @@ const FinishPage = () => {
         <h1 style={{ fontSize: '48px' }}>ナビゲスト</h1>
       </header>
 
-      <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-        <h2>目的地に到着しました！</h2>
-        <p style={{ fontSize: '1.5rem', marginTop: '2rem' }}>
-          ナビゲーションのご利用ありがとうございました。
-        </p>
-        <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>
-          何かお手伝いできることがあれば、お近くのスタッフにお声がけください。
-        </p>
+      <div style={{ textAlign: 'center', padding: '1rem 2rem' }}>
+        <h2>
+          目的地に到着しました！<br />
+          ナビゲストのご利用ありがとうございました。<br /><br />
+          ・他の部署、出入口に行きたい場合は、「案内を続ける」を押してください。<br />
+          ・最初の画面に戻りたい場合は、「戻る」を押してください。<br /><br />
+          ※<span style={{ color: 'red' }}>令和７年７月から赤れんがパーク周辺駐車場が有料になりました。</span>（詳細は<a href="https://www.city.maizuru.kyoto.jp/0000013369.html" target="_blank">こちら</a>）<br />
+    　　　市役所利用者・東体育館利用者の駐車場利用料金は無料です。<br />
+    　　　１階総合案内で無料券の交付をお受けください。
+        </h2>
       </div>
 
       <div 
@@ -26,9 +28,9 @@ const FinishPage = () => {
           textAlign: 'center', 
           marginBottom: '2rem', 
           display: 'flex', 
-          flexDirection: 'column', // 縦方向に並べる
-          alignItems: 'center', // 中央揃え
-          gap: '20px' // ボタン間の間隔
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          gap: '20px' 
         }}
       >
 
@@ -48,7 +50,7 @@ const FinishPage = () => {
 
       <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
         {/* ホームに戻るボタン（スタート画面へ） */}
-        <Link to="/"> {/* または /startpoint に戻っても良いでしょう */}
+        <Link to="/"> 
           <img src={backbutton} alt="ホームに戻る" style={{ width: '200px', height: 'auto', cursor: 'pointer' }} />
         </Link>
       </div>

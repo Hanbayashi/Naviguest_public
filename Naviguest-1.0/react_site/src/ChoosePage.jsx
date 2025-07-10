@@ -67,6 +67,8 @@ import Genre8Image from './assets/genre8.png';
 import Genre8aImage from './assets/genre8-1.png';
 import Genre8bImage from './assets/genre8-2.png';
 
+import Genre9Image from './assets/genre9.png';
+
 const SelectionScreen = () => {
 
   const navigate = useNavigate();
@@ -145,6 +147,32 @@ const SelectionScreen = () => {
   }, []);
 
   //送信する値（目的地の番号）の設定
+  const handleGenrepoint1Click = async () => {
+  const valueToSend = 1; // 送信するノード番号
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/update_goal', { // エンドポイントを修正
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ goal_node: valueToSend }), // キーを 'goal_node' に修正
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Pythonからの応答:", data); // Pythonからの応答を確認
+    navigate('/map'); // Map.jsxへ遷移
+
+  } catch (error) {
+    console.error("目的地の送信エラー:", error); // エラーメッセージを修正
+    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
+  }
+};
+
+
   const handleGenrepoint2Click = async () => {
   const valueToSend = 2; // 送信するノード番号
   try {
@@ -706,8 +734,8 @@ const handleGenrepoint32Click = async () => {
       {/* 説明テキスト */}
       <div style={{ textAlign: 'center' }}>
         <h2>
-          ご案内を希望するジャンルをお選びください。<br /> 
-          選択されたジャンルの目的地まで、自動でスクロールします。
+          案内を希望するジャンルを選んでください。<br /> 
+          選択されたジャンルに対応する各部署まで、自動でスクロールします。
         </h2>
       </div>
 
@@ -777,12 +805,27 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <img
           src={Genre8Image}
           alt="ジャンル8"
           style={{ width: '300px', height: 'auto', maxWidth: '100%', cursor: 'pointer' }}
           onClick={handleScrollToGenre8a} // ここでスクロール処理を実行
+        />
+      </div>
+
+      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+        <img
+          src={Genre9Image}
+          alt="ジャンル9"
+          style={{
+            width: '300px',
+            height: 'auto',
+            maxWidth: '100%',
+            scrollMarginTop: '100px',
+            cursor: 'pointer',
+          }}
+          onClick={handleGenrepoint1Click}
         />
       </div>
 
