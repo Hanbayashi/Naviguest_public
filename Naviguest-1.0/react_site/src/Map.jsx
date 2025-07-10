@@ -16,6 +16,7 @@ import guidance_1_5 from './assets/1-5.png';
 import guidance_1_6 from './assets/1-6.png';
 import guidance_2_1 from './assets/2-1.png';
 import guidance_2_3 from './assets/2-3.png';
+import guidance_3_1 from './assets/3-1.png';
 import guidance_3_2 from './assets/3-2.png';
 import guidance_3_4 from './assets/3-4.png';
 import guidance_4_1 from './assets/4-1.png';
@@ -152,6 +153,7 @@ const guidanceImages = {
     '1-6': guidance_1_6,
     '2-1': guidance_2_1,
     '2-3': guidance_2_3,
+    '3-1': guidance_3_1,
     '3-2': guidance_3_2,
     '3-4': guidance_3_4,
     '4-1': guidance_4_1,
@@ -380,6 +382,8 @@ const MapPage = () => {
 
       <div style={{ textAlign: 'center' }}>
         <h2>現在地から目的地までの案内画面です</h2>
+        <h2>現在地：青色</h2>
+        <h2>次のポイント：黄色</h2>
       
       <div style={{  textAlign: 'center' }}>
         <h2>現在の場所の番号を入力し、確定ボタンを押してください。</h2>

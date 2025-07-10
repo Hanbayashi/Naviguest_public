@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // useNavigateをインポート
 import backbutton from './assets/BackButton.png';
-import point1 from './assets/startpoint1.png';
-import point3 from './assets/startpoint3.png';
-import point4 from './assets/startpoint4.png';
-import point9 from './assets/startpoint9.png';
+import point1 from './assets/startpoint1.jpg';
+import point3 from './assets/startpoint3.jpg';
+import point4 from './assets/startpoint4.jpg';
+import point9 from './assets/startpoint9.jpg';
 
 const StartPointPage = () => {
   const [selectedStartNode, setSelectedStartNode] = useState(null); // 選択された開始ノードを保持
@@ -63,7 +63,7 @@ const StartPointPage = () => {
       </header>
 
       <div style={{ textAlign: 'center', padding: '2rem' }}>
-        <h2>現在の場所を写真を参考に選択してください</h2>
+        <h2>現在地を写真を参考に選択してください</h2>
 
         <div 
           style={{ 

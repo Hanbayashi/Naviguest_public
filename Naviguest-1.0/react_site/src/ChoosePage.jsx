@@ -676,7 +676,7 @@ const handleGenrepoint32Click = async () => {
   }
 };
 
-  // ★★★ ページトップへスクロールする関数 ★★★
+  //ページトップへスクロールする関数
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -711,9 +711,7 @@ const handleGenrepoint32Click = async () => {
         </h2>
       </div>
 
-      <p style={{ textAlign: 'center', fontSize: '1.2em', color: '#555' }}>
-        {pythonMessage}
-      </p>
+      
 
       {/* ジャンル一覧 */}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>

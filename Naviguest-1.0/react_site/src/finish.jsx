@@ -1,8 +1,7 @@
 // src/finish.jsx
 import React from 'react';
-import { Link } from 'react-router-dom'; // 戻るためにLinkを使用
-import backbutton from './assets/BackButton.png'; // 戻るボタンの画像があれば
-import mapbutton from './assets/Mapbutton.png'; 
+import { Link } from 'react-router-dom'; 
+import backbutton from './assets/BackButton.png'; 
 import choosebutton from './assets/Choosebutton.png'; 
 
 const FinishPage = () => {
@@ -32,18 +31,6 @@ const FinishPage = () => {
           gap: '20px' // ボタン間の間隔
         }}
       >
-        {/* Map.jsx へ戻るボタン */}
-        <Link to="/map">
-          <img 
-            src={mapbutton} 
-            alt="マップに戻る" 
-            style={{ 
-              width: '200px', 
-              height: 'auto', 
-              cursor: 'pointer', 
-            }} 
-          />
-        </Link>
 
         {/* ChoosePage.jsx へ戻るボタン */}
         <Link to="/choose">
