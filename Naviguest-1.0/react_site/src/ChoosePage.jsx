@@ -5,7 +5,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import backbutton from './assets/BackButton.png';
 import topbutton from './assets/TopButton.png';
 
+// ジャンル選択ボタンの画像
 import Genre1Image from './assets/genre1.png';
+import Genre2Image from './assets/genre2.png';
+import Genre3Image from './assets/genre3.png';
+import Genre4Image from './assets/genre4.png';
+import Genre5Image from './assets/genre5.png';
+import Genre6Image from './assets/genre6.png';
+import Genre7Image from './assets/genre7.png';
+import Genre8Image from './assets/genre8.png';
+import Genre9Image from './assets/genre9.png';
+
+// 各ジャンルの詳細画像
 import Genre1aImage from './assets/genre1-1.png';
 import Genre1bImage from './assets/genre1-2.png';
 import Genre1cImage from './assets/genre1-3.png';
@@ -16,31 +27,26 @@ import Genre1gImage from './assets/genre1-7.png';
 import Genre1hImage from './assets/genre1-8.png';
 import Genre1iImage from './assets/genre1-9.png';
 
-import Genre2Image from './assets/genre2.png';
 import Genre2aImage from './assets/genre2-1.png';
 import Genre2bImage from './assets/genre2-2.png';
 import Genre2cImage from './assets/genre2-3.png';
 import Genre2dImage from './assets/genre2-4.png';
 
-import Genre3Image from './assets/genre3.png';
 import Genre3aImage from './assets/genre3-1.png';
 import Genre3bImage from './assets/genre3-2.png';
 import Genre3cImage from './assets/genre3-3.png';
 
-import Genre4Image from './assets/genre4.png';
 import Genre4aImage from './assets/genre4-1.png';
 import Genre4bImage from './assets/genre4-2.png';
 import Genre4cImage from './assets/genre4-3.png';
 import Genre4dImage from './assets/genre4-4.png';
 
-import Genre5Image from './assets/genre5.png';
 import Genre5aImage from './assets/genre5-1.png';
 import Genre5bImage from './assets/genre5-2.png';
 import Genre5cImage from './assets/genre5-3.png';
 import Genre5dImage from './assets/genre5-4.png';
 import Genre5eImage from './assets/genre5-5.png';
 
-import Genre6Image from './assets/genre6.png';
 import Genre6aImage from './assets/genre6-1.png';
 import Genre6bImage from './assets/genre6-2.png';
 import Genre6cImage from './assets/genre6-3.png';
@@ -55,7 +61,6 @@ import Genre6kImage from './assets/genre6-11.png';
 import Genre6lImage from './assets/genre6-12.png';
 import Genre6mImage from './assets/genre6-13.png';
 
-import Genre7Image from './assets/genre7.png';
 import Genre7aImage from './assets/genre7-1.png';
 import Genre7bImage from './assets/genre7-2.png';
 import Genre7cImage from './assets/genre7-3.png';
@@ -63,14 +68,10 @@ import Genre7dImage from './assets/genre7-4.png';
 import Genre7eImage from './assets/genre7-5.png';
 import Genre7fImage from './assets/genre7-6.png';
 
-import Genre8Image from './assets/genre8.png';
 import Genre8aImage from './assets/genre8-1.png';
 import Genre8bImage from './assets/genre8-2.png';
 
-import Genre9Image from './assets/genre9.png';
-
 const SelectionScreen = () => {
-
   const navigate = useNavigate();
 
   // スクロール先の参照を定義
@@ -84,7 +85,6 @@ const SelectionScreen = () => {
   const genre8aRef = useRef(null);
 
   const [pythonMessage, setPythonMessage] = useState('Pythonからのメッセージを待機中...');
-
   const [showTopButton, setShowTopButton] = useState(false);
 
   // スクロール処理
@@ -113,7 +113,7 @@ const SelectionScreen = () => {
     genre8aRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  //Pythonとの通信設定
+  // Pythonとの通信設定
   useEffect(() => {
     const apiUrl = 'http://127.0.0.1:5000/api/hello';
     fetch(apiUrl)
@@ -127,7 +127,7 @@ const SelectionScreen = () => {
         setPythonMessage('Pythonバックエンドに接続できませんでした。');
       });
 
-      // ★★★ スクロールイベントリスナーを設定 ★★★
+    // スクロールイベントリスナーを設定
     const handleScroll = () => {
       // ページのスクロール位置が一定以上（例: 200px）になったらボタンを表示
       if (window.scrollY > 200) {
@@ -143,568 +143,75 @@ const SelectionScreen = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-
   }, []);
 
-  //送信する値（目的地の番号）の設定
-  const handleGenrepoint1Click = async () => {
-  const valueToSend = 1; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', { // エンドポイントを修正
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }), // キーを 'goal_node' に修正
-    });
+  // 送信する値（目的地の番号）の設定を共通化
+  const sendGoalNode = async (valueToSend) => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ goal_node: valueToSend }),
+      });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Pythonからの応答:", data);
+      navigate('/map'); // Map.jsxへ遷移
+
+    } catch (error) {
+      console.error("目的地の送信エラー:", error);
+      alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
     }
+  };
 
-    const data = await response.json();
-    console.log("Pythonからの応答:", data); // Pythonからの応答を確認
-    navigate('/map'); // Map.jsxへ遷移
+  // 各ジャンルポイントのクリックハンドラ
+  const handleGenrepoint1Click = () => sendGoalNode(1);
+  const handleGenrepoint2Click = () => sendGoalNode(2);
+  const handleGenrepoint3Click = () => sendGoalNode(3);
+  const handleGenrepoint5Click = () => sendGoalNode(5);
+  const handleGenrepoint6Click = () => sendGoalNode(6);
+  const handleGenrepoint7Click = () => sendGoalNode(7);
+  const handleGenrepoint8Click = () => sendGoalNode(8);
+  const handleGenrepoint9Click = () => sendGoalNode(9);
+  const handleGenrepoint10Click = () => sendGoalNode(10);
+  const handleGenrepoint11Click = () => sendGoalNode(11);
+  const handleGenrepoint12Click = () => sendGoalNode(12);
+  const handleGenrepoint13Click = () => sendGoalNode(13);
+  const handleGenrepoint14Click = () => sendGoalNode(14);
+  const handleGenrepoint15Click = () => sendGoalNode(15);
+  const handleGenrepoint16Click = () => sendGoalNode(16);
+  const handleGenrepoint17Click = () => sendGoalNode(17);
+  const handleGenrepoint18Click = () => sendGoalNode(18);
+  const handleGenrepoint19Click = () => sendGoalNode(19);
+  const handleGenrepoint20Click = () => sendGoalNode(20);
+  const handleGenrepoint21Click = () => sendGoalNode(21);
+  const handleGenrepoint25Click = () => sendGoalNode(25);
+  const handleGenrepoint26Click = () => sendGoalNode(26);
+  const handleGenrepoint27Click = () => sendGoalNode(27);
+  const handleGenrepoint31Click = () => sendGoalNode(31);
+  const handleGenrepoint32Click = () => sendGoalNode(32);
 
-  } catch (error) {
-    console.error("目的地の送信エラー:", error); // エラーメッセージを修正
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
+  // 9つのジャンル選択ボタンのデータを配列で管理
+  const mainGenres = [
+    { src: Genre1Image, alt: "ジャンル1", onClick: handleScrollToGenre1a },
+    { src: Genre2Image, alt: "ジャンル2", onClick: handleScrollToGenre2a },
+    { src: Genre3Image, alt: "ジャンル3", onClick: handleScrollToGenre3a },
+    { src: Genre4Image, alt: "ジャンル4", onClick: handleScrollToGenre4a },
+    { src: Genre5Image, alt: "ジャンル5", onClick: handleScrollToGenre5a },
+    { src: Genre6Image, alt: "ジャンル6", onClick: handleScrollToGenre6a },
+    { src: Genre7Image, alt: "ジャンル7", onClick: handleScrollToGenre7a },
+    { src: Genre8Image, alt: "ジャンル8", onClick: handleScrollToGenre8a },
+    // ジャンル9はスクロールではなくAPI送信のため、直接onClickを設定
+    { src: Genre9Image, alt: "ジャンル9", onClick: handleGenrepoint1Click },
+  ];
 
-
-  const handleGenrepoint2Click = async () => {
-  const valueToSend = 2; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', { // エンドポイントを修正
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }), // キーを 'goal_node' に修正
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log("Pythonからの応答:", data); // Pythonからの応答を確認
-    navigate('/map'); // Map.jsxへ遷移
-
-  } catch (error) {
-    console.error("目的地の送信エラー:", error); // エラーメッセージを修正
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint3Click = async () => {
-  const valueToSend = 3; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint5Click = async () => {
-  const valueToSend = 5; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint6Click = async () => {
-  const valueToSend = 6; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint7Click = async () => {
-  const valueToSend = 7; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint8Click = async () => {
-  const valueToSend = 8; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint9Click = async () => {
-  const valueToSend = 9; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint10Click = async () => {
-  const valueToSend = 10; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint11Click = async () => {
-  const valueToSend = 11; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint12Click = async () => {
-  const valueToSend = 12; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint13Click = async () => {
-  const valueToSend = 13; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint14Click = async () => {
-  const valueToSend = 14; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint15Click = async () => {
-  const valueToSend = 15; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint16Click = async () => {
-  const valueToSend = 16; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint17Click = async () => {
-  const valueToSend = 17; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint18Click = async () => {
-  const valueToSend = 18; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint19Click = async () => {
-  const valueToSend = 19; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint20Click = async () => {
-  const valueToSend = 20; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint21Click = async () => {
-  const valueToSend = 21; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint25Click = async () => {
-  const valueToSend = 25; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint26Click = async () => {
-  const valueToSend = 26; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint27Click = async () => {
-  const valueToSend = 27; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint31Click = async () => {
-  const valueToSend = 31; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-const handleGenrepoint32Click = async () => {
-  const valueToSend = 32; // 送信するノード番号
-  try {
-    const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goal_node: valueToSend }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Pythonからの応答:", data);
-    navigate('/map');
-  } catch (error) {
-    console.error("目的地の送信エラー:", error);
-    alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
-  }
-};
-
-  //ページトップへスクロールする関数
+  // ページトップへスクロールする関数
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -717,14 +224,14 @@ const handleGenrepoint32Click = async () => {
       {/* ヘッダー */}
       <header
         style={{
-          backgroundColor: '#0066cc',color: 'white',padding: '1rem 2rem',textAlign: 'center',
+          backgroundColor: '#0066cc', color: 'white', padding: '1rem 2rem', textAlign: 'center',
         }}
       >
         <h1 style={{ fontSize: '48px' }}>ナビゲスト</h1>
         <nav>
           <ul
             style={{
-              listStyle: 'none',padding: 0,display: 'flex',justifyContent: 'center',gap: '2rem',
+              listStyle: 'none', padding: 0, display: 'flex', justifyContent: 'center', gap: '2rem',
             }}
           >
           </ul>
@@ -732,112 +239,59 @@ const handleGenrepoint32Click = async () => {
       </header>
 
       {/* 説明テキスト */}
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', padding: '2rem 0' }}>
         <h2>
-          案内を希望するカテゴリーを選んでください。<br /> 
+          案内を希望するカテゴリーを選んでください。<br />
           選択されたカテゴリーに対応する部署の一覧まで、自動でスクロールします。
         </h2>
       </div>
 
-      
-
-      {/* ジャンル一覧 */}
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <img
-          src={Genre1Image}
-          alt="ジャンル1"
-          style={{ width: '300px', height: 'auto', maxWidth: '100%', cursor: 'pointer' }}
-          onClick={handleScrollToGenre1a} // ここでスクロール処理を実行
-        />
+      {/* --- ジャンル一覧 (3x3グリッド) --- */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)', // 3列均等幅
+          gap: '2rem', // 各画像間の隙間
+          maxWidth: '960px', // 全体の最大幅
+          margin: '0 auto', // 中央寄せ
+          padding: '2rem', // 全体のパディング
+        }}
+      >
+        {mainGenres.map((genre, index) => (
+          <div
+            key={index}
+            style={{
+              textAlign: 'center',
+              display: 'flex', // 画像を中央揃えにするため
+              justifyContent: 'center', // 画像を水平方向で中央揃え
+              alignItems: 'center', // 画像を垂直方向で中央揃え
+              marginBottom: index < 6 ? '0' : '5rem' // 最後の行のみ下マージンを大きくする
+            }}
+          >
+            <img
+              src={genre.src}
+              alt={genre.alt}
+              style={{
+                width: '100%', // 親要素に合わせて幅を100%に
+                maxWidth: '300px', // 画像の最大幅
+                height: 'auto',
+                cursor: 'pointer',
+              }}
+              onClick={genre.onClick}
+            />
+          </div>
+        ))}
       </div>
+      {/* --- ジャンル一覧 終わり --- */}
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <img
-          src={Genre2Image}
-          alt="ジャンル2"
-          style={{ width: '300px', height: 'auto', maxWidth: '100%', cursor: 'pointer' }}
-          onClick={handleScrollToGenre2a}
-        />
-      </div>
+      {/* 部署等 */}
 
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <img
-          src={Genre3Image}
-          alt="ジャンル3"
-          style={{ width: '300px', height: 'auto', maxWidth: '100%', cursor: 'pointer' }}
-          onClick={handleScrollToGenre3a}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <img
-          src={Genre4Image}
-          alt="ジャンル4"
-          style={{ width: '300px', height: 'auto', maxWidth: '100%', cursor: 'pointer' }}
-          onClick={handleScrollToGenre4a} // ここでスクロール処理を実行
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <img
-          src={Genre5Image}
-          alt="ジャンル5"
-          style={{ width: '300px', height: 'auto', maxWidth: '100%', cursor: 'pointer' }}
-          onClick={handleScrollToGenre5a} // ここでスクロール処理を実行
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <img
-          src={Genre6Image}
-          alt="ジャンル6"
-          style={{ width: '300px', height: 'auto', maxWidth: '100%', cursor: 'pointer' }}
-          onClick={handleScrollToGenre6a}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <img
-          src={Genre7Image}
-          alt="ジャンル7"
-          style={{ width: '300px', height: 'auto', maxWidth: '100%', cursor: 'pointer' }}
-          onClick={handleScrollToGenre7a}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <img
-          src={Genre8Image}
-          alt="ジャンル8"
-          style={{ width: '300px', height: 'auto', maxWidth: '100%', cursor: 'pointer' }}
-          onClick={handleScrollToGenre8a} // ここでスクロール処理を実行
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-        <img
-          src={Genre9Image}
-          alt="ジャンル9"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint1Click}
-        />
-      </div>
-
-      {/*部署等*/}
-
-      {/*ジャンル1*/}
-      <div style={{  textAlign: 'center' }}>
+      {/* ジャンル1 */}
+      <div style={{ textAlign: 'center', marginTop: '3rem' }}>
         <h2>手続き・証明・財務</h2>
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        {/* Link コンポーネントを削除し、onClick で直接処理を呼び出す */}
         <img
           ref={genre1aRef}
           src={Genre1aImage}
@@ -973,8 +427,8 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      {/*ジャンル2*/}
-      <div style={{  textAlign: 'center' }}>
+      {/* ジャンル2 */}
+      <div style={{ textAlign: 'center' }}>
         <h2>子育て・家庭支援</h2>
       </div>
 
@@ -1039,8 +493,8 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      {/*ジャンル3*/}
-      <div style={{  textAlign: 'center' }}>
+      {/* ジャンル3 */}
+      <div style={{ textAlign: 'center' }}>
         <h2>健康・医療・保険</h2>
       </div>
 
@@ -1090,7 +544,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      {/*ジャンル4*/}
+      {/* ジャンル4 */}
       <div style={{ textAlign: 'center' }}>
         <h2>高齢者・障がい者・生活困窮者支援</h2>
       </div>
@@ -1156,7 +610,7 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      {/*ジャンル5*/}
+      {/* ジャンル5 */}
       <div style={{ textAlign: 'center' }}>
         <h2>雇用・経済・企業・産業復興</h2>
       </div>
@@ -1237,8 +691,8 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      {/*ジャンル6*/}
-      <div style={{  textAlign: 'center' }}>
+      {/* ジャンル6 */}
+      <div style={{ textAlign: 'center' }}>
         <h2>住宅・都市計画・まちづくり</h2>
       </div>
 
@@ -1438,8 +892,8 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      {/*ジャンル7*/}
-      <div style={{  textAlign: 'center' }}>
+      {/* ジャンル7 */}
+      <div style={{ textAlign: 'center' }}>
         <h2>広報・市民対応・行政運営</h2>
       </div>
 
@@ -1534,8 +988,8 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      {/*ジャンル8*/}
-      <div style={{  textAlign: 'center' }}>
+      {/* ジャンル8 */}
+      <div style={{ textAlign: 'center' }}>
         <h2>会議・相談</h2>
       </div>
 
@@ -1570,37 +1024,39 @@ const handleGenrepoint32Click = async () => {
         />
       </div>
 
-      <div style={{ marginBottom: '2rem',textAlign: 'center' }}>
-        <Link to="/startpoint"> 
+      {/* 戻るボタン */}
+      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+        <Link to="/startpoint">
           <img
             src={backbutton}
             alt="戻る"
             style={{
-              width: '200px', // 必要に応じてサイズ調整 
+              width: '200px',
               height: 'auto',
               cursor: 'pointer',
-              border: 'none', 
-              verticalAlign: 'middle', //  追加: 画像の配置を調整 
+              border: 'none',
+              verticalAlign: 'middle',
             }}
           />
         </Link>
       </div>
 
-      {showTopButton && ( // showTopButtonがtrueの場合のみ表示
+      {/* トップに戻るボタン */}
+      {showTopButton && (
         <div
           style={{
             position: 'fixed',
-            bottom: '20px', // 画面下端から20px
-            right: '20px',  // 画面右端から20px
-            zIndex: 1000,   // 他の要素の上に表示
+            bottom: '20px',
+            right: '20px',
+            zIndex: 1000,
           }}
         >
           <img
-            src={topbutton} 
+            src={topbutton}
             alt="ページトップへ"
-            onClick={scrollToTop} 
+            onClick={scrollToTop}
             style={{
-              width: '180px', 
+              width: '180px',
               height: 'auto',
               cursor: 'pointer',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
