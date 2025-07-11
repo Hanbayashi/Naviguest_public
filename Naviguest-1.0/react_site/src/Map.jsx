@@ -12,7 +12,7 @@ import F6button from './assets/6F.png';
 import guidance_1_2 from './assets/1-2.png';
 import guidance_1_3 from './assets/1-3.png';
 import guidance_1_4 from './assets/1-4.png';
-import guidance_1_5 from './assets/1-5.png';
+import guidance_1_5 from './assets/1-5.jpg';
 import guidance_1_6 from './assets/1-6.png';
 import guidance_2_1 from './assets/2-1.png';
 import guidance_2_3 from './assets/2-3.png';
@@ -377,15 +377,14 @@ const MapPage = () => {
           textAlign: 'center',
         }}
       >
-        <h1 style={{ fontSize: '48px' }}>ナビゲスト</h1>
+        <h1 style={{ fontSize: '48px' , marginBottom: '1rem'}}>ナビゲスト</h1>
       </header>
 
       <div style={{ textAlign: 'center' }}>
         <h2>
-          現在地から目的地までの案内画面です。<br /> 
-          現在の場所の番号を入力し、確定ボタンを押してください。
-        </h2>
-        <h2>
+          案内とマップを参考に進んでください。<br /> 
+          次の番号が見えたらその番号を入力し、確定ボタンを押してください。<br />
+          進む方向のわからない方は、マップ下の写真の方向に進んでください。<br /><br />
           現在地：青色<br />
           次のポイント：黄色
         </h2>
@@ -566,7 +565,6 @@ const MapPage = () => {
         {/* 案内画像の表示 */}
         {currentGuidanceImage && !loading && !error && (
           <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-            <h3>次の移動案内</h3>
             <img 
               src={currentGuidanceImage} 
               alt="次の移動案内" 
