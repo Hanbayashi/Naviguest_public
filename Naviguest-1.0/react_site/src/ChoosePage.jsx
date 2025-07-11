@@ -18,7 +18,7 @@ import Genre9Image from './assets/genre9.png';
 
 // 各ジャンルの詳細画像
 import Genre1aImage from './assets/genre1-1.png';
-import Genre1bImage from './assets/genre1-2.png';
+import Genre1bImage from './assets/genre1-2.png'; // ★スクロールターゲット
 import Genre1cImage from './assets/genre1-3.png';
 import Genre1dImage from './assets/genre1-4.png';
 import Genre1eImage from './assets/genre1-5.png';
@@ -28,27 +28,27 @@ import Genre1hImage from './assets/genre1-8.png';
 import Genre1iImage from './assets/genre1-9.png';
 
 import Genre2aImage from './assets/genre2-1.png';
-import Genre2bImage from './assets/genre2-2.png';
+import Genre2bImage from './assets/genre2-2.png'; // ★スクロールターゲット
 import Genre2cImage from './assets/genre2-3.png';
 import Genre2dImage from './assets/genre2-4.png';
 
 import Genre3aImage from './assets/genre3-1.png';
-import Genre3bImage from './assets/genre3-2.png';
+import Genre3bImage from './assets/genre3-2.png'; // ★スクロールターゲット
 import Genre3cImage from './assets/genre3-3.png';
 
 import Genre4aImage from './assets/genre4-1.png';
-import Genre4bImage from './assets/genre4-2.png';
+import Genre4bImage from './assets/genre4-2.png'; // ★スクロールターゲット
 import Genre4cImage from './assets/genre4-3.png';
 import Genre4dImage from './assets/genre4-4.png';
 
 import Genre5aImage from './assets/genre5-1.png';
-import Genre5bImage from './assets/genre5-2.png';
+import Genre5bImage from './assets/genre5-2.png'; // ★スクロールターゲット
 import Genre5cImage from './assets/genre5-3.png';
 import Genre5dImage from './assets/genre5-4.png';
 import Genre5eImage from './assets/genre5-5.png';
 
 import Genre6aImage from './assets/genre6-1.png';
-import Genre6bImage from './assets/genre6-2.png';
+import Genre6bImage from './assets/genre6-2.png'; // ★スクロールターゲット
 import Genre6cImage from './assets/genre6-3.png';
 import Genre6dImage from './assets/genre6-4.png';
 import Genre6eImage from './assets/genre6-5.png';
@@ -62,55 +62,56 @@ import Genre6lImage from './assets/genre6-12.png';
 import Genre6mImage from './assets/genre6-13.png';
 
 import Genre7aImage from './assets/genre7-1.png';
-import Genre7bImage from './assets/genre7-2.png';
+import Genre7bImage from './assets/genre7-2.png'; // ★スクロールターゲット
 import Genre7cImage from './assets/genre7-3.png';
 import Genre7dImage from './assets/genre7-4.png';
 import Genre7eImage from './assets/genre7-5.png';
 import Genre7fImage from './assets/genre7-6.png';
 
 import Genre8aImage from './assets/genre8-1.png';
-import Genre8bImage from './assets/genre8-2.png';
+import Genre8bImage from './assets/genre8-2.png'; // ★スクロールターゲット
 
 const SelectionScreen = () => {
   const navigate = useNavigate();
 
   // スクロール先の参照を定義
-  const genre1aRef = useRef(null);
-  const genre2aRef = useRef(null);
-  const genre3aRef = useRef(null);
-  const genre4aRef = useRef(null);
-  const genre5aRef = useRef(null);
-  const genre6aRef = useRef(null);
-  const genre7aRef = useRef(null);
-  const genre8aRef = useRef(null);
+  const genre1bRef = useRef(null);
+  const genre2bRef = useRef(null);
+  const genre3bRef = useRef(null);
+  const genre4bRef = useRef(null);
+  const genre5bRef = useRef(null);
+  const genre6bRef = useRef(null);
+  const genre7bRef = useRef(null);
+  const genre8bRef = useRef(null);
 
   const [pythonMessage, setPythonMessage] = useState('Pythonからのメッセージを待機中...');
   const [showTopButton, setShowTopButton] = useState(false);
 
   // スクロール処理
+  // block: 'center' を追加して、要素が画面中央に来るようにする
   const handleScrollToGenre1a = () => {
-    genre1aRef.current?.scrollIntoView({ behavior: 'smooth' });
+    genre1bRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
   };
   const handleScrollToGenre2a = () => {
-    genre2aRef.current?.scrollIntoView({ behavior: 'smooth' });
+    genre2bRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
   };
   const handleScrollToGenre3a = () => {
-    genre3aRef.current?.scrollIntoView({ behavior: 'smooth' });
+    genre3bRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
   };
   const handleScrollToGenre4a = () => {
-    genre4aRef.current?.scrollIntoView({ behavior: 'smooth' });
+    genre4bRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
   };
   const handleScrollToGenre5a = () => {
-    genre5aRef.current?.scrollIntoView({ behavior: 'smooth' });
+    genre5bRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
   };
   const handleScrollToGenre6a = () => {
-    genre6aRef.current?.scrollIntoView({ behavior: 'smooth' });
+    genre6bRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
   };
   const handleScrollToGenre7a = () => {
-    genre7aRef.current?.scrollIntoView({ behavior: 'smooth' });
+    genre7bRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
   };
   const handleScrollToGenre8a = () => {
-    genre8aRef.current?.scrollIntoView({ behavior: 'smooth' });
+    genre8bRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
   };
 
   // Pythonとの通信設定
@@ -129,7 +130,6 @@ const SelectionScreen = () => {
 
     // スクロールイベントリスナーを設定
     const handleScroll = () => {
-      // ページのスクロール位置が一定以上（例: 200px）になったらボタンを表示
       if (window.scrollY > 200) {
         setShowTopButton(true);
       } else {
@@ -139,7 +139,6 @@ const SelectionScreen = () => {
 
     window.addEventListener('scroll', handleScroll);
 
-    // クリーンアップ関数: コンポーネントがアンマウントされるときにイベントリスナーを削除
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -207,9 +206,74 @@ const SelectionScreen = () => {
     { src: Genre6Image, alt: "ジャンル6", onClick: handleScrollToGenre6a },
     { src: Genre7Image, alt: "ジャンル7", onClick: handleScrollToGenre7a },
     { src: Genre8Image, alt: "ジャンル8", onClick: handleScrollToGenre8a },
-    // ジャンル9はスクロールではなくAPI送信のため、直接onClickを設定
-    { src: Genre9Image, alt: "ジャンル9", onClick: handleGenrepoint1Click },
+    { src: Genre9Image, alt: "ジャンル9", onClick: handleGenrepoint1Click }, // ジャンル9はスクロールではなくAPI送信
   ];
+
+  // 各ジャンルの詳細画像データを配列で定義
+  const detailGenres = {
+    genre1: [
+      { src: Genre1aImage, onClick: handleGenrepoint5Click, alt: "ジャンル1-1" },
+      { src: Genre1bImage, onClick: handleGenrepoint2Click, alt: "ジャンル1-2", ref: genre1bRef }, // ★refをここに設定
+      { src: Genre1cImage, onClick: handleGenrepoint10Click, alt: "ジャンル1-3" },
+      { src: Genre1dImage, onClick: handleGenrepoint13Click, alt: "ジャンル1-4" },
+      { src: Genre1eImage, onClick: handleGenrepoint6Click, alt: "ジャンル1-5" },
+      { src: Genre1fImage, onClick: handleGenrepoint15Click, alt: "ジャンル1-6" },
+      { src: Genre1gImage, onClick: handleGenrepoint7Click, alt: "ジャンル1-7" },
+      { src: Genre1hImage, onClick: handleGenrepoint21Click, alt: "ジャンル1-8" },
+      { src: Genre1iImage, onClick: handleGenrepoint21Click, alt: "ジャンル1-9" },
+    ],
+    genre2: [
+      { src: Genre2aImage, onClick: handleGenrepoint7Click, alt: "ジャンル2-1" },
+      { src: Genre2bImage, onClick: handleGenrepoint26Click, alt: "ジャンル2-2", ref: genre2bRef }, // ★refをここに設定
+      { src: Genre2cImage, onClick: handleGenrepoint26Click, alt: "ジャンル2-3" },
+      { src: Genre2dImage, onClick: handleGenrepoint27Click, alt: "ジャンル2-4" },
+    ],
+    genre3: [
+      { src: Genre3aImage, onClick: handleGenrepoint8Click, alt: "ジャンル3-1" },
+      { src: Genre3bImage, onClick: handleGenrepoint25Click, alt: "ジャンル3-2", ref: genre3bRef }, // ★refをここに設定
+      { src: Genre3cImage, onClick: handleGenrepoint12Click, alt: "ジャンル3-3" },
+    ],
+    genre4: [
+      { src: Genre4aImage, onClick: handleGenrepoint8Click, alt: "ジャンル4-1" },
+      { src: Genre4bImage, onClick: handleGenrepoint9Click, alt: "ジャンル4-2", ref: genre4bRef }, // ★refをここに設定
+      { src: Genre4cImage, onClick: handleGenrepoint3Click, alt: "ジャンル4-3" },
+      { src: Genre4dImage, onClick: handleGenrepoint11Click, alt: "ジャンル4-4" },
+    ],
+    genre5: [
+      { src: Genre5aImage, onClick: handleGenrepoint11Click, alt: "ジャンル5-1" },
+      { src: Genre5bImage, onClick: handleGenrepoint13Click, alt: "ジャンル5-2", ref: genre5bRef }, // ★refをここに設定
+      { src: Genre5cImage, onClick: handleGenrepoint10Click, alt: "ジャンル5-3" },
+      { src: Genre5dImage, onClick: handleGenrepoint11Click, alt: "ジャンル5-4" },
+      { src: Genre5eImage, onClick: handleGenrepoint12Click, alt: "ジャンル5-5" },
+    ],
+    genre6: [
+      { src: Genre6aImage, onClick: handleGenrepoint20Click, alt: "ジャンル6-1" },
+      { src: Genre6bImage, onClick: handleGenrepoint12Click, alt: "ジャンル6-2", ref: genre6bRef }, // ★refをここに設定
+      { src: Genre6cImage, onClick: handleGenrepoint20Click, alt: "ジャンル6-3" },
+      { src: Genre6dImage, onClick: handleGenrepoint19Click, alt: "ジャンル6-4" },
+      { src: Genre6eImage, onClick: handleGenrepoint19Click, alt: "ジャンル6-5" },
+      { src: Genre6fImage, onClick: handleGenrepoint32Click, alt: "ジャンル6-6" },
+      { src: Genre6gImage, onClick: handleGenrepoint11Click, alt: "ジャンル6-7" },
+      { src: Genre6hImage, onClick: handleGenrepoint11Click, alt: "ジャンル6-8" },
+      { src: Genre6iImage, onClick: handleGenrepoint12Click, alt: "ジャンル6-9" },
+      { src: Genre6jImage, onClick: handleGenrepoint15Click, alt: "ジャンル6-10" },
+      { src: Genre6kImage, onClick: handleGenrepoint16Click, alt: "ジャンル6-11" },
+      { src: Genre6lImage, onClick: handleGenrepoint14Click, alt: "ジャンル6-12" },
+      { src: Genre6mImage, onClick: handleGenrepoint14Click, alt: "ジャンル6-13" },
+    ],
+    genre7: [
+      { src: Genre7aImage, onClick: handleGenrepoint17Click, alt: "ジャンル7-1" },
+      { src: Genre7bImage, onClick: handleGenrepoint16Click, alt: "ジャンル7-2", ref: genre7bRef }, // ★refをここに設定
+      { src: Genre7cImage, onClick: handleGenrepoint17Click, alt: "ジャンル7-3" },
+      { src: Genre7dImage, onClick: handleGenrepoint16Click, alt: "ジャンル7-4" },
+      { src: Genre7eImage, onClick: handleGenrepoint17Click, alt: "ジャンル7-5" },
+      { src: Genre7fImage, onClick: handleGenrepoint18Click, alt: "ジャンル7-6" },
+    ],
+    genre8: [
+      { src: Genre8aImage, onClick: handleGenrepoint3Click, alt: "ジャンル8-1" },
+      { src: Genre8bImage, onClick: handleGenrepoint31Click, alt: "ジャンル8-2", ref: genre8bRef }, // ★refをここに設定
+    ],
+  };
 
   // ページトップへスクロールする関数
   const scrollToTop = () => {
@@ -218,6 +282,66 @@ const SelectionScreen = () => {
       behavior: 'smooth'
     });
   };
+
+  // 詳細画像をレンダリングするヘルパー関数
+  const renderDetailImages = (images) => {
+    const rows = [];
+    for (let i = 0; i < images.length; i += 3) {
+      const rowImages = images.slice(i, i + 3);
+      const remaining = images.length - i;
+
+      let justifyContent = 'center'; // デフォルトは中央揃え
+
+      if (remaining === 1) {
+        justifyContent = 'center';
+      } else if (remaining === 2) {
+        justifyContent = 'center';
+      }
+
+      rows.push(
+        <div
+          key={i}
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: justifyContent,
+            gap: '1rem',
+            marginBottom: '1rem',
+            maxWidth: '960px',
+            margin: '0 auto',
+            padding: '0 1rem',
+          }}
+        >
+          {rowImages.map((image, idx) => (
+            <div
+              key={idx}
+              style={{
+                flex: '0 0 auto',
+                width: 'calc(33.33% - 0.67rem)',
+                maxWidth: '300px',
+                textAlign: 'center',
+              }}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  cursor: 'pointer',
+                }}
+                onClick={image.onClick}
+                // imageオブジェクトにrefプロパティがある場合、それをimg要素に設定
+                ref={image.ref || null}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return rows;
+  };
+
 
   return (
     <>
@@ -290,739 +414,58 @@ const SelectionScreen = () => {
       <div style={{ textAlign: 'center', marginTop: '3rem' }}>
         <h2>手続き・証明・財務</h2>
       </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          ref={genre1aRef}
-          src={Genre1aImage}
-          alt="ジャンル1-1"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint5Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre1bImage}
-          alt="ジャンル1-2"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint2Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre1cImage}
-          alt="ジャンル1-3"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint10Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre1dImage}
-          alt="ジャンル1-4"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint13Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre1eImage}
-          alt="ジャンル1-5"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint6Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre1fImage}
-          alt="ジャンル1-6"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint15Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre1gImage}
-          alt="ジャンル1-7"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint7Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre1hImage}
-          alt="ジャンル1-8"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint21Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <img
-          src={Genre1iImage}
-          alt="ジャンル1-9"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint21Click}
-        />
-      </div>
+      {renderDetailImages(detailGenres.genre1)}
+      <div style={{ marginBottom: '3rem' }} /> {/* 各ジャンルセクション間の余白 */}
 
       {/* ジャンル2 */}
       <div style={{ textAlign: 'center' }}>
         <h2>子育て・家庭支援</h2>
       </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          ref={genre2aRef}
-          src={Genre2aImage}
-          alt="ジャンル2-1"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint7Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre2bImage}
-          alt="ジャンル2-2"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint26Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre2cImage}
-          alt="ジャンル2-3"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint26Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <img
-          src={Genre2dImage}
-          alt="ジャンル2-4"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint27Click}
-        />
-      </div>
+      {renderDetailImages(detailGenres.genre2)}
+      <div style={{ marginBottom: '3rem' }} />
 
       {/* ジャンル3 */}
       <div style={{ textAlign: 'center' }}>
         <h2>健康・医療・保険</h2>
       </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          ref={genre3aRef}
-          src={Genre3aImage}
-          alt="ジャンル3-1"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint8Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre3bImage}
-          alt="ジャンル3-2"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint25Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <img
-          src={Genre3cImage}
-          alt="ジャンル3-3"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint12Click}
-        />
-      </div>
+      {renderDetailImages(detailGenres.genre3)}
+      <div style={{ marginBottom: '3rem' }} />
 
       {/* ジャンル4 */}
       <div style={{ textAlign: 'center' }}>
         <h2>高齢者・障がい者・生活困窮者支援</h2>
       </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          ref={genre4aRef}
-          src={Genre4aImage}
-          alt="ジャンル4-1"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint8Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre4bImage}
-          alt="ジャンル4-2"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint9Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre4cImage}
-          alt="ジャンル4-3"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint3Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <img
-          src={Genre4dImage}
-          alt="ジャンル4-4"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint11Click}
-        />
-      </div>
+      {renderDetailImages(detailGenres.genre4)}
+      <div style={{ marginBottom: '3rem' }} />
 
       {/* ジャンル5 */}
       <div style={{ textAlign: 'center' }}>
         <h2>雇用・経済・企業・産業復興</h2>
       </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          ref={genre5aRef}
-          src={Genre5aImage}
-          alt="ジャンル5-1"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint11Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre5bImage}
-          alt="ジャンル5-2"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint13Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre5cImage}
-          alt="ジャンル5-3"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint10Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre5dImage}
-          alt="ジャンル5-4"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint11Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <img
-          src={Genre5eImage}
-          alt="ジャンル5-5"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint12Click}
-        />
-      </div>
+      {renderDetailImages(detailGenres.genre5)}
+      <div style={{ marginBottom: '3rem' }} />
 
       {/* ジャンル6 */}
       <div style={{ textAlign: 'center' }}>
         <h2>住宅・都市計画・まちづくり</h2>
       </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          ref={genre6aRef}
-          src={Genre6aImage}
-          alt="ジャンル6-1"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint20Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6bImage}
-          alt="ジャンル6-2"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint12Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6cImage}
-          alt="ジャンル6-3"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint20Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6dImage}
-          alt="ジャンル6-4"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint19Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6eImage}
-          alt="ジャンル6-5"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint19Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6fImage}
-          alt="ジャンル6-6"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint32Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6gImage}
-          alt="ジャンル6-7"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint11Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6hImage}
-          alt="ジャンル6-8"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint11Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6iImage}
-          alt="ジャンル6-9"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint12Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6jImage}
-          alt="ジャンル6-10"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint15Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6kImage}
-          alt="ジャンル6-11"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint16Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre6lImage}
-          alt="ジャンル6-12"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint14Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <img
-          src={Genre6mImage}
-          alt="ジャンル6-13"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint14Click}
-        />
-      </div>
+      {renderDetailImages(detailGenres.genre6)}
+      <div style={{ marginBottom: '3rem' }} />
 
       {/* ジャンル7 */}
       <div style={{ textAlign: 'center' }}>
         <h2>広報・市民対応・行政運営</h2>
       </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          ref={genre7aRef}
-          src={Genre7aImage}
-          alt="ジャンル7-1"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint17Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre7bImage}
-          alt="ジャンル7-2"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint16Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre7cImage}
-          alt="ジャンル7-3"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint17Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre7dImage}
-          alt="ジャンル7-4"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint16Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre7eImage}
-          alt="ジャンル7-5"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint17Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <img
-          src={Genre7fImage}
-          alt="ジャンル7-6"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint18Click}
-        />
-      </div>
+      {renderDetailImages(detailGenres.genre7)}
+      <div style={{ marginBottom: '3rem' }} />
 
       {/* ジャンル8 */}
       <div style={{ textAlign: 'center' }}>
         <h2>会議・相談</h2>
       </div>
+      {renderDetailImages(detailGenres.genre8)}
+      <div style={{ marginBottom: '3rem' }} />
 
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          ref={genre8aRef}
-          src={Genre8aImage}
-          alt="ジャンル8-1"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint3Click}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <img
-          src={Genre8bImage}
-          alt="ジャンル8-2"
-          style={{
-            width: '300px',
-            height: 'auto',
-            maxWidth: '100%',
-            scrollMarginTop: '100px',
-            cursor: 'pointer',
-          }}
-          onClick={handleGenrepoint31Click}
-        />
-      </div>
 
       {/* 戻るボタン */}
       <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
