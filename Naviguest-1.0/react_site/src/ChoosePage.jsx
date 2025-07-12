@@ -371,7 +371,7 @@ const SelectionScreen = () => {
       {/* 説明テキスト */}
       <div style={{ textAlign: 'center', padding: '2rem 0' }}>
         <h2>
-          案内を希望するカテゴリーを選んでください。<br />
+          案内を希望するカテゴリーを選んでください。
           選択されたカテゴリーに対応する部署の一覧まで、自動でスクロールします。
         </h2>
       </div>
@@ -381,8 +381,8 @@ const SelectionScreen = () => {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)', // 3列均等幅
-          gap: '2rem', // 各画像間の隙間
-          maxWidth: '960px', // 全体の最大幅
+          gap: '0.5rem', // 各画像間の隙間
+          maxWidth: '1500px', // 全体の最大幅
           margin: '0 auto', // 中央寄せ
           padding: '2rem', // 全体のパディング
         }}
