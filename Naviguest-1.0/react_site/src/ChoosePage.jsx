@@ -18,7 +18,7 @@ import Genre9Image from './assets/genre9.png';
 
 // 各ジャンルの詳細画像
 import Genre1aImage from './assets/genre1-1.png';
-import Genre1bImage from './assets/genre1-2.png'; // ★スクロールターゲット
+import Genre1bImage from './assets/genre1-2.png'; 
 import Genre1cImage from './assets/genre1-3.png';
 import Genre1dImage from './assets/genre1-4.png';
 import Genre1eImage from './assets/genre1-5.png';
