@@ -20,7 +20,7 @@ const HomePage = () => {
         src={CityHall}
         alt="市役所の写真"
         style={{
-          width: '600px',
+          width: '400px',
           height: 'auto',
           maxWidth: '100%',
           scrollMarginTop: '100px',
@@ -30,11 +30,11 @@ const HomePage = () => {
 
     <div style={{ textAlign: 'center' }}>
   　　<h2>
-   　　 舞鶴市役所にご来庁いただきありがとうございます。<br /> 
-    　　このページでは、舞鶴市役所各課の場所や施設へのアクセス方法をわかりやすくご紹介しています。<br /><br />
-    　　※<span style={{ color: 'red' }}>令和７年７月から赤れんがパーク周辺駐車場が有料になりました。</span>（詳細は<a href="https://www.city.maizuru.kyoto.jp/0000013369.html" target="_blank">こちら</a>）<br />
-    　　　市役所利用者・東体育館利用者の駐車場利用料金は無料です。<br />
-    　　　１階総合案内で無料券の交付をお受けください。
+舞鶴市役所にご来庁いただきありがとうございます。<br /> 
+このページでは、舞鶴市役所各課の場所や施設へのアクセス方法をわかりやすくご紹介しています。<br /><br />
+※<span style={{ color: 'red' }}>令和７年７月から赤れんがパーク周辺駐車場が有料になりました。</span>（詳細は<a href="https://www.city.maizuru.kyoto.jp/0000013369.html" target="_blank">こちら</a>）<br />
+  市役所利用者・東体育館利用者の駐車場利用料金は無料です。<br />
+  １階総合案内で無料券の交付をお受けください。
   　　</h2>
 　　</div>
 
