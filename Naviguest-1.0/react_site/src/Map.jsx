@@ -146,73 +146,73 @@ const nodePointData = {
 };
 
 const guidanceImages = {
-    '1-2': guidance_1_2,
-    '1-3': guidance_1_3,
-    '1-4': guidance_1_4,
-    '1-5': guidance_1_5,
-    '1-6': guidance_1_6,
-    '2-1': guidance_2_1,
-    '2-3': guidance_2_3,
-    '3-1': guidance_3_1,
-    '3-2': guidance_3_2,
-    '3-4': guidance_3_4,
-    '4-1': guidance_4_1,
-    '4-3': guidance_4_3,
-    '4-5': guidance_4_5,
-    '5-4': guidance_5_4,
-    '5-6': guidance_5_6,
-    '5-7': guidance_5_7,
-    '6-1': guidance_6_1,
-    '6-5': guidance_6_5,
-    '6-7': guidance_6_7,
-    '7-5': guidance_7_5,
-    '7-6': guidance_7_6,
-    '7-8': guidance_7_8,
-    '7-9': guidance_7_9,
-    '8-7': guidance_8_7,
-    '8-9': guidance_8_9,
-    '9-7': guidance_9_7,
-    '9-8': guidance_9_8,
-    '10-11': guidance_10_11,
-    '11-10': guidance_11_10,
-    '11-12': guidance_11_12,
-    '12-11': guidance_12_11,
-    '12-13': guidance_12_13,
-    '12-14': guidance_12_14,
-    '13-12': guidance_13_12,
-    '13-14': guidance_13_14,
-    '14-12': guidance_14_12,
-    '14-13': guidance_14_13,
-    '15-16': guidance_15_16,
-    '16-15': guidance_16_15,
-    '16-17': guidance_16_17,
-    '17-16': guidance_17_16,
-    '17-18': guidance_17_18,
-    '18-17': guidance_18_17,
-    '19-20': guidance_19_20,
-    '19-21': guidance_19_21,
-    '20-19': guidance_20_19,
-    '20-21': guidance_20_21,
-    '21-19': guidance_21_19,
-    '21-20': guidance_21_20,
-    '22-23': guidance_22_23,
-    '23-22': guidance_23_22,
-    '23-24': guidance_23_24,
-    '24-23': guidance_24_23,
-    '25-26': guidance_25_26,
-    '25-27': guidance_25_27,
-    '26-25': guidance_26_25,
-    '26-27': guidance_26_27,
-    '27-25': guidance_27_25,
-    '27-26': guidance_27_26,
-    '28-29': guidance_28_29,
-    '28-30': guidance_28_30,
-    '29-28': guidance_29_28,
-    '29-30': guidance_29_30,
-    '30-28': guidance_30_28,
-    '30-29': guidance_30_29,
-    '31-32': guidance_31_32,
-    '32-31': guidance_32_31,
+  '1-2': guidance_1_2,
+  '1-3': guidance_1_3,
+  '1-4': guidance_1_4,
+  '1-5': guidance_1_5,
+  '1-6': guidance_1_6,
+  '2-1': guidance_2_1,
+  '2-3': guidance_2_3,
+  '3-1': guidance_3_1,
+  '3-2': guidance_3_2,
+  '3-4': guidance_3_4,
+  '4-1': guidance_4_1,
+  '4-3': guidance_4_3,
+  '4-5': guidance_4_5,
+  '5-4': guidance_5_4,
+  '5-6': guidance_5_6,
+  '5-7': guidance_5_7,
+  '6-1': guidance_6_1,
+  '6-5': guidance_6_5,
+  '6-7': guidance_6_7,
+  '7-5': guidance_7_5,
+  '7-6': guidance_7_6,
+  '7-8': guidance_7_8,
+  '7-9': guidance_7_9,
+  '8-7': guidance_8_7,
+  '8-9': guidance_8_9,
+  '9-7': guidance_9_7,
+  '9-8': guidance_9_8,
+  '10-11': guidance_10_11,
+  '11-10': guidance_11_10,
+  '11-12': guidance_11_12,
+  '12-11': guidance_12_11,
+  '12-13': guidance_12_13,
+  '12-14': guidance_12_14,
+  '13-12': guidance_13_12,
+  '13-14': guidance_13_14,
+  '14-12': guidance_14_12,
+  '14-13': guidance_14_13,
+  '15-16': guidance_15_16,
+  '16-15': guidance_16_15,
+  '16-17': guidance_16_17,
+  '17-16': guidance_17_16,
+  '17-18': guidance_17_18,
+  '18-17': guidance_18_17,
+  '19-20': guidance_19_20,
+  '19-21': guidance_19_21,
+  '20-19': guidance_20_19,
+  '20-21': guidance_20_21,
+  '21-19': guidance_21_19,
+  '21-20': guidance_21_20,
+  '22-23': guidance_22_23,
+  '23-22': guidance_23_22,
+  '23-24': guidance_23_24,
+  '24-23': guidance_24_23,
+  '25-26': guidance_25_26,
+  '25-27': guidance_25_27,
+  '26-25': guidance_26_25,
+  '26-27': guidance_26_27,
+  '27-25': guidance_27_25,
+  '27-26': guidance_27_26,
+  '28-29': guidance_28_29,
+  '28-30': guidance_28_30,
+  '29-28': guidance_29_28,
+  '29-30': guidance_29_30,
+  '30-28': guidance_30_28,
+  '30-29': guidance_30_29,
+  '31-32': guidance_31_32,
+  '32-31': guidance_32_31,
 };
 
 const MapPage = () => {
@@ -230,6 +230,9 @@ const MapPage = () => {
   const [currentFloorDisplayImage, setCurrentFloorDisplayImage] = useState(F1button);
 
   const navigate = useNavigate();
+
+  // 環境変数からAPIのベースURLを取得
+  const apiBaseUrl = process.env.REACT_APP_API_URL || '';
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -278,8 +281,9 @@ const MapPage = () => {
         setLoading(true);
         setError(null);
 
+        // 初回ロード時にFlaskから現在のノードを取得
         if (confirmedMapNode === null) {
-          const initialResponse = await fetch('http://127.0.0.1:5000/api/get_current_node');
+          const initialResponse = await fetch(`${apiBaseUrl}/get_current_node`);
           if (!initialResponse.ok) {
             const errorText = await initialResponse.text();
             throw new Error(`HTTP error! status: ${initialResponse.status} for initial node: ${errorText}`);
@@ -294,10 +298,11 @@ const MapPage = () => {
             setConfirmedMapNode(1);
             setArrivedNumber('1');
           }
-          return;
+          return; // 初回取得後は、useEffectの再実行を待つ
         }
 
-        const response = await fetch('http://127.0.0.1:5000/api/get_next_point', {
+        // 次のポイントのデータをFlaskから取得
+        const response = await fetch(`${apiBaseUrl}/get_next_point`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -320,9 +325,10 @@ const MapPage = () => {
         if (data.current_floor && floorImages.hasOwnProperty(data.current_floor)) {
           setCurrentFloorDisplayImage(floorImages[`${data.current_floor}`]);
         } else {
-          setCurrentFloorDisplayImage(F1button);
+          setCurrentFloorDisplayImage(F1button); // デフォルトの階イメージ
         }
 
+        // 目的地に到着した場合のナビゲーション
         if (data.next_point === null && data.goal_node !== null && confirmedMapNode === data.goal_node) {
           navigate('/finish'); // /finish パスへ遷移
         }
@@ -337,7 +343,7 @@ const MapPage = () => {
     };
 
     fetchPathData();
-  }, [confirmedMapNode]);
+  }, [confirmedMapNode, apiBaseUrl, navigate]); // apiBaseUrlとnavigateを依存配列に追加
 
   const handleMoveToNextPoint = () => {
     if (nextPoint !== null) {
@@ -588,7 +594,24 @@ const MapPage = () => {
           <p style={{ color: 'red' }}>エラー: {error}</p>
         ) : (
           <>
-            
+            {/* nextPointがnullでない、かつ現在地がゴールではない場合に「次のポイントへ」ボタンを表示 */}
+            {nextPoint !== null && confirmedMapNode !== goalNode && (
+                <button
+                    onClick={handleMoveToNextPoint}
+                    style={{
+                        padding: '20px 40px',
+                        fontSize: '2rem',
+                        cursor: 'pointer',
+                        backgroundColor: '#007bff',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '5px',
+                        marginTop: '1rem', // 上部の余白を追加
+                    }}
+                >
+                    次のポイントへ
+                </button>
+            )}
           </>
         )}
       </div>

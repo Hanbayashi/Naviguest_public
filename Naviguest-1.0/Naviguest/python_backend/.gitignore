@@ -1,0 +1,30 @@
+# Python generated files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+env/
+.env/
+
+# Environment variables
+.env
+.flaskenv
+
+# Database files (if using SQLite)
+*.db
+*.sqlite3
+instance/
+
+# Flask-specific files (if applicable)
+/static/dist/  # If frontend build output is put into Flask's static folder
+/media/        # For user uploaded files
+
+# IDE specific files
+.idea/          # PyCharm
+.vscode/        # VS Code
+*.sublime-project
+*.sublime-workspace

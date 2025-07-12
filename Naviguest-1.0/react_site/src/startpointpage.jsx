@@ -12,6 +12,9 @@ const StartPointPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
+  // 環境変数からAPIのベースURLを取得
+  const apiBaseUrl = process.env.REACT_APP_API_URL || ''; // 未定義の場合に備えて空文字列をデフォルト値に設定
+
   const nodeImages = {
     1: point1,
     3: point3,
@@ -24,7 +27,8 @@ const StartPointPage = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/set_initial_current_node', {
+      // 環境変数を使ってAPIエンドポイントを構築
+      const response = await fetch(`${apiBaseUrl}/set_initial_current_node`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +37,10 @@ const StartPointPage = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // エラーの詳細情報を含める
+        return response.text().then(text => {
+            throw new Error(`HTTP error! Status: ${response.status}, Message: ${text}`);
+        });
       }
 
       const data = await response.json();
@@ -46,7 +53,7 @@ const StartPointPage = () => {
       }
     } catch (error) {
       console.error("開始ノード送信エラー:", error);
-      setErrorMessage("開始ノードの送信中にエラーが発生しました。");
+      setErrorMessage(`開始ノードの送信中にエラーが発生しました: ${error.message}`);
     }
   };
 
@@ -61,14 +68,14 @@ const StartPointPage = () => {
       <div style={{ textAlign: 'center', padding: '2rem' }}>
         <h2>現在地を写真を参考に選択してください</h2>
 
-        <div 
-          style={{ 
+        <div
+          style={{
             display: 'grid', // ここをgridに変更
             gridTemplateColumns: 'repeat(2, 1fr)', // 2列のグリッドにする
             gap: '20px', // グリッドアイテム間の間隔
             maxWidth: '600px', // グリッド全体の最大幅（調整してください）
             margin: '0 auto', // グリッドを中央に配置
-            marginBottom: '30px' 
+            marginBottom: '30px'
           }}
         >
           {nodeOptions.map((node) => (
@@ -76,7 +83,7 @@ const StartPointPage = () => {
               key={node}
               onClick={() => handleNodeSelect(node)}
               style={{
-                background: 'none', 
+                background: 'none',
                 border: selectedStartNode === node ? '3px solid #0056b3' : '1px solid #ccc',
                 borderRadius: '8px',
                 cursor: 'pointer',
@@ -88,14 +95,14 @@ const StartPointPage = () => {
                 alignItems: 'center', // ボタン内の画像を中央揃えにするため
               }}
             >
-              <img 
-                src={nodeImages[node]} 
-                alt={`ノード ${node}`} 
-                style={{ 
+              <img
+                src={nodeImages[node]}
+                alt={`ノード ${node}`}
+                style={{
                   maxWidth: '100%', // 親要素のボタンに合わせる
-                  height: 'auto', 
+                  height: 'auto',
                   display: 'block'
-                }} 
+                }}
               />
             </button>
           ))}

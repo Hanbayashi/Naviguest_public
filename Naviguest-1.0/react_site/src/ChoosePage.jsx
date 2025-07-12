@@ -37,7 +37,7 @@ import Genre3bImage from './assets/genre3-2.png'; // ★スクロールターゲ
 import Genre3cImage from './assets/genre3-3.png';
 
 import Genre4aImage from './assets/genre4-1.png';
-import Genre4bImage from './assets/genre4-2.png'; // ★スクロールターゲット
+import Genre4bImage from './assets/4-2.png'; // ★スクロールターゲット
 import Genre4cImage from './assets/genre4-3.png';
 import Genre4dImage from './assets/genre4-4.png';
 
@@ -116,16 +116,25 @@ const SelectionScreen = () => {
 
   // Pythonとの通信設定
   useEffect(() => {
-    const apiUrl = 'http://127.0.0.1:5000/api/hello';
+    // 環境変数からAPIのベースURLを取得し、'/hello' エンドポイントに接続
+    // process.env.REACT_APP_API_URL が未定義の場合に備えて空文字列をデフォルト値に設定
+    const apiBaseUrl = process.env.REACT_APP_API_URL || '';
+    const apiUrl = `${apiBaseUrl}/hello`;
+
     fetch(apiUrl)
       .then(response => {
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+            // エラーの詳細情報を含める
+            return response.text().then(text => {
+                throw new Error(`HTTP error! Status: ${response.status}, Message: ${text}`);
+            });
+        }
         return response.json();
       })
       .then(data => setPythonMessage(data.message))
       .catch(error => {
         console.error("Python API呼び出しエラー:", error);
-        setPythonMessage('Pythonバックエンドに接続できませんでした。');
+        setPythonMessage(`Pythonバックエンドに接続できませんでした: ${error.message}`);
       });
 
     // スクロールイベントリスナーを設定
@@ -147,7 +156,9 @@ const SelectionScreen = () => {
   // 送信する値（目的地の番号）の設定を共通化
   const sendGoalNode = async (valueToSend) => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/update_goal', {
+      // 環境変数からAPIのベースURLを取得
+      const apiBaseUrl = process.env.REACT_APP_API_URL || '';
+      const response = await fetch(`${apiBaseUrl}/update_goal`, { // update_goalエンドポイント
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -156,7 +167,10 @@ const SelectionScreen = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // エラーの詳細情報を含める
+        return response.text().then(text => {
+            throw new Error(`HTTP error! Status: ${response.status}, Message: ${text}`);
+        });
       }
 
       const data = await response.json();
@@ -165,11 +179,11 @@ const SelectionScreen = () => {
 
     } catch (error) {
       console.error("目的地の送信エラー:", error);
-      alert("目的地の送信に失敗しました。詳細をコンソールで確認してください。");
+      alert(`目的地の送信に失敗しました。詳細をコンソールで確認してください: ${error.message}`);
     }
   };
 
-  // 各ジャンルポイントのクリックハンドラ
+  // 各ジャンルポイントのクリックハンドラ (変更なし)
   const handleGenrepoint1Click = () => sendGoalNode(1);
   const handleGenrepoint2Click = () => sendGoalNode(2);
   const handleGenrepoint3Click = () => sendGoalNode(3);
@@ -196,7 +210,7 @@ const SelectionScreen = () => {
   const handleGenrepoint31Click = () => sendGoalNode(31);
   const handleGenrepoint32Click = () => sendGoalNode(32);
 
-  // 9つのジャンル選択ボタンのデータを配列で管理
+  // 9つのジャンル選択ボタンのデータを配列で管理 (変更なし)
   const mainGenres = [
     { src: Genre1Image, alt: "ジャンル1", onClick: handleScrollToGenre1a },
     { src: Genre2Image, alt: "ジャンル2", onClick: handleScrollToGenre2a },
@@ -209,7 +223,7 @@ const SelectionScreen = () => {
     { src: Genre9Image, alt: "ジャンル9", onClick: handleGenrepoint1Click }, // ジャンル9はスクロールではなくAPI送信
   ];
 
-  // 各ジャンルの詳細画像データを配列で定義
+  // 各ジャンルの詳細画像データを配列で定義 (変更なし)
   const detailGenres = {
     genre1: [
       { src: Genre1aImage, onClick: handleGenrepoint5Click, alt: "ジャンル1-1" },
