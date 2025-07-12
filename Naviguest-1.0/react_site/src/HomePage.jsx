@@ -20,7 +20,7 @@ const HomePage = () => {
         src={CityHall}
         alt="市役所の写真"
         style={{
-          width: '600px',
+          width: '400px',
           height: 'auto',
           maxWidth: '100%',
           scrollMarginTop: '100px',
