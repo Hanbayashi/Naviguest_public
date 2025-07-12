@@ -26,8 +26,8 @@ const FinishPage = () => {
       <div
   style={{
     display: 'flex',
-    justifyContent: 'center', // Centers the items horizontally
-    gap: '20px', // Adds space between the buttons
+    justifyContent: 'center', 
+    gap: '20px', 
     marginBottom: '2rem',
   }}
 >
