@@ -382,7 +382,7 @@ const SelectionScreen = () => {
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)', // 3列均等幅
           gap: '2rem', // 各画像間の隙間
-          maxWidth: '1000px', // 全体の最大幅
+          maxWidth: '960px', // 全体の最大幅
           margin: '0 auto', // 中央寄せ
           padding: '2rem', // 全体のパディング
         }}
