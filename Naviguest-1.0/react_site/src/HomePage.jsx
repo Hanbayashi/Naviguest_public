@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import CityHall from './assets/CityHall.png';
 import startbutton from './assets/StartButton.png';
 
@@ -16,43 +16,44 @@ const HomePage = () => {
       </header>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' , marginTop: '2rem'}}>
-      <img
-        src={CityHall}
-        alt="市役所の写真"
-        style={{
-          width: '400px',
-          height: 'auto',
-          maxWidth: '100%',
-          scrollMarginTop: '100px',
-        }}
-      />
-    </div>
+        <img
+          src={CityHall}
+          alt="市役所の写真"
+          style={{
+            width: '400px',
+            height: 'auto',
+            maxWidth: '100%',
+            scrollMarginTop: '100px',
+          }}
+        />
+      </div>
 
-    <div style={{ textAlign: 'center' }}>
-  　　<h2>
-舞鶴市役所にご来庁いただきありがとうございます。<br /> 
-このページでは、舞鶴市役所各課の場所や施設へのアクセス方法をわかりやすくご紹介しています。<br /><br />
-※<span style={{ color: 'red' }}>令和７年７月から赤れんがパーク周辺駐車場が有料になりました。</span>（詳細は<a href="https://www.city.maizuru.kyoto.jp/0000013369.html" target="_blank">こちら</a>）<br />
-  市役所利用者・東体育館利用者の駐車場利用料金は無料です。<br />
-  １階総合案内で無料券の交付をお受けください。
-  　　</h2>
-　　</div>
+      {/* ここでテキストの配置を左揃えに設定します */}
+      <div style={{ textAlign: 'left', margin: '0 auto', maxWidth: '800px', padding: '0 1rem' }}>
+        <h2>
+          舞鶴市役所にご来庁いただきありがとうございます。<br />
+          このページでは、舞鶴市役所各課の場所や施設へのアクセス方法をわかりやすくご紹介しています。<br /><br />
+          ※<span style={{ color: 'red' }}>令和７年７月から赤れんがパーク周辺駐車場が有料になりました。</span>（詳細は<a href="https://www.city.maizuru.kyoto.jp/0000013369.html" target="_blank" rel="noopener noreferrer">こちら</a>）<br />
+          市役所利用者・東体育館利用者の駐車場利用料金は無料です。<br />
+          １階総合案内で無料券の交付をお受けください。
+        </h2>
+      </div>
 
       <div style={{ marginBottom: '2rem',textAlign: 'center' }}>
-          <Link to="/startpoint">
-            <img
-              src={startbutton}
-              alt="スタートボタン"
-              style={{
-                width: '200px',
-                height: 'auto',
-                cursor: 'pointer',
-                border: 'none', 
-                verticalAlign: 'middle', 
-              }}
-            />
-          </Link>
-        </div>
+        <Link to="/startpoint">
+          <img
+            src={startbutton}
+            alt="スタートボタン"
+            style={{
+              width: '200px',
+              height: 'auto',
+              cursor: 'pointer',
+              border: 'none',
+              verticalAlign: 'middle',
+            }}
+          />
+        </Link>
+      </div>
 
       <footer style={{ backgroundColor: '#ddd', textAlign: 'center', padding: '1rem' }}>
         <p>&copy; 2025 ナビゲスト</p>
