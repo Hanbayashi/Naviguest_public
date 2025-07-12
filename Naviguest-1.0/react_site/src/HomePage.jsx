@@ -30,7 +30,7 @@ const HomePage = () => {
 
       {/* ここでテキストの配置を左揃えに設定します */}
       <div style={{ textAlign: 'left', margin: '0 auto', maxWidth: '800px', padding: '0 1rem' }}>
-        <h2>
+        <h2 style={{ fontSize: '18px' }}>
           舞鶴市役所にご来庁いただきありがとうございます。<br />
           このページでは、舞鶴市役所各課の場所や施設へのアクセス方法をわかりやすくご紹介しています。<br /><br />
           ※<span style={{ color: 'red' }}>令和７年７月から赤れんがパーク周辺駐車場が有料になりました。</span>（詳細は<a href="https://www.city.maizuru.kyoto.jp/0000013369.html" target="_blank" rel="noopener noreferrer">こちら</a>）<br />
