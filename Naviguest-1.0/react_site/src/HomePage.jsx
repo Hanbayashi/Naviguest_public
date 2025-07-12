@@ -56,7 +56,7 @@ const HomePage = () => {
             src={startbutton}
             alt="スタートボタン"
             style={{
-              width: '200px',
+              width: '140px',
               height: 'auto',
               cursor: 'pointer',
               border: 'none',

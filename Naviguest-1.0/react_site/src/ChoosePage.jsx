@@ -319,7 +319,7 @@ const SelectionScreen = () => {
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: justifyContent,
-            gap: '1rem',
+            gap: '0.5rem',
             marginBottom: '1rem',
             maxWidth: '100%',
             margin: '0 auto',
