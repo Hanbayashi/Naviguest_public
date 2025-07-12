@@ -473,8 +473,7 @@ const MapPage = () => {
             if (getNodeFloor(nodeNumber) === currentFloor) {
               // ノードの種類に応じた背景色とテキスト
               let backgroundColor = 'rgba(255, 0, 0, 0.7)'; // その他のノードは赤色（半透明）
-              let labelTextAbove = null; // ノードの上に表示するテキスト
-
+              let labelTextAbove = null; 
               if (nodeNumber === confirmedMapNode) {
                 // 現在地
                 backgroundColor = 'rgba(0, 0, 255, 0.7)'; // 青色（半透明）
