@@ -40,7 +40,7 @@ const FinishPage = () => {
     />
   </Link>
 
-  {/* ChoosePage.jsx へ戻るボタン - Now on the right */}
+  {/* ChoosePage.jsx へ戻るボタン */}
   <Link to="/choose">
     <img
       src={choosebutton}
