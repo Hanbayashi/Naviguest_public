@@ -1,1 +1,42 @@
-.vercel
+# Node modules (依存関係のインストール先)
+node_modules/
+.npm/                          # npmのキャッシュディレクトリ
+npm-debug.log* # npmのデバッグログファイル
+yarn-debug.log* # Yarnのデバッグログファイル
+yarn-error.log* # Yarnのエラーログファイル
+.pnpm-debug.log* # pnpmのデバッグログファイル
+.yarn/                         # Yarn Plug'n'Playなどの内部ディレクトリ
+/pnpm-lock.yaml                # pnpmのロックファイル (プロジェクトによっては含めるが、巨大な場合は除外検討)
+
+# Environment variables (環境変数ファイル - 機密情報を含むため絶対に除外)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.staging.local             # もしステージング環境があれば
+
+# Build artifacts (ビルド生成物 - 自動生成されるため除外)
+build/                         # Create React Appのデフォルトビルド出力先
+dist/                          # Viteなどのビルド出力先
+out/                           # Next.jsのビルド出力先 (next exportの場合)
+.next/                         # Next.jsの内部ビルドキャッシュ
+.svelte-kit/                   # SvelteKitのビルドキャッシュ
+.vite/                         # Viteの内部キャッシュ
+
+# IDE specific files (エディタ・IDE固有の設定ファイル - 各自の環境用)
+.idea/                         # WebStorm/IntelliJ IDEA
+.vscode/                       # VS Code
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files (OSが自動生成するファイル)
+.DS_Store                      # macOSのディレクトリ設定ファイル
+Thumbs.db                      # Windowsのサムネイルキャッシュファイル
+
+# Other common ignored files (その他の一般的な除外ファイル)
+coverage/                      # テストカバレッジレポート
+.cache/                        # 各種キャッシュディレクトリ (Babel, ESLint, TypeScriptなど)
+*.log                          # 一般的なログファイル
+*.tmp                          # 一時ファイル
+temp/                          # 一時ディレクトリ
