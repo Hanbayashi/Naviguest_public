@@ -61,8 +61,13 @@ const StartPointPage = () => {
 
   return (
     <>
-      <header style={{ backgroundColor: '#0066cc', color: 'white', padding: '1rem 2rem', textAlign: 'center' }}>
+      <header style={{ backgroundColor: '#0066cc', color: 'white', padding: '0.5rem 2rem', textAlign: 'center' }}>
         <h1 style={{ fontSize: '48px' }}>ナビゲスト</h1>
+        <nav>
+          <ul style={{ listStyle: 'none', padding: 0, display: 'flex', justifyContent: 'center', gap: '2rem' }}>
+
+          </ul>
+        </nav>
       </header>
 
       <div style={{ textAlign: 'center', padding: '2rem' }}>
