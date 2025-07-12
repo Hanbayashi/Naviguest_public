@@ -28,27 +28,27 @@ import Genre1hImage from './assets/genre1-8.png';
 import Genre1iImage from './assets/genre1-9.png';
 
 import Genre2aImage from './assets/genre2-1.png';
-import Genre2bImage from './assets/genre2-2.png'; // ★スクロールターゲット
+import Genre2bImage from './assets/genre2-2.png'; 
 import Genre2cImage from './assets/genre2-3.png';
 import Genre2dImage from './assets/genre2-4.png';
 
 import Genre3aImage from './assets/genre3-1.png';
-import Genre3bImage from './assets/genre3-2.png'; // ★スクロールターゲット
+import Genre3bImage from './assets/genre3-2.png'; 
 import Genre3cImage from './assets/genre3-3.png';
 
 import Genre4aImage from './assets/genre4-1.png';
-import Genre4bImage from './assets/genre4-2.png'; // ★スクロールターゲット
+import Genre4bImage from './assets/genre4-2.png'; 
 import Genre4cImage from './assets/genre4-3.png';
 import Genre4dImage from './assets/genre4-4.png';
 
 import Genre5aImage from './assets/genre5-1.png';
-import Genre5bImage from './assets/genre5-2.png'; // ★スクロールターゲット
+import Genre5bImage from './assets/genre5-2.png'; 
 import Genre5cImage from './assets/genre5-3.png';
 import Genre5dImage from './assets/genre5-4.png';
 import Genre5eImage from './assets/genre5-5.png';
 
 import Genre6aImage from './assets/genre6-1.png';
-import Genre6bImage from './assets/genre6-2.png'; // ★スクロールターゲット
+import Genre6bImage from './assets/genre6-2.png'; 
 import Genre6cImage from './assets/genre6-3.png';
 import Genre6dImage from './assets/genre6-4.png';
 import Genre6eImage from './assets/genre6-5.png';
@@ -62,14 +62,14 @@ import Genre6lImage from './assets/genre6-12.png';
 import Genre6mImage from './assets/genre6-13.png';
 
 import Genre7aImage from './assets/genre7-1.png';
-import Genre7bImage from './assets/genre7-2.png'; // ★スクロールターゲット
+import Genre7bImage from './assets/genre7-2.png'; 
 import Genre7cImage from './assets/genre7-3.png';
 import Genre7dImage from './assets/genre7-4.png';
 import Genre7eImage from './assets/genre7-5.png';
 import Genre7fImage from './assets/genre7-6.png';
 
 import Genre8aImage from './assets/genre8-1.png';
-import Genre8bImage from './assets/genre8-2.png'; // ★スクロールターゲット
+import Genre8bImage from './assets/genre8-2.png'; 
 
 const SelectionScreen = () => {
   const navigate = useNavigate();
