@@ -321,7 +321,7 @@ const SelectionScreen = () => {
             justifyContent: justifyContent,
             gap: '1rem',
             marginBottom: '1rem',
-            maxWidth: '960px',
+            maxWidth: '100%',
             margin: '0 auto',
             padding: '0 1rem',
           }}
@@ -384,7 +384,7 @@ const SelectionScreen = () => {
           gap: '0.5rem', // 各画像間の隙間
           maxWidth: '100%', // 全体の最大幅
           margin: '0 auto', // 中央寄せ
-          padding: '2rem', // 全体のパディング
+          padding: '0 1rem', // 全体のパディング
         }}
       >
         {mainGenres.map((genre, index) => (
