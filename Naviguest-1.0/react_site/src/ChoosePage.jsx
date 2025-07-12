@@ -37,7 +37,7 @@ import Genre3bImage from './assets/genre3-2.png'; // ★スクロールターゲ
 import Genre3cImage from './assets/genre3-3.png';
 
 import Genre4aImage from './assets/genre4-1.png';
-import Genre4bImage from './assets/4-2.png'; // ★スクロールターゲット
+import Genre4bImage from './assets/genre4-2.png'; // ★スクロールターゲット
 import Genre4cImage from './assets/genre4-3.png';
 import Genre4dImage from './assets/genre4-4.png';
 
