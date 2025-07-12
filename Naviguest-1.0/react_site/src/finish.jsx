@@ -23,37 +23,36 @@ const FinishPage = () => {
         </h2>
       </div>
 
-      <div 
-        style={{ 
-          textAlign: 'center', 
-          marginBottom: '2rem', 
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center', 
-          gap: '20px' 
-        }}
-      >
+      <div
+  style={{
+    display: 'flex',
+    justifyContent: 'center', // Centers the items horizontally
+    gap: '20px', // Adds space between the buttons
+    marginBottom: '2rem',
+  }}
+>
+  {/* ホームに戻るボタン（スタート画面へ） - Now on the left */}
+  <Link to="/">
+    <img
+      src={backbutton}
+      alt="ホームに戻る"
+      style={{ width: '200px', height: 'auto', cursor: 'pointer' }}
+    />
+  </Link>
 
-        {/* ChoosePage.jsx へ戻るボタン */}
-        <Link to="/choose">
-          <img 
-            src={choosebutton} 
-            alt="目的地選択に戻る" 
-            style={{ 
-              width: '200px', 
-              height: 'auto', 
-              cursor: 'pointer', 
-            }} 
-          />
-        </Link>
-      </div>
-
-      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-        {/* ホームに戻るボタン（スタート画面へ） */}
-        <Link to="/"> 
-          <img src={backbutton} alt="ホームに戻る" style={{ width: '200px', height: 'auto', cursor: 'pointer' }} />
-        </Link>
-      </div>
+  {/* ChoosePage.jsx へ戻るボタン - Now on the right */}
+  <Link to="/choose">
+    <img
+      src={choosebutton}
+      alt="目的地選択に戻る"
+      style={{
+        width: '200px',
+        height: 'auto',
+        cursor: 'pointer',
+      }}
+    />
+  </Link>
+</div>
 
       <footer style={{ backgroundColor: '#ddd', textAlign: 'center', padding: '1rem' }}>
         <p>&copy; 2025 ナビゲスト</p>
