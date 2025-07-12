@@ -7,7 +7,6 @@ import F3button from './assets/3F.png';
 import F4button from './assets/4F.png';
 import F5button from './assets/5F.png';
 import F6button from './assets/6F.png';
-
 //案内画像
 import guidance_1_2 from './assets/1-2.png';
 import guidance_1_3 from './assets/1-3.png';
